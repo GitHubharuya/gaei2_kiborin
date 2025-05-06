@@ -1,0 +1,5 @@
+fieldGeneratorの使い方
+
+FieldGenerator用のからのオブジェクトを追加→
+インスタンスにfirlGenerator追加→
+参照オブジェクトにplane(床)とcube(壁)を適用
