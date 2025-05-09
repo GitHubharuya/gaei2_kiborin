@@ -22,7 +22,6 @@ public class Collision : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        //nameは各自設定したアクタ通りに設定してね
         if (other.name == "Mouse")
         {
             //ネズミに障害物と衝突した合図を送る
@@ -32,7 +31,6 @@ public class Collision : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        //nameは各自設定したアクタ通りに設定してね
         if (other.name == "Mouse")
         {
             //ネズミに障害物から離れた合図を送る
