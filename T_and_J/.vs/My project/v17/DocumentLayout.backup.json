@@ -1,0 +1,86 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\suzur\\My project\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{32C3BDE6-E125-3128-82C1-25D0441455A3}|Assembly-CSharp.csproj|c:\\users\\suzur\\my project\\assets\\scripts\\fieldgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32C3BDE6-E125-3128-82C1-25D0441455A3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\fieldgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32C3BDE6-E125-3128-82C1-25D0441455A3}|Assembly-CSharp.csproj|C:\\Users\\suzur\\My project\\assets\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32C3BDE6-E125-3128-82C1-25D0441455A3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32C3BDE6-E125-3128-82C1-25D0441455A3}|Assembly-CSharp.csproj|C:\\Users\\suzur\\My project\\assets\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32C3BDE6-E125-3128-82C1-25D0441455A3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32C3BDE6-E125-3128-82C1-25D0441455A3}|Assembly-CSharp.csproj|C:\\Users\\suzur\\My project\\assets\\scripts\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32C3BDE6-E125-3128-82C1-25D0441455A3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\wall.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "FieldGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\My project\\Assets\\Scripts\\FieldGenerator.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\FieldGenerator.cs",
+              "ToolTip": "C:\\Users\\suzur\\My project\\Assets\\Scripts\\FieldGenerator.cs",
+              "RelativeToolTip": "Assets\\Scripts\\FieldGenerator.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAmwGQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T08:43:00.723Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Mouse.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\My project\\Assets\\Scripts\\Mouse.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Mouse.cs",
+              "ToolTip": "C:\\Users\\suzur\\My project\\Assets\\Scripts\\Mouse.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Mouse.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwCEAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T11:43:02.177Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Cat.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\My project\\Assets\\Scripts\\Cat.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Cat.cs",
+              "ToolTip": "C:\\Users\\suzur\\My project\\Assets\\Scripts\\Cat.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Cat.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBUAAABWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-19T11:42:54.947Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Wall.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\My project\\Assets\\Scripts\\Wall.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Wall.cs",
+              "ToolTip": "C:\\Users\\suzur\\My project\\Assets\\Scripts\\Wall.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Wall.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAmwBsAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-17T03:18:27.999Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
