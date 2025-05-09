@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{32C3BDE6-E125-3128-82C1-25D0441455A3}</ProjectGuid>
+    <ProjectGuid>{4C1E6176-89C1-3607-1895-2F957C4348D6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,10 +60,10 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Mouse.cs" />
-    <Compile Include="Assets\Scripts\Wall.cs" />
-    <Compile Include="Assets\Scripts\Cat.cs" />
-    <Compile Include="Assets\Scripts\FieldGenerator.cs" />
+    <Compile Include="Assets\Project\Scripts\Mouse.cs" />
+    <Compile Include="Assets\Project\Scripts\FieldGenerator.cs" />
+    <Compile Include="Assets\Project\Scripts\Cat.cs" />
+    <Compile Include="Assets\Project\Scripts\Wall.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
