@@ -5,12 +5,13 @@ using UnityEngine;
 public class FieldGenerator : MonoBehaviour
 {
     [Header("マップサイズ(奇数)")]
-    public int mapSize = 21;
+    public int mapSize = 11;
     [Header("シード")]
     public int seed = 0;
 
     public GameObject groundPrefab;
     public GameObject wallPrefab;
+    public GameObject cheesePrefab;
 
     private int[] dx = { 1, 0, -1, 0 };
     private int[] dy = { 0, 1, 0, -1 };
@@ -87,13 +88,28 @@ public class FieldGenerator : MonoBehaviour
         {
             for (int j = 0; j < mapSize; j++)
             {
-                Vector3 pos = new Vector3(i, 0, j);
+                //障害物のサイズに合わせて座標を調整
+                //障害物の一片の長さl
+                float l = 0.5f;
+
+                float _i = i * l;
+                float _j = j * l;
+
+                Vector3 pos = new Vector3(_i, 0, _j);
                 Instantiate(groundPrefab, pos, Quaternion.identity, transform);
 
                 if (wallMap[i, j] == true)
                 {
-                    Vector3 wallPos = new Vector3(i, 0.5f, j);
+                    Vector3 wallPos = new Vector3(_i, l * 0.5f, _j);
                     Instantiate(wallPrefab, wallPos, Quaternion.identity, transform);
+                }
+                else
+                {
+                    if(Random.Range(0, 3) == 0)
+                    {
+                        Vector3 cheesePos = new Vector3(_i, l * 0.2f, _j);
+                        Instantiate(cheesePrefab, cheesePos, Quaternion.identity, transform);
+                    }
                 }
             }
         }
