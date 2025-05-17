@@ -5,16 +5,18 @@ using UnityEngine;
 public class FieldGenerator : MonoBehaviour
 {
     [Header("マップサイズ(奇数)")]
-    private int mapSize = 11;
+    public int mapSize = 11;
     [Header("シード")]
-    private int seed = 0;
+    public int seed = 0;
 
     [SerializeField]
     private GameObject groundPrefab;
     [SerializeField]
     private GameObject[] wallPrefabs;
     [SerializeField]
-    private GameObject furniturePrefab;
+    private GameObject[] furniturePrefabsS;
+    [SerializeField]
+    private GameObject[] furniturePrefabsL;
     [SerializeField] 
     private GameObject ceilingPrefab;
     [SerializeField]
@@ -130,6 +132,13 @@ public class FieldGenerator : MonoBehaviour
         }
 
         //壁以外
+        bool[,] furnitureCheck = new bool[mapSize, mapSize];
+
+        // 全部壁で初期化
+        for (int i = 0; i < mapSize; i++)
+            for (int j = 0; j < mapSize; j++)
+                furnitureCheck[i, j] = false;
+
         for (int i = 1; i < mapSize - 1; i++)
         {
             for (int j = 1; j < mapSize - 1; j++)
@@ -146,31 +155,26 @@ public class FieldGenerator : MonoBehaviour
                 Quaternion ceilingQt = ceilingPrefab.transform.rotation;
                 Instantiate(ceilingPrefab, ceilingPos, ceilingQt, transform);
 
-                if (wallMap[i, j] == true)
+                if (wallMap[i, j] == true && !furnitureCheck[i, j])
                 {
-                    //壁を張る
-                    int rot = 0;
-                    if (j == 0)
+                    Vector3 wallPos = new Vector3(_i, 0, _j);
+                    //隣まで続いてる？
+                    if (i != mapSize - 1 && wallMap[i + 1, j] && !furnitureCheck[i + 1, j])
                     {
-                        rot = 0;
+                        wallPos.x += l / 2;
+                        furnitureCheck[i + 1, j] = true;
+                        Instantiate(furniturePrefabsL[Random.Range(0, 2)], wallPos, Quaternion.Euler(0, 180 * Random.Range(0, 2), 0), transform);
                     }
-                    else if (i == 0)
+                    else if (j != mapSize - 1 && wallMap[i, j + 1] && !furnitureCheck[i, j + 1])
                     {
-                        rot = 1;
+                        wallPos.z += l / 2;
+                        furnitureCheck[i, j + 1] = true;
+                        Instantiate(furniturePrefabsL[Random.Range(0, 2)], wallPos, Quaternion.Euler(0, 90 + 180 * Random.Range(0, 2), 0), transform);
                     }
-                    else if (j == mapSize - 1)
+                    else
                     {
-                        rot = 2;
+                        Instantiate(furniturePrefabsS[Random.Range(0, 2)], wallPos, Quaternion.Euler(0, 90 * Random.Range(0, 4), 0), transform);
                     }
-                    else if (i == mapSize - 1)
-                    {
-                        rot = 3;
-                    }
-                    Quaternion wallQt = Quaternion.Euler(0, 90 * rot, 0);
-                    
-
-                    Vector3 wallPos = new Vector3(_i, l * 0.5f, _j);
-                    Instantiate(furniturePrefab, wallPos, Quaternion.identity, transform);
                 }
                 else
                 {
@@ -180,6 +184,9 @@ public class FieldGenerator : MonoBehaviour
                         Instantiate(cheesePrefab, cheesePos, Quaternion.identity, transform);
                     }
                 }
+
+                //furnitureCheck更新
+                furnitureCheck[i, j] = true;
             }
         }
 
