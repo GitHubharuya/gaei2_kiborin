@@ -221,7 +221,7 @@ Transform:
   m_GameObject: {fileID: 43088950}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.047, y: 0.26, z: 1.155}
+  m_LocalPosition: {x: 0.14, y: 0.26, z: -2.09}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -636,7 +636,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: -0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 1.3, y: 4.01, z: 5.2}
+  m_LocalPosition: {x: 4.3, y: 4.01, z: 5.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -768,12 +768,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533920a4bd7486b44bb794c79084d510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapSize: 21
+  seed: 0
   groundPrefab: {fileID: 919132149155446097, guid: 70b51a382134e864e8b813a268fb364d, type: 3}
   wallPrefabs:
   - {fileID: 919132149155446097, guid: a36ddc1bc9fe5b44b9c3daa401cd2d46, type: 3}
   - {fileID: 919132149155446097, guid: f97df5e770f822c439c097bf4b2b9ee2, type: 3}
   - {fileID: 919132149155446097, guid: 6629546e136751c41be3072d472dce49, type: 3}
-  furniturePrefab: {fileID: 43088950}
+  furniturePrefabsS:
+  - {fileID: 919132149155446097, guid: faa4c6bc74b54c847864f2626f886eb5, type: 3}
+  - {fileID: 919132149155446097, guid: ff7ba780d3185a74ba0d254eae399ae8, type: 3}
+  furniturePrefabsL:
+  - {fileID: 919132149155446097, guid: 132b1451858403548b646564ac76c0ae, type: 3}
+  - {fileID: 919132149155446097, guid: 94ca915f58fec774eb287f424204b2ca, type: 3}
   ceilingPrefab: {fileID: 440469099}
   lightPrefab: {fileID: 5497717562607429501, guid: d47e14e5a81b42e419e552660db9d1ad, type: 3}
   cheesePrefab: {fileID: 1920922200}
@@ -802,7 +809,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 481807920767153647, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.554
+      value: 4.066
       objectReference: {fileID: 0}
     - target: {fileID: 481807920767153647, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -932,7 +939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6104272071443322280, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.528
+      value: 4.04
       objectReference: {fileID: 0}
     - target: {fileID: 6104272071443322280, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
       propertyPath: m_LocalPosition.y
