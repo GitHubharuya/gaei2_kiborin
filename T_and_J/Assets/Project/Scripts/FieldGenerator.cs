@@ -5,13 +5,22 @@ using UnityEngine;
 public class FieldGenerator : MonoBehaviour
 {
     [Header("マップサイズ(奇数)")]
-    public int mapSize = 11;
+    private int mapSize = 11;
     [Header("シード")]
-    public int seed = 0;
+    private int seed = 0;
 
-    public GameObject groundPrefab;
-    public GameObject wallPrefab;
-    public GameObject cheesePrefab;
+    [SerializeField]
+    private GameObject groundPrefab;
+    [SerializeField]
+    private GameObject[] wallPrefabs;
+    [SerializeField]
+    private GameObject furniturePrefab;
+    [SerializeField] 
+    private GameObject ceilingPrefab;
+    [SerializeField]
+    private GameObject lightPrefab;
+    [SerializeField] 
+    private GameObject cheesePrefab;
 
     private int[] dx = { 1, 0, -1, 0 };
     private int[] dy = { 0, 1, 0, -1 };
@@ -82,26 +91,86 @@ public class FieldGenerator : MonoBehaviour
                 }
             }
         }
-        
+
         // プレハブを配置
-        for (int i = 0; i < mapSize; i++)
+
+        //障害物の一片の長さl
+        float l = 0.5f;
+
+        //まずは壁
+        for (int r = 0; r < 4; r++)
         {
-            for (int j = 0; j < mapSize; j++)
+            for (int i = 2; i < mapSize + 2; i += 4)
+            {
+                float _i = 0;
+                float _j = 0;
+                if (r == 0)
+                {
+                    _i = (i - 0.5f) * l;
+                    _j = 0.5f * l;
+                }
+                else if (r == 1)
+                {
+                    _i = 0.5f * l;
+                    _j = (i - 0.5f) * l;
+                }
+                else if (r == 2)
+                {
+                    _i = (i - 0.5f) * l;
+                    _j = (0.5f + mapSize - 2) * l;
+                }
+                else if (r == 3)
+                {
+                    _i = (0.5f + mapSize - 2) * l;
+                    _j = (i - 0.5f) * l;
+                }
+                Vector3 pos = new Vector3(_i, 0, _j);
+                Instantiate(wallPrefabs[(Random.Range(0, 5)) % 3], pos, Quaternion.Euler(0, 90 * r, 0));
+            }
+        }
+
+        //壁以外
+        for (int i = 1; i < mapSize - 1; i++)
+        {
+            for (int j = 1; j < mapSize - 1; j++)
             {
                 //障害物のサイズに合わせて座標を調整
-                //障害物の一片の長さl
-                float l = 0.5f;
-
                 float _i = i * l;
                 float _j = j * l;
 
+                //床・天井を張る
                 Vector3 pos = new Vector3(_i, 0, _j);
                 Instantiate(groundPrefab, pos, Quaternion.identity, transform);
+                
+                Vector3 ceilingPos = new Vector3(_i, 3f, _j);
+                Quaternion ceilingQt = ceilingPrefab.transform.rotation;
+                Instantiate(ceilingPrefab, ceilingPos, ceilingQt, transform);
 
                 if (wallMap[i, j] == true)
                 {
+                    //壁を張る
+                    int rot = 0;
+                    if (j == 0)
+                    {
+                        rot = 0;
+                    }
+                    else if (i == 0)
+                    {
+                        rot = 1;
+                    }
+                    else if (j == mapSize - 1)
+                    {
+                        rot = 2;
+                    }
+                    else if (i == mapSize - 1)
+                    {
+                        rot = 3;
+                    }
+                    Quaternion wallQt = Quaternion.Euler(0, 90 * rot, 0);
+                    
+
                     Vector3 wallPos = new Vector3(_i, l * 0.5f, _j);
-                    Instantiate(wallPrefab, wallPos, Quaternion.identity, transform);
+                    Instantiate(furniturePrefab, wallPos, Quaternion.identity, transform);
                 }
                 else
                 {
@@ -113,5 +182,9 @@ public class FieldGenerator : MonoBehaviour
                 }
             }
         }
+
+        //ライト
+        Vector3 lightPos = new Vector3(l * (mapSize / 2), 3, l * (mapSize / 2));
+        Instantiate(lightPrefab, lightPos, Quaternion.identity, transform);
     }
 }
