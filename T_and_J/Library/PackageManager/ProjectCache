@@ -13,10 +13,18 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638823857705368076
-    m_Hash: 479432054
+      ticks: 638830696961599930
+    m_Hash: 2115111898
 m_EmbeddedPackageManifests:
-  m_ManifestsStatus: {}
+  m_ManifestsStatus:
+    C:/Users/suzur/GitHub/gaei2_kiborin/T_and_J/Packages/jp.lilxyzw.liltoon/package.json:
+      m_FilePath: C:/Users/suzur/GitHub/gaei2_kiborin/T_and_J/Packages/jp.lilxyzw.liltoon/package.json
+      m_PathExists: 1
+      m_ContentTrackingEnabled: 1
+      m_ModificationDate:
+        serializedVersion: 2
+        ticks: 638799427900000000
+      m_Hash: 2622222485
 m_LocalPackages:
   m_LocalFileStatus: []
 m_ProjectPath: C:/Users/suzur/GitHub/gaei2_kiborin/T_and_J/Packages
@@ -2686,6 +2694,62 @@ m_ResolvedPackages:
     path: 
   unityLifecycle:
     version: 1.0.0
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
+  fingerprint: 
+- packageId: jp.lilxyzw.liltoon@file:C:\Users\suzur\GitHub\gaei2_kiborin\T_and_J\Packages\jp.lilxyzw.liltoon
+  testable: 1
+  isDirectDependency: 1
+  version: 1.9.0
+  source: 3
+  resolvedPath: C:\Users\suzur\GitHub\gaei2_kiborin\T_and_J\Packages\jp.lilxyzw.liltoon
+  assetPath: Packages/jp.lilxyzw.liltoon
+  name: jp.lilxyzw.liltoon
+  displayName: lilToon
+  author:
+    name: 
+    email: 
+    url: 
+  category: 
+  type: 
+  description: Feature-rich toon shader.
+  status: 0
+  errors: []
+  versions:
+    all: []
+    compatible: []
+    recommended: 
+    deprecated: []
+  dependencies: []
+  resolvedDependencies: []
+  keywords:
+  - Toon
+  - Shader
+  - Material
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: https://lilxyzw.github.io/lilToon/
+  hasRepository: 0
+  repository:
+    type: 
+    url: 
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 
     nextVersion: 
     recommendedVersion: 
     isDeprecated: 0

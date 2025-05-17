@@ -989,6 +989,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="lilToon.Editor.csproj">
+      <Project>{20C15251-CAA1-2318-9EA8-CD4C8CD4CAC9}</Project>
+      <Name>lilToon.Editor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
