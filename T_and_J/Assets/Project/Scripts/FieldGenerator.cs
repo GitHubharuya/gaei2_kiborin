@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FieldGenerator : MonoBehaviour
@@ -43,13 +44,17 @@ public class FieldGenerator : MonoBehaviour
     {
         Random.InitState(seed);
 
-        bool[,] wallMap = new bool[mapSize, mapSize];
+        //*GameManagerの配列のサイズを決定*
+        GameManager.instance.wallMap = new bool[(mapSize - 2) * 4 + 2, (mapSize - 2) * 4 + 2];
+        Debug.Log(GameManager.instance.wallMap.GetLength(0));
+
+        bool[,] preWallMap = new bool[mapSize, mapSize];
         bool[,] visited = new bool[mapSize, mapSize];
 
-        // 全部壁で初期化
+        // *全部壁で初期化*
         for (int i = 0; i < mapSize; i++)
             for (int j = 0; j < mapSize; j++)
-                wallMap[i, j] = true;
+                preWallMap[i, j] = true;
 
         int startX = Random.Range(0, (mapSize - 1) / 2) * 2 + 1;
         int startY = Random.Range(0, (mapSize - 1) / 2) * 2 + 1;
@@ -57,7 +62,7 @@ public class FieldGenerator : MonoBehaviour
         Stack<Vector2Int> stack = new Stack<Vector2Int>();
         stack.Push(new Vector2Int(startX, startY));
         visited[startX, startY] = true;
-        wallMap[startX, startY] = false;
+        preWallMap[startX, startY] = false;
 
         // 通路生成
         while (stack.Count > 0)
@@ -75,8 +80,8 @@ public class FieldGenerator : MonoBehaviour
                 if (visited[ni, nj]) continue;
 
                 visited[ni, nj] = true;
-                wallMap[ni, nj] = false;
-                wallMap[current.x + dx[dir], current.y + dy[dir]] = false;
+                preWallMap[ni, nj] = false;
+                preWallMap[current.x + dx[dir], current.y + dy[dir]] = false;
                 stack.Push(new Vector2Int(ni, nj));
             }
         }
@@ -89,7 +94,7 @@ public class FieldGenerator : MonoBehaviour
                 if (!visited[i, j] && Random.Range(0, 3) < 2)
                 {
                     visited[i, j] = true;
-                    wallMap[i, j] = false;
+                    preWallMap[i, j] = false;
                 }
             }
         }
@@ -106,21 +111,26 @@ public class FieldGenerator : MonoBehaviour
             {
                 float _i = 0;
                 float _j = 0;
+
+                //左
                 if (r == 0)
                 {
                     _i = (i - 0.5f) * l;
                     _j = 0.5f * l;
                 }
+                //上
                 else if (r == 1)
                 {
                     _i = 0.5f * l;
                     _j = (i - 0.5f) * l;
                 }
+                //右
                 else if (r == 2)
                 {
                     _i = (i - 0.5f) * l;
                     _j = (0.5f + mapSize - 2) * l;
                 }
+                //下
                 else if (r == 3)
                 {
                     _i = (0.5f + mapSize - 2) * l;
@@ -130,11 +140,21 @@ public class FieldGenerator : MonoBehaviour
                 Instantiate(wallPrefabs[(Random.Range(0, 5)) % 3], pos, Quaternion.Euler(0, 90 * r, 0));
             }
         }
+        //*wallMap更新・壁*
+        for (int k = 0; k < GameManager.instance.wallMap.GetLength(0); k++)
+        {
+            //左右上下
+            GameManager.instance.wallMap[k, 0] = true;
+            GameManager.instance.wallMap[k, GameManager.instance.wallMap.GetLength(0) - 1] = true;
+            GameManager.instance.wallMap[0, k] = true;
+            GameManager.instance.wallMap[GameManager.instance.wallMap.GetLength(0) - 1, k] = true;
+        }
+
 
         //壁以外
         bool[,] furnitureCheck = new bool[mapSize, mapSize];
 
-        // 全部壁で初期化
+        // furnitreCheck初期化
         for (int i = 0; i < mapSize; i++)
             for (int j = 0; j < mapSize; j++)
                 furnitureCheck[i, j] = false;
@@ -155,25 +175,57 @@ public class FieldGenerator : MonoBehaviour
                 Quaternion ceilingQt = ceilingPrefab.transform.rotation;
                 Instantiate(ceilingPrefab, ceilingPos, ceilingQt, transform);
 
-                if (wallMap[i, j] == true && !furnitureCheck[i, j])
+                if (preWallMap[i, j] == true && !furnitureCheck[i, j])
                 {
                     Vector3 wallPos = new Vector3(_i, 0, _j);
                     //隣まで続いてる？
-                    if (i != mapSize - 1 && wallMap[i + 1, j] && !furnitureCheck[i + 1, j])
+                    //縦
+                    if (i != mapSize - 2 && preWallMap[i + 1, j] && !furnitureCheck[i + 1, j])
                     {
                         wallPos.x += l / 2;
                         furnitureCheck[i + 1, j] = true;
-                        Instantiate(furniturePrefabsL[Random.Range(0, 2)], wallPos, Quaternion.Euler(0, 180 * Random.Range(0, 2), 0), transform);
+                        int rnd = Random.Range(0, 2);
+                        Instantiate(furniturePrefabsL[rnd], wallPos, Quaternion.identity, transform);
+                        for (int m = 0; m < 4; m++)
+                        {
+                            for (int n = 0; n < 4; n++)
+                            {
+                                bool[,] furnitureShape = getFurnitureShape(furniturePrefabsL[rnd]);
+                                GameManager.instance.wallMap[1 + 4 * (i - 1) + m, 1 + 4 * (j - 1) + n] = furnitureShape[m, n];
+                                GameManager.instance.wallMap[1 + 4 * i + m, 1 + 4 * (j - 1) + n] = furnitureShape[3 - m, n];
+                            }
+                        }
                     }
-                    else if (j != mapSize - 1 && wallMap[i, j + 1] && !furnitureCheck[i, j + 1])
+                    //横
+                    else if (j != mapSize - 2 && preWallMap[i, j + 1] && !furnitureCheck[i, j + 1])
                     {
                         wallPos.z += l / 2;
                         furnitureCheck[i, j + 1] = true;
-                        Instantiate(furniturePrefabsL[Random.Range(0, 2)], wallPos, Quaternion.Euler(0, 90 + 180 * Random.Range(0, 2), 0), transform);
+                        int rnd = Random.Range(0, 2);
+                        Instantiate(furniturePrefabsL[rnd], wallPos, Quaternion.Euler(0, 90, 0), transform);
+                        for (int m = 0; m < 4; m++)
+                        {
+                            for (int n = 0; n < 4; n++)
+                            {
+                                bool[,] furnitureShape = getFurnitureShape(furniturePrefabsL[rnd]);
+                                GameManager.instance.wallMap[1 + 4 * (i - 1) + m, 1 + 4 * (j - 1) + n] = furnitureShape[n, m];
+                                GameManager.instance.wallMap[1 + 4 * (i - 1) + m, 1 + 4 * j + n] = furnitureShape[3 - n, m];
+                            }
+                        }
                     }
+                    //一マス
                     else
                     {
-                        Instantiate(furniturePrefabsS[Random.Range(0, 2)], wallPos, Quaternion.Euler(0, 90 * Random.Range(0, 4), 0), transform);
+                        int rnd = Random.Range(0, 2);
+                        Instantiate(furniturePrefabsS[rnd], wallPos, Quaternion.Euler(0, 90 * Random.Range(0, 4), 0), transform);
+                        for (int m = 0; m < 4; m++)
+                        {
+                            for(int n = 0; n < 4; n++)
+                            {
+                                bool[,] furnitureShape = getFurnitureShape(furniturePrefabsS[rnd]);
+                                GameManager.instance.wallMap[1 + 4 * (i - 1) + m, 1 + 4 * (j - 1) + n] = furnitureShape[m, n];
+                            }
+                        }
                     }
                 }
                 else
@@ -183,6 +235,19 @@ public class FieldGenerator : MonoBehaviour
                         Vector3 cheesePos = new Vector3(_i, l * 0.2f, _j);
                         Instantiate(cheesePrefab, cheesePos, Quaternion.identity, transform);
                     }
+
+                    //wallMap更新
+                    /*
+                    for (int m = 0; m < 4; m++)
+                    {
+                        for (int n = 0; n < 4; n++)
+                        {
+                            Debug.Log(1 + 4 * i + m);
+                            Debug.Log(1 + 4 * j + n);
+                            GameManager.instance.wallMap[1 + 4 * (i - 1) + m, 1 + 4 * (j - 1) + n] = false;
+                        }
+                    }
+                    */
                 }
 
                 //furnitureCheck更新
@@ -193,5 +258,82 @@ public class FieldGenerator : MonoBehaviour
         //ライト
         Vector3 lightPos = new Vector3(l * (mapSize / 2), 3, l * (mapSize / 2));
         Instantiate(lightPrefab, lightPos, Quaternion.identity, transform);
+
+        printWallMap();
+    }
+
+    private bool[,] getFurnitureShape(GameObject gbj)
+    {
+        bool[,] rt = new bool[4, 4];
+
+        if (gbj == null)
+        {
+            Debug.Log("objectが得られてないよ");
+
+        }
+        else if (gbj == furniturePrefabsS[0])
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    rt[i, j] = true;
+                }
+            }
+        }
+        else if (gbj == furniturePrefabsS[1])
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    rt[i, j] = false;
+                }
+            }
+            rt[0, 0] = true;
+            rt[0, 3] = true;
+            rt[3, 0] = true;
+            rt[3, 3] = true;
+        }
+        else if (gbj == furniturePrefabsL[0])
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    rt[i, j] = true;
+                }
+            }
+        }
+        else if (gbj == furniturePrefabsL[1])
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    rt[i, j] = false;
+                }
+            }
+            rt[0, 0] = true;
+            rt[0, 3] = true;
+        }
+        return rt;
+    }
+
+    void printWallMap()
+    {
+        for(int i = 0;i < GameManager.instance.wallMap.GetLength(0); i++)
+        {
+            string x = null;
+            for(int j = 0; j < GameManager.instance.wallMap.GetLength(1); j++)
+            {
+                if (GameManager.instance.wallMap[i, j])
+                {
+                    x += "T";
+                }
+                else x += "F";
+            }
+            Debug.Log(x);
+        }
     }
 }
