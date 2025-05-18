@@ -3,7 +3,17 @@ guid: 61ab5c431b3f67843993616e1bee3196
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CeilingLight_Texture
+    second: {fileID: 2100000, guid: 80ba539d765b34146a326a8b701ba451, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light_Texture
+    second: {fileID: 2100000, guid: b1ae3ac236f464740a19599cf2ed0a77, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

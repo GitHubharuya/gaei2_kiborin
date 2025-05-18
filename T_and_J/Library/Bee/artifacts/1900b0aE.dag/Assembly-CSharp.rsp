@@ -356,6 +356,7 @@
 "Assets/Project/Scripts/Cat.cs"
 "Assets/Project/Scripts/Cheese.cs"
 "Assets/Project/Scripts/FieldGenerator.cs"
+"Assets/Project/Scripts/GameManager.cs"
 "Assets/Project/Scripts/Mouse.cs"
 "Assets/Project/Scripts/Wall.cs"
 -langversion:9.0
