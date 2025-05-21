@@ -66,6 +66,7 @@
     <Compile Include="Assets\Project\Scripts\FieldGenerator.cs" />
     <Compile Include="Assets\Project\Scripts\Cat.cs" />
     <Compile Include="Assets\Project\Scripts\Wall.cs" />
+    <Compile Include="Assets\Project\Scripts\ObstacleAvoidance.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

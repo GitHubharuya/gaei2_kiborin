@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -24,6 +25,9 @@ public class FieldGenerator : MonoBehaviour
     private GameObject lightPrefab;
     [SerializeField] 
     private GameObject cheesePrefab;
+    //20250522追加
+    public string newTag = "Obstacle";
+    public int newLayer = 6;
 
     private int[] dx = { 1, 0, -1, 0 };
     private int[] dy = { 0, 1, 0, -1 };
@@ -37,6 +41,48 @@ public class FieldGenerator : MonoBehaviour
         else
         {
             GenerateField();
+            //20250522追加
+            ChangeAllChildLayers();
+            ChangeAllChildTags();
+        }
+    }
+
+    public void ChangeAllChildLayers()
+    {
+        ChangeChildLayersRecursively(transform, newLayer);
+    }
+
+    public void ChangeChildLayersRecursively(Transform parent, int newLayer)
+    {
+        foreach (Transform child in parent)
+        {
+            child.gameObject.layer = newLayer;
+
+            if (child.childCount > 0)
+            {
+                ChangeChildLayersRecursively(child, newLayer);
+            }
+        }
+    }
+
+    public void ChangeAllChildTags()
+    {
+        ChangeChildTagsRecursively(transform, newTag);
+    }
+
+    private void ChangeChildTagsRecursively(Transform parent, string newTag)
+    {
+        foreach(Transform child in parent)
+        {
+
+            if (child.name == "Chest(Clone)" || child.name == "Table(Clone)" || child.name == "Chair(Clone)" || child.name == "Sofa(Clone)")
+            {
+                child.gameObject.tag = newTag;
+            }
+            if (child.childCount > 0)
+            {
+                ChangeChildTagsRecursively(child, newTag);
+            }
         }
     }
 
