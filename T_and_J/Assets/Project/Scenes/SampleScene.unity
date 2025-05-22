@@ -321,6 +321,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall0
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a36ddc1bc9fe5b44b9c3daa401cd2d46, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a36ddc1bc9fe5b44b9c3daa401cd2d46, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -484,7 +492,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc01b95eb534da479521ec7f8653cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  detectionRange: 0.5
+  detectionRange: 0.2
   avoidDistance: 2
   moveSpeed: 0.5
   rotationSpeed: 5
@@ -623,6 +631,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f97df5e770f822c439c097bf4b2b9ee2, type: 3}
       propertyPath: m_Name
       value: Wall1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f97df5e770f822c439c097bf4b2b9ee2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f97df5e770f822c439c097bf4b2b9ee2, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -916,6 +932,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 6629546e136751c41be3072d472dce49, type: 3}
       propertyPath: m_Name
       value: Wall2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6629546e136751c41be3072d472dce49, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6629546e136751c41be3072d472dce49, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1450,9 +1474,9 @@ MonoBehaviour:
   seed: 0
   groundPrefab: {fileID: 919132149155446097, guid: 70b51a382134e864e8b813a268fb364d, type: 3}
   wallPrefabs:
-  - {fileID: 919132149155446097, guid: a36ddc1bc9fe5b44b9c3daa401cd2d46, type: 3}
-  - {fileID: 919132149155446097, guid: f97df5e770f822c439c097bf4b2b9ee2, type: 3}
-  - {fileID: 919132149155446097, guid: 6629546e136751c41be3072d472dce49, type: 3}
+  - {fileID: 356117396}
+  - {fileID: 684820853}
+  - {fileID: 781943002}
   furniturePrefabsS:
   - {fileID: 2060376615}
   - {fileID: 991886680}
