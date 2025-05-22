@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\mitsu\\githubdesktop\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\mitsu\\githubdesktop\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\mitsu\\githubdesktop\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,11 +34,15 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Cat.cs",
               "DocumentMoniker": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cat.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Cat.cs",
@@ -50,18 +54,14 @@
               "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
-            },
-            {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "ObstacleAvoidance.cs",
               "DocumentMoniker": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
               "ToolTip": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAE8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-21T15:21:01.153Z",
               "EditorCaption": ""
@@ -76,8 +76,7 @@
               "RelativeToolTip": "Assets\\Project\\Scripts\\Mouse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAACMAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T07:51:45.303Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-09T07:51:45.303Z"
             },
             {
               "$type": "Document",
@@ -89,8 +88,7 @@
               "RelativeToolTip": "Assets\\Project\\Scripts\\GameManager.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-18T13:43:26.385Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-18T13:43:26.385Z"
             },
             {
               "$type": "Document",
@@ -102,8 +100,7 @@
               "RelativeToolTip": "Assets\\Project\\Scripts\\FieldGenerator.cs",
               "ViewState": "AgIAAFkBAAAAAAAAAAAqwGoBAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-12T02:49:04.128Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-05-12T02:49:04.128Z"
             },
             {
               "$type": "Document",
