@@ -491,6 +491,8 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
+  player: {fileID: 0}
+  cheeseText: {fileID: 0}
 --- !u!4 &474417711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: faa4c6bc74b54c847864f2626f886eb5, type: 3}
@@ -1588,6 +1590,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7829111371992915021, guid: 5a36f0febf400cc4b933fddc4452eab9, type: 3}
       propertyPath: m_Name
+      value: Cheese
+      objectReference: {fileID: 0}
+    - target: {fileID: 7829111371992915021, guid: 5a36f0febf400cc4b933fddc4452eab9, type: 3}
+      propertyPath: m_TagString
       value: Cheese
       objectReference: {fileID: 0}
     - target: {fileID: 8621696458400497048, guid: 5a36f0febf400cc4b933fddc4452eab9, type: 3}
