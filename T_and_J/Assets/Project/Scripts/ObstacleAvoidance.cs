@@ -20,61 +20,16 @@ public class ObstacleAvoidance : MonoBehaviour
 
     private void Start()
     {
-        UpdateCheeseUI();
+        
     }
 
     void Update()
     {
-        if(player == null)
-        {
-            FindNearestCheese();
-        }
-        else
-        {
-            Vector3 direction = player.position - transform.position;
-            direction.Normalize();
-            transform.position += direction * moveSpeed * Time.deltaTime;
-        }
+        
             AvoidObstaclesAndMove();
     }
 
-    void FindNearestCheese()
-    {
-        GameObject[] cheeses = GameObject.FindGameObjectsWithTag("Cheese");
-        float closestDistance = Mathf.Infinity;
-        Transform closest = null;
-
-        foreach (GameObject cheese in cheeses)
-        {
-            float distance = Vector3.Distance(transform.position, cheese.transform.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                closest = cheese.transform;
-            }
-        }
-
-        player = closest;
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Cheese"))
-        {
-            Destroy(other.gameObject);
-            cheeseCount++;
-            UpdateCheeseUI();
-            player = null;
-        }
-    }
-
-    void UpdateCheeseUI()
-    {
-        if (cheeseText != null)
-        {
-            cheeseText.text = "Cheese: " + cheeseCount.ToString();
-        }
-    }
+ 
 
     void AvoidObstaclesAndMove()
     {
