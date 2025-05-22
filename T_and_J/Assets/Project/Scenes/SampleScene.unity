@@ -794,6 +794,10 @@ PrefabInstance:
       propertyPath: mouse
       value: 
       objectReference: {fileID: 464185496}
+    - target: {fileID: 4742114153685721984, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
+      propertyPath: mouseCollider
+      value: 
+      objectReference: {fileID: 5349417604279033765, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
