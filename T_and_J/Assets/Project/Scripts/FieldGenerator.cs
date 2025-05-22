@@ -25,6 +25,8 @@ public class FieldGenerator : MonoBehaviour
     private GameObject lightPrefab;
     [SerializeField] 
     private GameObject cheesePrefab;
+    [SerializeField]
+    private Cat cat;
     //20250522追加
     public string newTag = "Obstacle";
     public int newLayer = 6;
@@ -306,6 +308,9 @@ public class FieldGenerator : MonoBehaviour
         Instantiate(lightPrefab, lightPos, Quaternion.identity, transform);
 
         printWallMap();
+
+        //猫のDFSをスタート
+        cat.startDFS();
     }
 
     private bool[,] getFurnitureShape(GameObject gbj)

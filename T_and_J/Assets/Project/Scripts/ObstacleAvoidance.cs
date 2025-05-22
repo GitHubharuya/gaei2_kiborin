@@ -5,18 +5,18 @@ using TMPro;
 
 public class ObstacleAvoidance : MonoBehaviour
 {
-    public float detectionRange = 1.0f; //áŠQ•¨ŒŸo‹——£
-    public float avoidDistance = 2f; //áŠQ•¨‰ñ”ğ‚Ì‚½‚ß‚Ì¶‰EŒŸo‹——£
+    public float detectionRange = 1.0f; //ï¿½ï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½oï¿½ï¿½ï¿½ï¿½
+    public float avoidDistance = 2f; //ï¿½ï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½Ì‚ï¿½ï¿½ß‚Ìï¿½ï¿½Eï¿½ï¿½ï¿½oï¿½ï¿½ï¿½ï¿½
 
     public float moveSpeed = 0.5f;
-    public float rotationSpeed = 5f; //‰ñ”ğù‰ñ‘¬“x
+    public float rotationSpeed = 5f; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ñ‘¬“x
 
     public LayerMask obstacleLayer;
 
     public Transform player;
 
-    private int cheeseCount = 0; // © ƒ`[ƒY‚Ì”‚ğƒJƒEƒ“ƒg
-    public TextMeshProUGUI cheeseText;      // © UI‚Ö‚ÌQÆiInspector‚Åİ’èj
+    private int cheeseCount = 0; // ï¿½ï¿½ ï¿½`ï¿½[ï¿½Yï¿½Ìï¿½ï¿½ï¿½Jï¿½Eï¿½ï¿½ï¿½g
+    public TextMeshProUGUI cheeseText;      // ï¿½ï¿½ UIï¿½Ö‚ÌQï¿½ÆiInspectorï¿½Åİ’ï¿½j
 
     private void Start()
     {
@@ -78,20 +78,20 @@ public class ObstacleAvoidance : MonoBehaviour
 
     void AvoidObstaclesAndMove()
     {
-        Vector3 origin = transform.position; //Œ»İ‚ÌƒlƒYƒ~ˆÊ’u‚ğæ“¾
-        Vector3 forwardDir = transform.forward; //ƒlƒYƒ~‹“_‚©‚çŒ©‚Ä‘O‚Ì•ûŒüƒxƒNƒgƒ‹
-        Vector3 upwardDirection = (forwardDir + Vector3.up).normalized; //ƒlƒYƒ~‹“_‚©‚çŒ©‚Äã‚Ì•ûŒüƒxƒNƒgƒ‹
+        Vector3 origin = transform.position; //ï¿½ï¿½ï¿½İ‚Ìƒlï¿½Yï¿½~ï¿½Ê’uï¿½ï¿½æ“¾
+        Vector3 forwardDir = transform.forward; //ï¿½lï¿½Yï¿½~ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½çŒ©ï¿½Ä‘Oï¿½Ì•ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½
+        Vector3 upwardDirection = (forwardDir + Vector3.up).normalized; //ï¿½lï¿½Yï¿½~ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½çŒ©ï¿½Äï¿½Ì•ï¿½ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½
 
         bool inFront = false;
         bool above = false;
-        Debug.DrawRay(origin, forwardDir * detectionRange, Color.red); //Ray‚Ì‰Â‹‰»
-        Debug.DrawRay(origin, upwardDirection * detectionRange, Color.blue); //Ray‚Ì‰Â‹‰»
+        Debug.DrawRay(origin, forwardDir * detectionRange, Color.red); //Rayï¿½Ì‰Âï¿½ï¿½ï¿½
+        Debug.DrawRay(origin, upwardDirection * detectionRange, Color.blue); //Rayï¿½Ì‰Âï¿½ï¿½ï¿½
 
         if (Physics.Raycast(origin, forwardDir, out RaycastHit hitinfo, detectionRange, obstacleLayer))
         {
             if (hitinfo.collider.CompareTag("Obstacle"))
             {
-                Debug.Log("áŠQ•¨‚ÉÚG");
+                Debug.Log("ï¿½ï¿½Qï¿½ï¿½ï¿½ÉÚG");
                 inFront = true;
             }         
             
@@ -100,39 +100,39 @@ public class ObstacleAvoidance : MonoBehaviour
         {
             if (hitinfo2.collider.CompareTag("Obstacle"))
             {
-                Debug.Log("áŠQ•¨‚ÉÚG");
+                Debug.Log("ï¿½ï¿½Qï¿½ï¿½ï¿½ÉÚG");
                 above = true;
             }
         }
 
         if (inFront || above)
         {
-            bool clearLeft = !Physics.Raycast(origin, -transform.right, avoidDistance, obstacleLayer); //ƒlƒYƒ~¶•ûŒü‚ÉáŠQ•¨‚ª‚È‚¢‚©’Tõ
-            bool clearRight = !Physics.Raycast(origin, transform.right, avoidDistance, obstacleLayer); //ã‚Æ“¯—l(‰Ever)
+            bool clearLeft = !Physics.Raycast(origin, -transform.right, avoidDistance, obstacleLayer); //ï¿½lï¿½Yï¿½~ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½ï¿½ï¿½Tï¿½ï¿½
+            bool clearRight = !Physics.Raycast(origin, transform.right, avoidDistance, obstacleLayer); //ï¿½ï¿½Æ“ï¿½ï¿½l(ï¿½Ever)
 
-            Vector3 desiredDirection = Vector3.zero; //‰ñ”ğ‚·‚é•ûŒü‚ÌƒxƒNƒgƒ‹‚Í‚±‚±‚ÉŠi”[‚µ‚Ü[‚·
-            if (clearLeft && clearRight) //‰E‚Æ¶—¼•ûáŠQ•¨‚ª‚È‚¢‚Æ‚«‚Í
+            Vector3 desiredDirection = Vector3.zero; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìƒxï¿½Nï¿½gï¿½ï¿½ï¿½Í‚ï¿½ï¿½ï¿½ï¿½ÉŠiï¿½[ï¿½ï¿½ï¿½Ü[ï¿½ï¿½
+            if (clearLeft && clearRight) //ï¿½Eï¿½Æï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Qï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½ï¿½Æ‚ï¿½ï¿½ï¿½
             {
-                desiredDirection = Random.value < 0.5f ? -transform.right : transform.right; //ƒ‰ƒ“ƒ_ƒ€‚Å¶‚©‰E‚Éi‚Ş
+                desiredDirection = Random.value < 0.5f ? -transform.right : transform.right; //ï¿½ï¿½ï¿½ï¿½ï¿½_ï¿½ï¿½ï¿½Åï¿½ï¿½ï¿½ï¿½Eï¿½Éiï¿½ï¿½
             }
-            else if (clearLeft)//¶áŠQ•¨‚È‚¢
+            else if (clearLeft)//ï¿½ï¿½ï¿½ï¿½Qï¿½ï¿½ï¿½È‚ï¿½
             {
-                desiredDirection = -transform.right; //¶‚Éi‚Ş
+                desiredDirection = -transform.right; //ï¿½ï¿½ï¿½Éiï¿½ï¿½
             }
-            else if (clearRight)//‰EáŠQ•¨‚È‚¢
+            else if (clearRight)//ï¿½Eï¿½ï¿½Qï¿½ï¿½ï¿½È‚ï¿½
             {
-                desiredDirection = transform.right; //‰E‚Éi‚Ş
+                desiredDirection = transform.right; //ï¿½Eï¿½Éiï¿½ï¿½
             }
-            else//3•ûŒü‹l‚İ
+            else//3ï¿½ï¿½ï¿½ï¿½ï¿½lï¿½ï¿½
             {
-                desiredDirection = -forwardDir; //Œã‘Ş
+                desiredDirection = -forwardDir; //ï¿½ï¿½ï¿½
             }
-            //‰ñ“]‚ğŠŠ‚ç‚©‚É‚·‚éˆ—
+            //ï¿½ï¿½]ï¿½ï¿½ï¿½ï¿½ç‚©ï¿½É‚ï¿½ï¿½éˆï¿½ï¿½
             Quaternion targetRotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
         }
 
-        //‰ñ“]”»’fŒã‚Í‘Oi!!!
+        //ï¿½ï¿½]ï¿½ï¿½ï¿½fï¿½ï¿½Í‘Oï¿½i!!!
         transform.position += transform.forward * moveSpeed * Time.deltaTime;
     }
 
