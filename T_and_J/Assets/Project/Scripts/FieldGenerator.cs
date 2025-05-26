@@ -25,6 +25,8 @@ public class FieldGenerator : MonoBehaviour
     private GameObject lightPrefab;
     [SerializeField] 
     private GameObject cheesePrefab;
+    [SerializeField] 
+    public Cat cat;
     //20250522追加
     public string newTag = "Obstacle";
     public int newLayer = 6;
@@ -216,7 +218,7 @@ public class FieldGenerator : MonoBehaviour
                 //床・天井を張る
                 Vector3 pos = new Vector3(_i, 0, _j);
                 Instantiate(groundPrefab, pos, Quaternion.identity, transform);
-                
+
                 Vector3 ceilingPos = new Vector3(_i, 3f, _j);
                 Quaternion ceilingQt = ceilingPrefab.transform.rotation;
                 Instantiate(ceilingPrefab, ceilingPos, ceilingQt, transform);
@@ -266,7 +268,7 @@ public class FieldGenerator : MonoBehaviour
                         Instantiate(furniturePrefabsS[rnd], wallPos, Quaternion.Euler(0, 90 * Random.Range(0, 4), 0), transform);
                         for (int m = 0; m < 4; m++)
                         {
-                            for(int n = 0; n < 4; n++)
+                            for (int n = 0; n < 4; n++)
                             {
                                 bool[,] furnitureShape = getFurnitureShape(furniturePrefabsS[rnd]);
                                 GameManager.instance.wallMap[1 + 4 * (i - 1) + m, 1 + 4 * (j - 1) + n] = furnitureShape[m, n];
@@ -276,7 +278,7 @@ public class FieldGenerator : MonoBehaviour
                 }
                 else
                 {
-                    if(Random.Range(0, 3) == 0)
+                    if (Random.Range(0, 3) == 0)
                     {
                         Vector3 cheesePos = new Vector3(_i, l * 0.2f, _j);
                         Instantiate(cheesePrefab, cheesePos, Quaternion.identity, transform);
@@ -306,6 +308,8 @@ public class FieldGenerator : MonoBehaviour
         Instantiate(lightPrefab, lightPos, Quaternion.identity, transform);
 
         printWallMap();
+
+        cat.startDFS();
     }
 
     private bool[,] getFurnitureShape(GameObject gbj)
