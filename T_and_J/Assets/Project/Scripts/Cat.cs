@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Cat : MonoBehaviour
 {
+
     [SerializeField]
     GameObject mouse;
 
@@ -13,7 +14,7 @@ public class Cat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -24,5 +25,10 @@ public class Cat : MonoBehaviour
         float vx = dir.x * chaseSpeed_;
         float vz = dir.z * chaseSpeed_;
         this.transform.Translate(vx / 50, 0, vz / 50);
+    }
+
+    public void startDFS()
+    {
+
     }
 }
