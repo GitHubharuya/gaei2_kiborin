@@ -5,11 +5,11 @@ using TMPro;
 
 public class ObstacleAvoidance : MonoBehaviour
 {
-    public float detectionRange = 1.0f; //障害物検出距離
+    public float detectionRange = 3.0f; //障害物検出距離
     public float avoidDistance = 2f; //障害物回避のための左右検出距離
 
     public float moveSpeed = 0.5f;
-    public float rotationSpeed = 5f; //回避時旋回速度
+    public float rotationSpeed = 10f; //回避時旋回速度
 
     public LayerMask obstacleLayer;
 
@@ -18,18 +18,25 @@ public class ObstacleAvoidance : MonoBehaviour
     private int cheeseCount = 0; // ← チーズの数をカウント
     public TextMeshProUGUI cheeseText;      // ← UIへの参照（Inspectorで設定）
 
+
+    private Rigidbody rb; //Rigidbodyコンポーネントを格納する変数
     private void Start()
     {
-        
+        rb = GetComponent<Rigidbody>();
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }
 
     void Update()
     {
         
-            AvoidObstaclesAndMove();
     }
 
- 
+    private void FixedUpdate()
+    {
+        AvoidObstaclesAndMove();
+    }
+
+
 
     void AvoidObstaclesAndMove()
     {
@@ -88,7 +95,9 @@ public class ObstacleAvoidance : MonoBehaviour
         }
 
         //回転判断後は前進!!!
-        transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        Vector3 newPosition = rb.position + transform.forward * moveSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(newPosition);
+        //transform.position += transform.forward * moveSpeed * Time.deltaTime;
     }
 
 
