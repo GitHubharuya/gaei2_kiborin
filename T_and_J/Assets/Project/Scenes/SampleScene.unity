@@ -1682,7 +1682,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapSize: 11
-  seed: 5
+  seed: 10
   groundPrefab: {fileID: 919132149155446097, guid: 70b51a382134e864e8b813a268fb364d, type: 3}
   wallPrefabs:
   - {fileID: 356117396}
