@@ -5,8 +5,8 @@ using TMPro; // ← UIを使うために必要
 
 public class MouseMovement : MonoBehaviour
 {
-    public Transform player;
-    private float speed = 5.0f;
+    public Transform cheese;
+    private float speed = 1.5f;
 
     private int cheeseCount = 0; // ← チーズの数をカウント
     public TextMeshProUGUI cheeseText;      // ← UIへの参照（Inspectorで設定）
@@ -18,15 +18,21 @@ public class MouseMovement : MonoBehaviour
 
     void Update()
     {
-        if (player == null)
+        if (cheese == null)
         {
             FindNearestCheese();
         }
 
-        if (player != null)
+        if (cheese != null)
         {
-            Vector3 direction = player.position - transform.position;
+            Vector3 direction = cheese.position - transform.position;
             direction.Normalize();
+
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 3f);
+            }
             transform.position += direction * speed * Time.deltaTime;
         }
     }
@@ -47,7 +53,7 @@ public class MouseMovement : MonoBehaviour
             }
         }
 
-        player = closest;
+        cheese = closest;
     }
 
     void OnTriggerEnter(Collider other)
@@ -57,7 +63,7 @@ public class MouseMovement : MonoBehaviour
             Destroy(other.gameObject);
             cheeseCount++;
             UpdateCheeseUI();
-            player = null;
+            cheese = null;
         }
     }
 
