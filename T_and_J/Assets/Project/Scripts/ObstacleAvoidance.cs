@@ -15,17 +15,20 @@ public class ObstacleAvoidance : MonoBehaviour
 
     public LayerMask obstacleLayer;
 
-    public Transform player;
-
     private int cheeseCount = 0; // �� �`�[�Y�̐���J�E���g
     public TextMeshProUGUI cheeseText;      // �� UI�ւ̎Q�ƁiInspector�Őݒ�j
 
-
+    public Transform cheese;
+    public bool useView = false;
     private Rigidbody rb; //Rigidbody�R���|�[�l���g��i�[����ϐ�
 
     public float commitDuration = 0.6f; // ��𓮍�̎�������
     private bool isCommitted = false;
-    
+
+    [Header("視界設定")]
+    public float viewDistance = 6f; // 視界の距離
+    public float viewAngle = 90f;   // 視野角（左右45度）
+
     private void Start()
     {
         UpdateCheeseUI();
@@ -35,7 +38,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -46,14 +49,24 @@ public class ObstacleAvoidance : MonoBehaviour
             bool flag = AvoidObstaclesAndMove();
             if (!flag)
             {
-                if (player == null)
+                if (cheese == null)
                 {
-                    FindNearestCheese();
+                    if (useView)
+                    {
+                        FindNearestCheese_View(); //視界を使ってチーズを探す
+                        Quaternion mouseRotation = Quaternion.LookRotation(-transform.forward);
+                        transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotation, rotationSpeed * Time.deltaTime);
+                        rb.MovePosition(rb.position + -transform.forward * moveSpeed * Time.fixedDeltaTime);
+                    }
+                    else
+                    {
+                        FindNearestCheese(); //視界を使わずにチーズを探す 
+                    }
                 }
 
-                if (player != null)
+                if (cheese != null)
                 {
-                    Vector3 direction = player.position - transform.position;
+                    Vector3 direction = cheese.position - transform.position;
                     direction.Normalize();
                     //transform.position += direction * speed * Time.deltaTime;
                     Quaternion mouseRotaion = Quaternion.LookRotation(direction); //�l�Y�~�̌�����v���C���[�����Ɍ�����
@@ -72,12 +85,12 @@ public class ObstacleAvoidance : MonoBehaviour
         Vector3 origin = transform.position; //���݂̃l�Y�~�ʒu��擾
         Vector3 forwardDir = transform.forward; //�l�Y�~���_���猩�đO�̕����x�N�g��
         Vector3 upwardDirection = (forwardDir + Vector3.up).normalized; //�l�Y�~���_���猩�ď�̕����x�N�g��
-        Vector3 dir1 = Quaternion.Euler(0,30,0) * transform.forward; 
-        Vector3 dir2 = Quaternion.Euler(0,-30,0) * transform.forward; 
+        Vector3 dir1 = Quaternion.Euler(0, 30, 0) * transform.forward;
+        Vector3 dir2 = Quaternion.Euler(0, -30, 0) * transform.forward;
         Vector3 dir3 = Quaternion.Euler(0, 60, 0) * transform.forward;
-        Vector3 dir4 = Quaternion.Euler(0, -60, 0) * transform.forward; 
+        Vector3 dir4 = Quaternion.Euler(0, -60, 0) * transform.forward;
         Vector3 dir5 = Quaternion.Euler(0, 120, 0) * transform.forward;
-        Vector3 dir6 = Quaternion.Euler(0, -120, 0) * transform.forward; 
+        Vector3 dir6 = Quaternion.Euler(0, -120, 0) * transform.forward;
         Vector3 dir7 = Quaternion.Euler(0, 150, 0) * transform.forward;
         Vector3 dir8 = Quaternion.Euler(0, -150, 0) * transform.forward;
         Vector3[] directions = new Vector3[] { -transform.right, transform.right, dir1, dir2, dir3, dir4, dir5, dir6, dir7, dir8 };
@@ -105,10 +118,10 @@ public class ObstacleAvoidance : MonoBehaviour
             {
                 //Debug.Log("��Q���ɐڐG");
                 inFront = true;
-            }         
-            
+            }
+
         }
-        if(Physics.Raycast(origin, upwardDirection, out RaycastHit hitinfo2, detectionRange, obstacleLayer))
+        if (Physics.Raycast(origin, upwardDirection, out RaycastHit hitinfo2, detectionRange, obstacleLayer))
         {
             if (hitinfo2.collider.CompareTag("Obstacle"))
             {
@@ -120,9 +133,9 @@ public class ObstacleAvoidance : MonoBehaviour
         if (inFront || above)
         {
             facingObstacle = true;
-            mouseMovement(origin, forwardDir,directions); //��Q�����O���ɂ���ꍇ�͉�������Ăяo��
+            mouseMovement(origin, forwardDir, directions); //��Q�����O���ɂ���ꍇ�͉�������Ăяo��
         }
-        
+
 
         //transform.position += transform.forward * moveSpeed * Time.deltaTime;
 
@@ -145,17 +158,17 @@ public class ObstacleAvoidance : MonoBehaviour
         bool clearDir8 = !Physics.Raycast(origin, directions[9], avoidDistance, obstacleLayer); //150�x�������ɏ�Q�����Ȃ����T��
         List<Vector3> clearDirections = new List<Vector3>(); //��Q�����Ȃ�������i�[���郊�X�g
 
-        foreach(Vector3 dir in directions)
+        foreach (Vector3 dir in directions)
         {
-            if(!Physics.Raycast(origin, dir, avoidDistance, obstacleLayer))
+            if (!Physics.Raycast(origin, dir, avoidDistance, obstacleLayer))
             {
                 clearDirections.Add(dir);
             }
         }
 
         Vector3 desiredDirection = Vector3.zero; //����������̃x�N�g���͂����Ɋi�[���܁[��
-        
-        if(clearDirections.Count > 0) {
+
+        if (clearDirections.Count > 0) {
             Debug.Log("��Q���Ȃ��̕��������������A�����܂�");
             int randomIndex = Random.Range(0, clearDirections.Count); //��Q�����Ȃ������̒����烉���_���őI��
             desiredDirection = clearDirections[randomIndex];
@@ -212,8 +225,25 @@ public class ObstacleAvoidance : MonoBehaviour
             Destroy(other.gameObject);
             cheeseCount++;
             UpdateCheeseUI();
-            player = null;
+            cheese = null;
         }
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, viewDistance);
+
+        Vector3 forward = transform.forward;
+        Quaternion leftRayRotation = Quaternion.Euler(0, -viewAngle / 2, 0);
+        Quaternion rightRayRotation = Quaternion.Euler(0, viewAngle / 2, 0);
+
+        Vector3 leftRay = leftRayRotation * forward;
+        Vector3 rightRay = rightRayRotation * forward;
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawRay(transform.position, leftRay * viewDistance);
+        Gizmos.DrawRay(transform.position, rightRay * viewDistance);
     }
 
     void FindNearestCheese()
@@ -232,7 +262,33 @@ public class ObstacleAvoidance : MonoBehaviour
             }
         }
 
-        player = closest;
+        cheese = closest;
+    }
+
+    void FindNearestCheese_View()
+    {
+        GameObject[] cheeses = GameObject.FindGameObjectsWithTag("Cheese");
+        float closestDistance = Mathf.Infinity;
+        Transform closest = null;
+
+        foreach (GameObject c in cheeses)
+        {
+            Vector3 toCheese = c.transform.position - transform.position;
+            float distance = toCheese.magnitude;
+
+            if (distance > viewDistance) continue; // 視界の距離外
+
+            float angle = Vector3.Angle(transform.forward, toCheese);
+            if (angle > viewAngle / 2f) continue; // 視野角外
+
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closest = c.transform;
+            }
+        }
+
+        cheese = closest;
     }
 
     private IEnumerator CommitMovement(Vector3 direction, float commitTime)
