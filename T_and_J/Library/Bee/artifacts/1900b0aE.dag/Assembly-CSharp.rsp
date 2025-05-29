@@ -360,6 +360,7 @@
 "Assets/Project/Scripts/Mouse.cs"
 "Assets/Project/Scripts/MouseMovement.cs"
 "Assets/Project/Scripts/ObstacleAvoidance.cs"
+"Assets/Project/Scripts/TestMouse.cs"
 "Assets/Project/Scripts/Wall.cs"
 -langversion:9.0
 /deterministic

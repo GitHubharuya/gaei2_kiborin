@@ -505,8 +505,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088fcb0febfff3c40b2dee7444a6a5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  cheese: {fileID: 0}
   cheeseText: {fileID: 0}
+--- !u!114 &464185514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464185496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10b91876341b5a04c9e02de9f93048cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cheese: {fileID: 0}
+  cheeseText: {fileID: 0}
+  viewDistance: 100
+  viewAngle: 180
 --- !u!4 &474417711 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: faa4c6bc74b54c847864f2626f886eb5, type: 3}
@@ -1460,8 +1476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533920a4bd7486b44bb794c79084d510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 11
-  seed: 0
+  mapSize: 21
+  seed: 1
   groundPrefab: {fileID: 919132149155446097, guid: 70b51a382134e864e8b813a268fb364d, type: 3}
   wallPrefabs:
   - {fileID: 919132149155446097, guid: a36ddc1bc9fe5b44b9c3daa401cd2d46, type: 3}
@@ -1696,6 +1712,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6916803040528289554, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
       insertIndex: -1
       addedObject: {fileID: 464185509}
+    - targetCorrespondingSourceObject: {fileID: 6916803040528289554, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 464185514}
   m_SourcePrefab: {fileID: 100100000, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

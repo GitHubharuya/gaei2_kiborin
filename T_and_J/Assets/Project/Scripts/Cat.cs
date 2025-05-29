@@ -8,7 +8,10 @@ public class Cat : MonoBehaviour
     GameObject mouse;
 
     [Header("追跡の速さ")]
-    private float chaseSpeed_ = 0.5f;
+    private float chaseSpeed_ = 1.0f;
+
+    [Header("回転の速さ（数値を大きくするとキビキビ回る）")]
+    private float rotationSpeed_ = 5f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,10 +22,19 @@ public class Cat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 dir = (mouse.transform.position - this.transform.position).normalized;
-        //指定した量進む
-        float vx = dir.x * chaseSpeed_;
-        float vz = dir.z * chaseSpeed_;
-        this.transform.Translate(vx / 50, 0, vz / 50);
+        Vector3 direction = mouse.transform.position - this.transform.position;
+        direction.y = 0f; // 水平方向のみを考慮
+
+        // ネズミが存在していて、方向ベクトルがゼロでなければ
+        if (direction != Vector3.zero)
+        {
+            // 目標の回転（ネズミの方向を向く）
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            // 現在の回転から滑らかに補間
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * rotationSpeed_);
+        }
+
+        // 向いている方向（transform.forward）に移動
+        transform.Translate(transform.forward * chaseSpeed_ * Time.deltaTime, Space.World);
     }
 }
