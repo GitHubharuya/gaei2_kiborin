@@ -62,12 +62,5 @@ public class Cat : MonoBehaviour
         }
         DFS(1, 1, -1);
         Debug.Log(GameManager.instance.wallMap.GetLength(0));
-        /*for(int i = 0; i < GameManager.instance.wallMap.GetLength(0); i++)
-        {
-            for (int j = 0; j < GameManager.instance.wallMap.GetLength(0); j++)
-            {
-                Debug.Log(GameManager.instance.wallMap[i, j]);
-            }
-        }*/
     }
 }
