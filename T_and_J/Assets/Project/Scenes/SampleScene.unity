@@ -194,10 +194,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1001040933350534997, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
   m_PrefabInstance: {fileID: 1699447401528197232}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &58874518 stripped
+--- !u!114 &58874520
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4742114153685721984, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
-  m_PrefabInstance: {fileID: 1699447401528197232}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 58874517}
   m_Enabled: 1
@@ -205,6 +206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed80d2500a123f478c09441371f79e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouse: {fileID: 464185496}
+  go: 
 --- !u!1 &186663026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1708,7 +1711,7 @@ MonoBehaviour:
   ceilingPrefab: {fileID: 440469099}
   lightPrefab: {fileID: 5497717562607429501, guid: d47e14e5a81b42e419e552660db9d1ad, type: 3}
   cheesePrefab: {fileID: 1920922200}
-  cat: {fileID: 58874518}
+  cat: {fileID: 58874520}
   newTag: Obstacle
   newLayer: 6
 --- !u!4 &2122317634
@@ -1786,7 +1789,10 @@ PrefabInstance:
     - {fileID: 4742114153685721984, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1001040933350534997, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 58874520}
   m_SourcePrefab: {fileID: 100100000, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
 --- !u!1001 &5785745825563195475
 PrefabInstance:
