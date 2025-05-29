@@ -736,13 +736,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464185496}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 088fcb0febfff3c40b2dee7444a6a5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cheese: {fileID: 0}
-  cheeseText: {fileID: 43409658}
+  cheeseText: {fileID: 0}
 --- !u!114 &464185514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,14 +750,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464185496}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10b91876341b5a04c9e02de9f93048cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cheese: {fileID: 0}
-  cheeseText: {fileID: 43409658}
-  viewDistance: 100
+  cheeseText: {fileID: 0}
+  viewDistance: 6
   viewAngle: 90
 --- !u!4 &474417711 stripped
 Transform:
