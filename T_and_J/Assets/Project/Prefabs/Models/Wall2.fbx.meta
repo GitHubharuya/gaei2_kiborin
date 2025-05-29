@@ -3,12 +3,7 @@ guid: 6629546e136751c41be3072d472dce49
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Wall2_Texture
-    second: {fileID: 2100000, guid: d968ea049d813514e8c6363deaa0b2bd, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
