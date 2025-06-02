@@ -307,4 +307,10 @@ public class ObstacleAvoidance : MonoBehaviour
 
         cheese = closest;
     }
+
+    public void beEaten()
+    {
+        Destroy(gameObject);
+    }
+
 }
