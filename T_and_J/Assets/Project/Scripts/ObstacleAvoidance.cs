@@ -54,9 +54,10 @@ public class ObstacleAvoidance : MonoBehaviour
                     if (useView)
                     {
                         FindNearestCheese_View(); //視界を使ってチーズを探す
-                        Quaternion mouseRotation = Quaternion.LookRotation(-transform.forward);
-                        transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotation, rotationSpeed * Time.deltaTime);
-                        rb.MovePosition(rb.position + -transform.forward * moveSpeed * Time.fixedDeltaTime);
+                        //Quaternion mouseRotation = Quaternion.LookRotation(-transform.forward);
+                        //transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotation, rotationSpeed * Time.deltaTime);
+                        //rb.MovePosition(rb.position + -transform.forward * moveSpeed * Time.fixedDeltaTime);
+                        //CommitMovement(-transform.forward, commitDuration); 
                     }
                     else
                     {
@@ -93,7 +94,7 @@ public class ObstacleAvoidance : MonoBehaviour
         Vector3 dir6 = Quaternion.Euler(0, -120, 0) * transform.forward;
         Vector3 dir7 = Quaternion.Euler(0, 150, 0) * transform.forward;
         Vector3 dir8 = Quaternion.Euler(0, -150, 0) * transform.forward;
-        Vector3[] directions = new Vector3[] { -transform.right, transform.right, dir1, dir2, dir3, dir4, dir5, dir6, dir7, dir8 };
+        Vector3[] directions = new Vector3[] { dir1, dir2, dir3, dir4, -transform.right, transform.right, dir5, dir6, dir7, dir8 };
         // �ǂ��ɓ����邱�Ƃ��ł���̂��A����Ŕ��f
 
         bool inFront = false;
@@ -146,17 +147,19 @@ public class ObstacleAvoidance : MonoBehaviour
     // Update is called once per frame
     public void mouseMovement(Vector3 origin, Vector3 forwardDir, Vector3[] directions)
     {
-        bool clearLeft = !Physics.Raycast(origin, directions[0], avoidDistance, obstacleLayer); //�l�Y�~�������ɏ�Q�����Ȃ����T��
-        bool clearRight = !Physics.Raycast(origin, directions[1], avoidDistance, obstacleLayer); //��Ɠ��l(�Ever)
-        bool clearDir1 = !Physics.Raycast(origin, directions[2], avoidDistance, obstacleLayer); //30�x�E�����ɏ�Q�����Ȃ����T��
-        bool clearDir2 = !Physics.Raycast(origin, directions[3], avoidDistance, obstacleLayer); //30�x�������ɏ�Q�����Ȃ����T��
-        bool clearDir3 = !Physics.Raycast(origin, directions[4], avoidDistance, obstacleLayer); //60�x�E�����ɏ�Q�����Ȃ����T��
-        bool clearDir4 = !Physics.Raycast(origin, directions[5], avoidDistance, obstacleLayer); //60�x�������ɏ�Q�����Ȃ����T��
-        bool clearDir5 = !Physics.Raycast(origin, directions[6], avoidDistance, obstacleLayer); //120�x�E�����ɏ�Q�����Ȃ����T��
-        bool clearDir6 = !Physics.Raycast(origin, directions[7], avoidDistance, obstacleLayer); //120�x�������ɏ�Q�����Ȃ����T��
-        bool clearDir7 = !Physics.Raycast(origin, directions[8], avoidDistance, obstacleLayer); //150�x�E�����ɏ�Q�����Ȃ����T��
-        bool clearDir8 = !Physics.Raycast(origin, directions[9], avoidDistance, obstacleLayer); //150�x�������ɏ�Q�����Ȃ����T��
+        bool clearDir1 = !Physics.Raycast(origin, directions[0], avoidDistance, obstacleLayer); 
+        bool clearDir2 = !Physics.Raycast(origin, directions[1], avoidDistance, obstacleLayer); 
+        bool clearDir3 = !Physics.Raycast(origin, directions[2], avoidDistance, obstacleLayer); 
+        bool clearDir4 = !Physics.Raycast(origin, directions[3], avoidDistance, obstacleLayer);
+        bool clearLeft = !Physics.Raycast(origin, directions[4], avoidDistance, obstacleLayer); 
+        bool clearRight = !Physics.Raycast(origin, directions[5], avoidDistance, obstacleLayer); 
+        bool clearDir5 = !Physics.Raycast(origin, directions[6], avoidDistance, obstacleLayer); 
+        bool clearDir6 = !Physics.Raycast(origin, directions[7], avoidDistance, obstacleLayer); 
+        bool clearDir7 = !Physics.Raycast(origin, directions[8], avoidDistance, obstacleLayer); 
+        bool clearDir8 = !Physics.Raycast(origin, directions[9], avoidDistance, obstacleLayer); 
         List<Vector3> clearDirections = new List<Vector3>(); //��Q�����Ȃ�������i�[���郊�X�g
+
+        int avoidIndex = 0;
 
         foreach (Vector3 dir in directions)
         {
@@ -170,13 +173,13 @@ public class ObstacleAvoidance : MonoBehaviour
 
         if (clearDirections.Count > 0)
         {
-            Debug.Log("��Q���Ȃ��̕��������������A�����܂�");
-            int randomIndex = Random.Range(0, clearDirections.Count); //��Q�����Ȃ������̒����烉���_���őI��
-            desiredDirection = clearDirections[randomIndex];
+            Debug.Log("move to avoid obstacle");
+            //int randomIndex = avoidIndex; //��Q�����Ȃ������̒����烉���_���őI��
+            desiredDirection = clearDirections[avoidIndex];
         }
         else
         {
-            Debug.Log("��Q���Ȃ��̕�����������Ȃ��A��ނ��܂�");
+            Debug.Log("move to backward");
             desiredDirection = -forwardDir; //��Q�����Ȃ�������������Ȃ���������
         }
 
@@ -269,12 +272,20 @@ public class ObstacleAvoidance : MonoBehaviour
                 closest = c.transform;
             }
         }
-
-        cheese = closest;
+        if(closest == null)
+        {
+            Debug.Log("No cheese found in view.");
+            StartCoroutine(CommitMovement(Quaternion.Euler(0, 10f, 0) * -transform.forward, commitDuration)); // 視界内にチーズがない場合は後退
+        }
+        else
+        {
+            cheese = closest;
+        }
     }
 
     private IEnumerator CommitMovement(Vector3 direction, float commitTime)
     {
+        Debug.Log("Committing...");
         isCommitted = true;
         float startTime = Time.time;
 
@@ -287,6 +298,8 @@ public class ObstacleAvoidance : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         isCommitted = false;
+
+        Debug.Log("Commit complete.");
     }
 
     void FindNearestCheese()
@@ -307,4 +320,10 @@ public class ObstacleAvoidance : MonoBehaviour
 
         cheese = closest;
     }
+
+    public void beEaten()
+    {
+        Destroy(gameObject);
+    }
+
 }
