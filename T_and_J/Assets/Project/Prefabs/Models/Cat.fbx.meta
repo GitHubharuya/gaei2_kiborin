@@ -38,11 +38,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|Searching
-      takeName: Armature|Searching
+      name: Armature|Chasing
+      takeName: Armature|Chasing
       internalID: 3911155605037112589
       firstFrame: 0
-      lastFrame: 32
+      lastFrame: 28
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
