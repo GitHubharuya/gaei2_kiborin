@@ -40,7 +40,6 @@ public class Cat : MonoBehaviour
 
     public void startDFS()
     {
-        bool[,] map;
         List<int> dx = new List<int>() { 1, 0, -1, 0 };
         List<int> dy = new List<int>() { 0, 1, 0, -1 };
         bool[,] v = new bool[GameManager.instance.wallMap.GetLength(0), GameManager.instance.wallMap.GetLength(0)];
@@ -56,11 +55,16 @@ public class Cat : MonoBehaviour
                 v[ni, nj] = true;
                 go.Add(i);
                 DFS(ni, nj, i);
+                go.Add((muki + 2) % 4);
                 move = true;
             }
-            if (!move) go.Add((muki + 2) % 4);
         }
         DFS(1, 1, -1);
         Debug.Log(GameManager.instance.wallMap.GetLength(0));
+    }
+
+    public void Dijkstra()
+    {
+
     }
 }
