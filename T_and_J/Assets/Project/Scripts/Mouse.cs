@@ -38,4 +38,9 @@ public class Mouse : MonoBehaviour
         isInWall = false;
         Debug.Log("出たよ");
     }
+
+    public void beEaten()
+    {
+        Destroy(gameObject);
+    }
 }
