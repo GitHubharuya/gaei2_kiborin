@@ -550,7 +550,7 @@ MonoBehaviour:
   cheeseText: {fileID: 0}
   cheese: {fileID: 0}
   useView: 1
-  commitDuration: 0.6
+  commitDuration: 0.7
   viewDistance: 6
   viewAngle: 90
 --- !u!114 &464185515
