@@ -275,7 +275,7 @@ public class ObstacleAvoidance : MonoBehaviour
         if(closest == null)
         {
             Debug.Log("No cheese found in view.");
-            StartCoroutine(CommitMovement(-transform.forward, commitDuration)); // 視界内にチーズがない場合は後退
+            StartCoroutine(CommitMovement(Quaternion.Euler(0, 10f, 0) * -transform.forward, commitDuration)); // 視界内にチーズがない場合は後退
         }
         else
         {
