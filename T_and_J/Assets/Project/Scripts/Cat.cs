@@ -11,6 +11,9 @@ public class Cat : MonoBehaviour
     [Header("追跡の速さ")]
     private float chaseSpeed_ = 0.125f;
 
+    [SerializeField]
+    GameObject eatingMouse;
+
     int y = 0;
     int cnt = 0;
     public List<int> go = new List<int>();
@@ -40,7 +43,7 @@ public class Cat : MonoBehaviour
 
     public void startDFS()
     {
-        bool[,] map;
+        //bool[,] map;
         List<int> dx = new List<int>() { 1, 0, -1, 0 };
         List<int> dy = new List<int>() { 0, 1, 0, -1 };
         bool[,] v = new bool[GameManager.instance.wallMap.GetLength(0), GameManager.instance.wallMap.GetLength(0)];
@@ -62,5 +65,18 @@ public class Cat : MonoBehaviour
         }
         DFS(1, 1, -1);
         Debug.Log(GameManager.instance.wallMap.GetLength(0));
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.name == "Mouse")
+        {
+            Mouse mouseScript = mouse.GetComponent<Mouse>();
+            //ネズミに障害物と衝突した合図を送る
+            mouseScript.beEaten();
+
+            eatingMouse.SetActive(true);
+            GameManager.instance.isFinished = true;
+        }
     }
 }

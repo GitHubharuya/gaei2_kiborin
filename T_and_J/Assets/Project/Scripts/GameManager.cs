@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
     public bool[,] wallMap;
+    public bool isFinished = false;
 
     private void Awake()
     {
