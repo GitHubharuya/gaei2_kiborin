@@ -65,6 +65,14 @@ public class Cat : MonoBehaviour
 
     public void Dijkstra()
     {
+        bool[,] v = new bool[GameManager.instance.wallMap.GetLength(0), GameManager.instance.wallMap.GetLength(0)];
+        for(int i = 0; i < GameManager.instance.wallMap.GetLength(0); i++)
+        {
+            for(int j = 0; j < GameManager.instance.wallMap.GetLength(0); j++)
+            {
+                if (v[i, j]) continue;
 
+            }
+        }
     }
 }
