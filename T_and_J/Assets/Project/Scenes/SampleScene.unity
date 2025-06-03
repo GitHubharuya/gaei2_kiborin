@@ -207,7 +207,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouse: {fileID: 464185496}
-  go: 
 --- !u!1 &186663026
 GameObject:
   m_ObjectHideFlags: 0
@@ -1757,7 +1756,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 481807920767153647, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.25
+      value: 0.52
       objectReference: {fileID: 0}
     - target: {fileID: 481807920767153647, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1765,7 +1764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 481807920767153647, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.25
+      value: -0.45
       objectReference: {fileID: 0}
     - target: {fileID: 481807920767153647, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
       propertyPath: m_LocalRotation.w
