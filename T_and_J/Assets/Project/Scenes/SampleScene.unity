@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouse: {fileID: 464185496}
+  moveSpeed: 1
 --- !u!1 &186663026
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,19 +540,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bc01b95eb534da479521ec7f8653cf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cat: {fileID: 58874517}
   detectionRange: 0.2
   avoidDistance: 0.7
   moveSpeed: 0.5
   rotationSpeed: 10
+  commitDuration: 0.7
+  viewDistance: 6
+  findCatDistance: 1
+  viewAngle: 90
+  emergencyDuration: 1
+  emergencySpeed: 0.55
+  emergencyRotationSpeed: 13
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 64
   cheeseText: {fileID: 0}
   cheese: {fileID: 0}
   useView: 1
-  commitDuration: 0.7
-  viewDistance: 6
-  viewAngle: 90
 --- !u!114 &464185515
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,27 +7,45 @@ using static UnityEngine.UI.Image;
 
 public class ObstacleAvoidance : MonoBehaviour
 {
-    public float detectionRange = 0.2f; //��Q�����o����
-    public float avoidDistance = 0.7f; //��Q�����̂��߂̍��E���o����
 
+    [SerializeField]
+    GameObject cat;
+
+    [Header("障害物回避設定")]
+    public float detectionRange = 0.2f;    
+    public float avoidDistance = 0.7f;     
+
+    [Header("速度・回転速度設定")]
     public float moveSpeed = 0.5f;
-    public float rotationSpeed = 10f; //�������񑬓x
+    public float rotationSpeed = 10f; 
 
-    public LayerMask obstacleLayer;
 
-    private int cheeseCount = 0; // �� �`�[�Y�̐���J�E���g
-    public TextMeshProUGUI cheeseText;      // �� UI�ւ̎Q�ƁiInspector�Őݒ�j
-
-    public Transform cheese;
-    public bool useView = false;
-    private Rigidbody rb; //Rigidbody�R���|�[�l���g��i�[����ϐ�
-
-    public float commitDuration = 0.6f; // ��𓮍�̎�������
+    [Header("コミット時処理")]
+    public float commitDuration = 0.6f;       
     private bool isCommitted = false;
 
     [Header("視界設定")]
     public float viewDistance = 6f; // 視界の距離
+    public float findCatDistance = 1f; // 猫を見つける距離
     public float viewAngle = 90f;   // 視野角（左右45度）
+
+    [Header("緊急状態の最低秒数")]
+    public float emergencyDuration = 1.0f;
+    private bool isEmergency = false; // 緊急状態かどうかのフラグ
+    private bool emergencyCoroutineRunning = false; // 緊急状態のコルーチンが実行中かどうかのフラグ
+    
+
+    [Header("緊急状態の移動速度")]
+    public float emergencySpeed = 0.5f;
+    public float emergencyRotationSpeed = 20f;
+
+    [Header("その他")]
+    public LayerMask obstacleLayer;
+    private int cheeseCount = 0; 
+    public TextMeshProUGUI cheeseText;      
+    public Transform cheese;
+    public bool useView = false;
+    private Rigidbody rb; 
 
     private void Start()
     {
@@ -43,7 +61,17 @@ public class ObstacleAvoidance : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!isCommitted)
+        if (findCat())
+        {
+            isEmergency = true; // 猫を見つけたら緊急状態にする
+
+
+            if (!emergencyCoroutineRunning) // 緊急状態のコルーチンが実行中でない場合
+            {
+                StartCoroutine(EmergencyEscapeState()); // 緊急状態のコルーチンを開始
+            }
+        }
+        else if (!isCommitted)
         {
             //Debug.Log(isCommitted);
             bool flag = AvoidObstaclesAndMove();
@@ -70,9 +98,9 @@ public class ObstacleAvoidance : MonoBehaviour
                     Vector3 direction = cheese.position - transform.position;
                     direction.Normalize();
                     //transform.position += direction * speed * Time.deltaTime;
-                    Quaternion mouseRotaion = Quaternion.LookRotation(direction); //�l�Y�~�̌�����v���C���[�����Ɍ�����
-                    transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotaion, rotationSpeed * Time.deltaTime); //�l�Y�~�̌�������炩�ɕς���
-                    rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime); //Rigidbody��g���Ĉړ�
+                    Quaternion mouseRotaion = Quaternion.LookRotation(direction);    
+                    transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotaion, rotationSpeed * Time.deltaTime);   
+                    rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime); 
                 }
             }
         }
@@ -83,9 +111,9 @@ public class ObstacleAvoidance : MonoBehaviour
     public bool AvoidObstaclesAndMove()
     {
         bool facingObstacle = false;
-        Vector3 origin = transform.position; //���݂̃l�Y�~�ʒu��擾
-        Vector3 forwardDir = transform.forward; //�l�Y�~���_���猩�đO�̕����x�N�g��
-        Vector3 upwardDirection = (forwardDir + Vector3.up).normalized; //�l�Y�~���_���猩�ď�̕����x�N�g��
+        Vector3 origin = transform.position; 
+        Vector3 forwardDir = transform.forward;  
+        Vector3 upwardDirection = (forwardDir + Vector3.up).normalized;  
         Vector3 dir1 = Quaternion.Euler(0, 30, 0) * transform.forward;
         Vector3 dir2 = Quaternion.Euler(0, -30, 0) * transform.forward;
         Vector3 dir3 = Quaternion.Euler(0, 60, 0) * transform.forward;
@@ -95,13 +123,13 @@ public class ObstacleAvoidance : MonoBehaviour
         Vector3 dir7 = Quaternion.Euler(0, 150, 0) * transform.forward;
         Vector3 dir8 = Quaternion.Euler(0, -150, 0) * transform.forward;
         Vector3[] directions = new Vector3[] { dir1, dir2, dir3, dir4, -transform.right, transform.right, dir5, dir6, dir7, dir8 };
-        // �ǂ��ɓ����邱�Ƃ��ł���̂��A����Ŕ��f
+        
 
         bool inFront = false;
         bool above = false;
 
-        Debug.DrawRay(origin, forwardDir * detectionRange, Color.red); //Ray�̉���
-        Debug.DrawRay(origin, upwardDirection * detectionRange, Color.red); //Ray�̉���
+        Debug.DrawRay(origin, forwardDir * detectionRange, Color.red);    
+        Debug.DrawRay(origin, upwardDirection * detectionRange, Color.red);    
         Debug.DrawRay(origin, -transform.right * avoidDistance, Color.green);
         Debug.DrawRay(origin, transform.right * avoidDistance, Color.green);
         Debug.DrawRay(origin, dir1 * avoidDistance, Color.green);
@@ -117,7 +145,7 @@ public class ObstacleAvoidance : MonoBehaviour
         {
             if (hitinfo.collider.CompareTag("Obstacle"))
             {
-                //Debug.Log("��Q���ɐڐG");
+                
                 inFront = true;
             }
 
@@ -126,7 +154,7 @@ public class ObstacleAvoidance : MonoBehaviour
         {
             if (hitinfo2.collider.CompareTag("Obstacle"))
             {
-                //Debug.Log("��Q���ɐڐG");
+                
                 above = true;
             }
         }
@@ -134,30 +162,30 @@ public class ObstacleAvoidance : MonoBehaviour
         if (inFront || above)
         {
             facingObstacle = true;
-            mouseMovement(origin, forwardDir, directions); //��Q�����O���ɂ���ꍇ�͉�������Ăяo��
+            mouseMovement(origin, forwardDir, directions); 
         }
 
 
         //transform.position += transform.forward * moveSpeed * Time.deltaTime;
 
-        return facingObstacle; //��Q���ɐڐG���Ă��邩�ǂ�����Ԃ�
+        return facingObstacle; 
     }
 
 
     // Update is called once per frame
     public void mouseMovement(Vector3 origin, Vector3 forwardDir, Vector3[] directions)
     {
-        bool clearDir1 = !Physics.Raycast(origin, directions[0], avoidDistance, obstacleLayer); 
-        bool clearDir2 = !Physics.Raycast(origin, directions[1], avoidDistance, obstacleLayer); 
-        bool clearDir3 = !Physics.Raycast(origin, directions[2], avoidDistance, obstacleLayer); 
+        bool clearDir1 = !Physics.Raycast(origin, directions[0], avoidDistance, obstacleLayer);
+        bool clearDir2 = !Physics.Raycast(origin, directions[1], avoidDistance, obstacleLayer);
+        bool clearDir3 = !Physics.Raycast(origin, directions[2], avoidDistance, obstacleLayer);
         bool clearDir4 = !Physics.Raycast(origin, directions[3], avoidDistance, obstacleLayer);
-        bool clearLeft = !Physics.Raycast(origin, directions[4], avoidDistance, obstacleLayer); 
-        bool clearRight = !Physics.Raycast(origin, directions[5], avoidDistance, obstacleLayer); 
-        bool clearDir5 = !Physics.Raycast(origin, directions[6], avoidDistance, obstacleLayer); 
-        bool clearDir6 = !Physics.Raycast(origin, directions[7], avoidDistance, obstacleLayer); 
-        bool clearDir7 = !Physics.Raycast(origin, directions[8], avoidDistance, obstacleLayer); 
-        bool clearDir8 = !Physics.Raycast(origin, directions[9], avoidDistance, obstacleLayer); 
-        List<Vector3> clearDirections = new List<Vector3>(); //��Q�����Ȃ�������i�[���郊�X�g
+        bool clearLeft = !Physics.Raycast(origin, directions[4], avoidDistance, obstacleLayer);
+        bool clearRight = !Physics.Raycast(origin, directions[5], avoidDistance, obstacleLayer);
+        bool clearDir5 = !Physics.Raycast(origin, directions[6], avoidDistance, obstacleLayer);
+        bool clearDir6 = !Physics.Raycast(origin, directions[7], avoidDistance, obstacleLayer);
+        bool clearDir7 = !Physics.Raycast(origin, directions[8], avoidDistance, obstacleLayer);
+        bool clearDir8 = !Physics.Raycast(origin, directions[9], avoidDistance, obstacleLayer);
+        List<Vector3> clearDirections = new List<Vector3>(); 
 
         int avoidIndex = 0;
 
@@ -169,47 +197,47 @@ public class ObstacleAvoidance : MonoBehaviour
             }
         }
 
-        Vector3 desiredDirection = Vector3.zero; //����������̃x�N�g���͂����Ɋi�[���܁[��
+        Vector3 desiredDirection = Vector3.zero; 
 
         if (clearDirections.Count > 0)
         {
             Debug.Log("move to avoid obstacle");
-            //int randomIndex = avoidIndex; //��Q�����Ȃ������̒����烉���_���őI��
+            //int randomIndex = avoidIndex; 
             desiredDirection = clearDirections[avoidIndex];
         }
         else
         {
             Debug.Log("move to backward");
-            desiredDirection = -forwardDir; //��Q�����Ȃ�������������Ȃ���������
+            desiredDirection = -forwardDir;         
         }
 
-        /*if (clearLeft && clearRight) //�E�ƍ�������Q�����Ȃ��Ƃ���
+        /*if (clearLeft && clearRight) 
         {
-            Debug.Log("��Q���Ȃ��A�����_���ŉ����������");
-            desiredDirection = Random.value < 0.5f ? -transform.right : transform.right; //�����_���ō����E�ɐi��
+           
+            desiredDirection = Random.value < 0.5f ? -transform.right : transform.right;   
         }
-        else if (clearLeft)//����Q���Ȃ�
+        else if (clearLeft)
         {
-            Debug.Log("���ɉ��");
-            desiredDirection = -transform.right; //���ɐi��
+            
+            desiredDirection = -transform.right;  
         }
-        else if (clearRight)//�E��Q���Ȃ�
+        else if (clearRight)
         {
-            Debug.Log("�E�ɉ��");
-            desiredDirection = transform.right; //�E�ɐi��
-        }
-        else//3�����l��
+            
+            desiredDirection = transform.right; 
+        
+        else
         {
-            Debug.Log("3�����l�݁A���");
-            desiredDirection = -forwardDir; //���
+            
+            desiredDirection = -forwardDir; 
         }
         */
 
-        //��]����炩�ɂ��鏈��
+        
         Quaternion targetRotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 
-        //��]���f��͑O�i!!!
+        
         StartCoroutine(CommitMovement(desiredDirection, commitDuration));
 
     }
@@ -272,9 +300,10 @@ public class ObstacleAvoidance : MonoBehaviour
                 closest = c.transform;
             }
         }
-        if(closest == null)
+        if (closest == null)
         {
             Debug.Log("No cheese found in view.");
+            // 視界内にチーズがない場合の挙動については検討の余地あり
             StartCoroutine(CommitMovement(Quaternion.Euler(0, 10f, 0) * -transform.forward, commitDuration)); // 視界内にチーズがない場合は後退
         }
         else
@@ -289,7 +318,7 @@ public class ObstacleAvoidance : MonoBehaviour
         isCommitted = true;
         float startTime = Time.time;
 
-        Quaternion targetRotaion = Quaternion.LookRotation(direction, Vector3.up); //�������Ɍ�����
+        Quaternion targetRotaion = Quaternion.LookRotation(direction, Vector3.up); //       Ɍ     
 
         while (Time.time < startTime + commitTime)
         {
@@ -319,6 +348,58 @@ public class ObstacleAvoidance : MonoBehaviour
         }
 
         cheese = closest;
+    }
+
+    private bool findCat()
+    {
+        Vector3 toCat = cat.transform.position - transform.position;
+        float distance = toCat.magnitude;
+        float angle = Vector3.Angle(transform.forward, toCat);
+
+        if (distance < findCatDistance)
+        {
+
+            if (angle < viewAngle / 2f)
+            {
+                Debug.Log("Cat found in view!");
+                return true;
+            }
+        }
+        return false;
+
+    }
+
+    private IEnumerator EmergencyEscapeState()
+    {
+        Debug.Log("Emergency escape state started.");
+        emergencyCoroutineRunning = true;
+        isEmergency = true;
+        float startTime = Time.time;
+
+        while (Time.time < startTime + emergencyDuration)
+        {
+            detectionRange = 0.4f;
+            avoidDistance = 1.0f;
+            Vector3 dir = cat.transform.position - this.transform.position;
+            dir.y = 0;
+            dir.Normalize(); 
+            bool flag = AvoidObstaclesAndMove(); //障害物回避の処理を呼び出す
+            if (!flag) //障害物回避が成功した場合は緊急状態を維持する
+            {
+                dir.Normalize();
+                Quaternion mouseRotation = Quaternion.LookRotation(-dir, Vector3.up);
+                transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotation, emergencyRotationSpeed * Time.fixedDeltaTime);
+                rb.velocity = -dir * emergencySpeed; // 緊急状態の移動速度で移動
+
+            }
+            yield return new WaitForFixedUpdate();
+
+        }
+        isEmergency = false;
+        emergencyCoroutineRunning = false;
+        detectionRange = 0.2f; // 元の設定に戻す
+        avoidDistance = 0.7f; // 元の設定に戻す
+        Debug.Log("Emergency escape state ended.");
     }
 
     public void beEaten()

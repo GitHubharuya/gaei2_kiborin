@@ -63,6 +63,7 @@
     <Compile Include="Assets\Project\Scripts\MouseMovement.cs" />
     <Compile Include="Assets\Project\Scripts\GameManager.cs" />
     <Compile Include="Assets\Project\Scripts\Cheese.cs" />
+    <Compile Include="Assets\EmergencyState.cs" />
     <Compile Include="Assets\Project\Scripts\Mouse.cs" />
     <Compile Include="Assets\Project\Scripts\FieldGenerator.cs" />
     <Compile Include="Assets\Project\Scripts\Cat.cs" />
