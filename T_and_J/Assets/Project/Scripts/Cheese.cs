@@ -22,7 +22,7 @@ public class Cheese : MonoBehaviour
     {
         if (other.name == "Mouse")
         {
-            Debug.Log("チーズゲット！");
+            GameManager.instance.getCheese();
             Destroy(gameObject);
         }
     }

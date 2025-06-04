@@ -39,5 +39,6 @@ public class GameManager : MonoBehaviour
     public void getCheese()
     {
         cheeseCount++;
+        Debug.Log(cheeseCount);
     }
 }
