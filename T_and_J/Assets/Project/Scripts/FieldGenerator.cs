@@ -43,7 +43,7 @@ public class FieldGenerator : MonoBehaviour
         else
         {
             GenerateField();
-            //20250522追加
+            //20250522追加←20250604修正
             ChangeAllChildLayers();
             ChangeAllChildTags();
         }
@@ -58,7 +58,11 @@ public class FieldGenerator : MonoBehaviour
     {
         foreach (Transform child in parent)
         {
-            child.gameObject.layer = newLayer;
+            // MiniMapLayerは除外する
+            if (LayerMask.LayerToName(child.gameObject.layer) != "MiniMapLayer")
+            {
+                child.gameObject.layer = newLayer;
+            }
 
             if (child.childCount > 0)
             {
@@ -384,6 +388,15 @@ public class FieldGenerator : MonoBehaviour
                 else x += "F";
             }
             Debug.Log(x);
+        }
+    }
+
+    void SetLayerRecursively(GameObject obj, int layer)
+    {
+        obj.layer = layer;
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, layer);
         }
     }
 }

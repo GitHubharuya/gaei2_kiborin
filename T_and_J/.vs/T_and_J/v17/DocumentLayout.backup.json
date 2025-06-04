@@ -1,14 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\",
+  "WorkspaceRootPath": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\mitsu\\githubdesktop\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\suzur\\github\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\fieldgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\fieldgenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\mitsu\\githubdesktop\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\suzur\\github\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\suzur\\github\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Mouse.cs",
-              "DocumentMoniker": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Mouse.cs",
-              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Mouse.cs",
-              "ToolTip": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Mouse.cs",
-              "RelativeToolTip": "Assets\\Project\\Scripts\\Mouse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "FieldGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\FieldGenerator.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\FieldGenerator.cs",
+              "ViewState": "AgIAAAoBAAAAAAAAAAAcwBsBAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T10:05:23.255Z",
+              "WhenOpened": "2025-06-04T07:41:22.157Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ObstacleAvoidance.cs",
-              "DocumentMoniker": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
-              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
-              "ToolTip": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
-              "RelativeToolTip": "Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "GameManager.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\GameManager.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\GameManager.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAAwCgAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T09:32:05.97Z",
+              "WhenOpened": "2025-06-04T07:01:15.166Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UI.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\UI.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\UI.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAADwvxwAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T06:38:01.757Z",
               "EditorCaption": ""
             }
           ]
