@@ -32,9 +32,9 @@ public class Cat : MonoBehaviour
             this.height = height;
             // Unity座標系での中心点を計算（y座標は0に設定）
             this.center = new Vector3(
-                (x + width / 2.0f) * TILE_SIZE,
+                (x + width / 2.0f) * TILE_SIZE + 0.125f,
                 0f, // y座標を0に設定
-                (y + height / 2.0f) * TILE_SIZE
+                (y + height / 2.0f) * TILE_SIZE + 0.125f
             );
         }
     }
@@ -183,7 +183,7 @@ public class Cat : MonoBehaviour
             Debug.Log("目標到達！");
 
             // 少し待ってから次の目標を設定
-            Invoke(nameof(SetNextTarget), 0f);
+            Invoke(nameof(SetNextTarget), 0.05f);
             return;
         }
 
@@ -316,6 +316,7 @@ public class Cat : MonoBehaviour
                 for (int dy = -1; dy <= 1; dy++)
                 {
                     if (dx == 0 && dy == 0) continue;
+                    if (dx != 0 && dy != 0) continue;
 
                     int newX = currentNode.x + dx;
                     int newY = currentNode.y + dy;
