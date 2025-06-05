@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class MouseController : MonoBehaviour
 {
     [SerializeField]
     float moveSpeedIn;//プレイヤーの移動速度を入力

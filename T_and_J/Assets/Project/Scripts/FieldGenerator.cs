@@ -282,7 +282,24 @@ public class FieldGenerator : MonoBehaviour
                 }
                 else
                 {
-                    if (Random.Range(0, 3) == 0)
+                    //チーズ生成
+                    int baseX = 1 + 4 * (i - 1);
+                    int baseY = 1 + 4 * (j - 1);
+                    bool canPlaceCheese = true;
+
+                    for (int m = 0; m < 4; m++)
+                    {
+                        for (int n = 0; n < 4; n++)
+                        {
+                            if (GameManager.instance.wallMap[baseX + m, baseY + n])
+                            {
+                                canPlaceCheese = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (canPlaceCheese && Random.Range(0, 3) == 0)
                     {
                         Vector3 cheesePos = new Vector3(_i, l * 0.2f, _j);
                         Instantiate(cheesePrefab, cheesePos, Quaternion.identity, transform);
