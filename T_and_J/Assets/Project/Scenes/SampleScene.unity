@@ -173,6 +173,7 @@ MonoBehaviour:
   isFinished: 0
   timer: 0
   cheeseCount: 0
+  gameMode: 0
 --- !u!4 &186663028
 Transform:
   m_ObjectHideFlags: 0
@@ -1213,13 +1214,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7070799, y: -0.006170608, z: 0.006170608, w: 0.7070799}
   m_LocalPosition: {x: 4.06, y: 1.41, z: 1.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 1}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1864,11 +1865,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8729446621498787675, guid: f46daab346b9b794ab349d88f0c33644, type: 3}
   m_PrefabInstance: {fileID: 7127911922651643948}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1920922200 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7829111371992915021, guid: 5a36f0febf400cc4b933fddc4452eab9, type: 3}
-  m_PrefabInstance: {fileID: 5785745825563195475}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2046137553
 GameObject:
   m_ObjectHideFlags: 0
@@ -2003,7 +1999,7 @@ MonoBehaviour:
   - {fileID: 8245785112732179937, guid: f46daab346b9b794ab349d88f0c33644, type: 3}
   ceilingPrefab: {fileID: 440469099}
   lightPrefab: {fileID: 5497717562607429501, guid: d47e14e5a81b42e419e552660db9d1ad, type: 3}
-  cheesePrefab: {fileID: 1920922200}
+  cheesePrefab: {fileID: 7829111371992915021, guid: 5a36f0febf400cc4b933fddc4452eab9, type: 3}
   cat: {fileID: 58874520}
   newTag: Obstacle
   newLayer: 6
@@ -2252,6 +2248,10 @@ PrefabInstance:
     - target: {fileID: 7829111371992915021, guid: 5a36f0febf400cc4b933fddc4452eab9, type: 3}
       propertyPath: m_Name
       value: Cheese
+      objectReference: {fileID: 0}
+    - target: {fileID: 7829111371992915021, guid: 5a36f0febf400cc4b933fddc4452eab9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7829111371992915021, guid: 5a36f0febf400cc4b933fddc4452eab9, type: 3}
       propertyPath: m_TagString

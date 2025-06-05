@@ -8,7 +8,10 @@ public class GameManager : MonoBehaviour
     public bool[,] wallMap;
     public bool isFinished = false;
     public float timer;
+    //*timerはFieldGeneratorで初期化！！！*
     public int cheeseCount = 0;
+
+    public int gameMode;
 
     private void Awake()
     {
@@ -22,12 +25,6 @@ public class GameManager : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
-    private void Start()
-    {
-        timer = 0;
-    }
-
     private void Update()
     {
         if (!isFinished)

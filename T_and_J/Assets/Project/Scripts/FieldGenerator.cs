@@ -331,6 +331,9 @@ public class FieldGenerator : MonoBehaviour
         printWallMap();
 
         cat.startDFS();
+
+        //タイマー開始
+        GameManager.instance.timer = 0;
     }
 
     private bool[,] getFurnitureShape(GameObject gbj)
