@@ -70,6 +70,7 @@
     <Compile Include="Assets\Project\Scripts\Mouse.cs" />
     <Compile Include="Assets\Project\Scripts\MouseCamera.cs" />
     <Compile Include="Assets\Project\Scripts\FieldGenerator.cs" />
+    <Compile Include="Assets\Project\Scripts\MouseController.cs" />
     <Compile Include="Assets\Project\Scripts\UI.cs" />
     <Compile Include="Assets\Project\Scripts\Cat.cs" />
     <Compile Include="Assets\Project\Scripts\Wall.cs" />
