@@ -30,8 +30,9 @@ public class ObstacleAvoidance : MonoBehaviour
     public float viewAngle = 90f;   // 視野角（左右45度）
 
     [Header("緊急状態の最低秒数")]
-    public float emergencyDuration = 1.0f;
+    public float emergencyDuration = 2.0f;
     private bool isEmergency = false; // 緊急状態かどうかのフラグ
+    private bool ismoveMouseinEmergency = false; 
     private bool emergencyCoroutineRunning = false; // 緊急状態のコルーチンが実行中かどうかのフラグ
 
 
@@ -97,6 +98,7 @@ public class ObstacleAvoidance : MonoBehaviour
                 {
                     Vector3 direction = cheese.position - transform.position;
                     direction.Normalize();
+                    direction.y = 0; // Y軸の成分をゼロにして水平移動にする
                     //transform.position += direction * speed * Time.deltaTime;
                     Quaternion mouseRotaion = Quaternion.LookRotation(direction);
                     transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotaion, rotationSpeed * Time.deltaTime);
@@ -317,8 +319,9 @@ public class ObstacleAvoidance : MonoBehaviour
         Debug.Log("Committing...");
         isCommitted = true;
         float startTime = Time.time;
+        direction.y = 0; // 水平移動にするためY成分をゼロにする
 
-        Quaternion targetRotaion = Quaternion.LookRotation(direction, Vector3.up); //       Ɍ     
+        Quaternion targetRotaion = Quaternion.LookRotation(direction, Vector3.up);
 
         while (Time.time < startTime + commitTime)
         {
@@ -381,16 +384,21 @@ public class ObstacleAvoidance : MonoBehaviour
 
         while (Time.time < startTime + emergencyDuration)
         {
-            detectionRange = 0.4f;
-            avoidDistance = 1.0f;
-            dir.Normalize();
-            bool flag = AvoidObstaclesAndMove(); //障害物回避の処理を呼び出す
-            if (!flag) //障害物回避が成功した場合は緊急状態を維持する
+            //detectionRange = 0.4f;
+            //avoidDistance = 1.0f;
+
+            bool flag = false;
+            if (!isCommitted)
             {
-                dir.Normalize();
-                Quaternion mouseRotation = Quaternion.LookRotation(-dir, Vector3.up);
-                transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotation, emergencyRotationSpeed * Time.fixedDeltaTime);
-                rb.transform.position += -dir * emergencySpeed * Time.fixedDeltaTime;
+                flag = AvoidObstaclesAndMove();
+            }
+            if (!flag && !isCommitted) //障害物回避が成功した場合は緊急状態を維持する
+            {
+                if(!ismoveMouseinEmergency)
+                {
+                    StartCoroutine(moveMouseinEmergency(0.3f, -dir));
+                }
+                
                 yield return new WaitForFixedUpdate();
 
             }
@@ -399,12 +407,28 @@ public class ObstacleAvoidance : MonoBehaviour
         }
         isEmergency = false;
         emergencyCoroutineRunning = false;
-        detectionRange = 0.2f; // 元の設定に戻す
-        avoidDistance = 0.7f; // 元の設定に戻す
+        //detectionRange = 0.2f; // 元の設定に戻す
+        //avoidDistance = 0.7f; // 元の設定に戻す
         Debug.Log("Emergency escape state ended.");
     }
 
-    public void beEaten()
+    private IEnumerator moveMouseinEmergency(float time, Vector3 dir)
+    {
+        ismoveMouseinEmergency = true;
+        float startTime = Time.time;
+
+        while( Time.time < startTime + time)
+        {
+            Quaternion mouseRotation = Quaternion.LookRotation(dir, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotation, emergencyRotationSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + dir * emergencySpeed * Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+        }
+        ismoveMouseinEmergency = false;
+
+    }
+
+public void beEaten()
     {
         Destroy(gameObject);
     }
