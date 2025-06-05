@@ -19,11 +19,12 @@ public class Title : MonoBehaviour
         
     }
 
-    public void pressStart()
+    public void pressStart(int gameMode)
     {
         if (!isPressed)
         {
             isPressed = true;
+            GameManager.instance.gameMode = gameMode;
             Debug.Log("start!");
             //シーン遷移
             SceneManager.LoadScene("SampleScene");
