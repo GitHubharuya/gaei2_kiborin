@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
 using static UnityEngine.UI.Image;
+using System;
 
 public class ObstacleAvoidance : MonoBehaviour
 {
@@ -96,6 +97,8 @@ public class ObstacleAvoidance : MonoBehaviour
 
                 if (cheese != null)
                 {
+                    moveSpeed = 0.5f; // チーズに向かうときは通常の速度で移動
+                    rotationSpeed = 10f; // チーズに向かうときは通常の回転速度
                     Vector3 direction = cheese.position - transform.position;
                     direction.Normalize();
                     direction.y = 0; // Y軸の成分をゼロにして水平移動にする
@@ -105,6 +108,10 @@ public class ObstacleAvoidance : MonoBehaviour
                     rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
                 }
             }
+        }
+        else if( !isEmergency && isCommitted)
+        {
+            Debug.Log("あっれれー？おかしいぞ？");
         }
     }
 
@@ -116,6 +123,8 @@ public class ObstacleAvoidance : MonoBehaviour
         Vector3 origin = transform.position;
         Vector3 forwardDir = transform.forward;
         Vector3 upwardDirection = (forwardDir + Vector3.up).normalized;
+        Vector3 forwardDir2 = Quaternion.Euler(0, 10, 0) * forwardDir; 
+        Vector3 forwardDir3 = Quaternion.Euler(0, -10, 0) * forwardDir;
         Vector3 dir1 = Quaternion.Euler(0, 30, 0) * transform.forward;
         Vector3 dir2 = Quaternion.Euler(0, -30, 0) * transform.forward;
         Vector3 dir3 = Quaternion.Euler(0, 60, 0) * transform.forward;
@@ -129,9 +138,13 @@ public class ObstacleAvoidance : MonoBehaviour
 
         bool inFront = false;
         bool above = false;
+        bool fDir2 = false;
+        bool fDir3 = false;
 
         Debug.DrawRay(origin, forwardDir * detectionRange, Color.red);
         Debug.DrawRay(origin, upwardDirection * detectionRange, Color.red);
+        Debug.DrawRay(origin, forwardDir2 * detectionRange, Color.red);
+        Debug.DrawRay(origin, forwardDir3 * detectionRange, Color.red);
         Debug.DrawRay(origin, -transform.right * avoidDistance, Color.green);
         Debug.DrawRay(origin, transform.right * avoidDistance, Color.green);
         Debug.DrawRay(origin, dir1 * avoidDistance, Color.green);
@@ -160,8 +173,22 @@ public class ObstacleAvoidance : MonoBehaviour
                 above = true;
             }
         }
+        if (Physics.Raycast(origin, forwardDir2, out RaycastHit hitinfo3, detectionRange, obstacleLayer))
+        {
+            if (hitinfo3.collider.CompareTag("Obstacle"))
+            {
+                fDir2 = true;
+            }
+        }
+        if (Physics.Raycast(origin, forwardDir3, out RaycastHit hitinfo4, detectionRange, obstacleLayer))
+        {
+            if (hitinfo4.collider.CompareTag("Obstacle"))
+            {
+                fDir3 = true;
+            }
+        }
 
-        if (inFront || above)
+        if (inFront || above || fDir2 || fDir3)
         {
             facingObstacle = true;
             mouseMovement(origin, forwardDir, directions);
@@ -306,7 +333,11 @@ public class ObstacleAvoidance : MonoBehaviour
         {
             Debug.Log("No cheese found in view.");
             // 視界内にチーズがない場合の挙動については検討の余地あり
-            StartCoroutine(CommitMovement(Quaternion.Euler(0, 10f, 0) * -transform.forward, commitDuration)); // 視界内にチーズがない場合は後退
+            System.Random rand = new System.Random();
+            float randNum = rand.Next(10, 180);
+
+
+            StartCoroutine(CommitMovement(Quaternion.Euler(0, randNum, 0) * -transform.forward, commitDuration)); // 視界内にチーズがない場合は後退
         }
         else
         {
@@ -317,6 +348,8 @@ public class ObstacleAvoidance : MonoBehaviour
     private IEnumerator CommitMovement(Vector3 direction, float commitTime)
     {
         Debug.Log("Committing...");
+        moveSpeed = 0.5f; // コミット中は通常の移動速度
+        rotationSpeed = 10f; // コミット中は通常の回転速度
         isCommitted = true;
         float startTime = Time.time;
         direction.y = 0; // 水平移動にするためY成分をゼロにする
@@ -374,6 +407,8 @@ public class ObstacleAvoidance : MonoBehaviour
 
     private IEnumerator EmergencyEscapeState()
     {
+        emergencySpeed = 0.5f; // 緊急状態の移動速度を設定
+        emergencyRotationSpeed = 10f; // 緊急状態の回転速度を設定
         Debug.Log("Emergency escape state started.");
         emergencyCoroutineRunning = true;
         isEmergency = true;
@@ -396,6 +431,7 @@ public class ObstacleAvoidance : MonoBehaviour
             {
                 if(!ismoveMouseinEmergency)
                 {
+                    ismoveMouseinEmergency = true;
                     StartCoroutine(moveMouseinEmergency(0.3f, -dir));
                 }
                 
@@ -414,6 +450,8 @@ public class ObstacleAvoidance : MonoBehaviour
 
     private IEnumerator moveMouseinEmergency(float time, Vector3 dir)
     {
+        emergencySpeed = 0.5f; // 緊急状態の移動速度を設定
+        emergencyRotationSpeed = 10f; // 緊急状態の回転速度を設定
         ismoveMouseinEmergency = true;
         float startTime = Time.time;
 
@@ -428,7 +466,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
     }
 
-public void beEaten()
+    public void beEaten()
     {
         Destroy(gameObject);
     }
