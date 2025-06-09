@@ -471,7 +471,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464185496}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bc01b95eb534da479521ec7f8653cf9, type: 3}
   m_Name: 
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464185496}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 68db2079edbb2084f9e1acb8fcb02729, type: 3}
   m_Name: 
@@ -1332,7 +1332,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1200371163}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1200371165
 Camera:
   m_ObjectHideFlags: 0
@@ -1955,6 +1955,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046137553}
   m_CullTransparentMesh: 1
+--- !u!1 &2083255693 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7829111371992915021, guid: 5a36f0febf400cc4b933fddc4452eab9, type: 3}
+  m_PrefabInstance: {fileID: 5785745825563195475}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2122317632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1984,8 +1989,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533920a4bd7486b44bb794c79084d510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 19
-  seed: 13
+  mapSize: 11
+  seed: 10
   groundPrefab: {fileID: 919132149155446097, guid: 70b51a382134e864e8b813a268fb364d, type: 3}
   wallPrefabs:
   - {fileID: 356117396}
@@ -1999,7 +2004,7 @@ MonoBehaviour:
   - {fileID: 8245785112732179937, guid: f46daab346b9b794ab349d88f0c33644, type: 3}
   ceilingPrefab: {fileID: 440469099}
   lightPrefab: {fileID: 5497717562607429501, guid: d47e14e5a81b42e419e552660db9d1ad, type: 3}
-  cheesePrefab: {fileID: 7829111371992915021, guid: 5a36f0febf400cc4b933fddc4452eab9, type: 3}
+  cheesePrefab: {fileID: 2083255693}
   cat: {fileID: 58874520}
   newTag: Obstacle
   newLayer: 6
@@ -2127,6 +2132,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cat
       objectReference: {fileID: 0}
+    - target: {fileID: 1001040933350534997, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4742114153685721984, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
       propertyPath: mouse
       value: 
@@ -2251,7 +2260,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7829111371992915021, guid: 5a36f0febf400cc4b933fddc4452eab9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7829111371992915021, guid: 5a36f0febf400cc4b933fddc4452eab9, type: 3}
       propertyPath: m_TagString
