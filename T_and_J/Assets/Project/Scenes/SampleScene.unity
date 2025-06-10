@@ -1989,8 +1989,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533920a4bd7486b44bb794c79084d510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 11
-  seed: 10
+  mapSize: 15
+  seed: 5
   groundPrefab: {fileID: 919132149155446097, guid: 70b51a382134e864e8b813a268fb364d, type: 3}
   wallPrefabs:
   - {fileID: 356117396}
@@ -2348,6 +2348,10 @@ PrefabInstance:
       propertyPath: cat
       value: 
       objectReference: {fileID: 58874517}
+    - target: {fileID: 2993062412010268484, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5349417604279033765, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
       propertyPath: m_Height
       value: 0.1
