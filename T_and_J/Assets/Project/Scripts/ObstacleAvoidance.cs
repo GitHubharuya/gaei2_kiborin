@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using static UnityEngine.UI.Image;
 using System;
+using System.Net;
 
 public class ObstacleAvoidance : MonoBehaviour
 {
@@ -63,7 +64,11 @@ public class ObstacleAvoidance : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (findCat())
+        if ( isCommitted || isEmergency )
+        {
+            
+        }
+        else if (findCat())
         {
             isEmergency = true; // 猫を見つけたら緊急状態にする
 
@@ -108,10 +113,6 @@ public class ObstacleAvoidance : MonoBehaviour
                     rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
                 }
             }
-        }
-        else if( !isEmergency && isCommitted)
-        {
-            Debug.Log("あっれれー？おかしいぞ？");
         }
     }
 
