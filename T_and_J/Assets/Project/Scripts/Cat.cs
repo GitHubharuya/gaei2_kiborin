@@ -17,6 +17,10 @@ public class Cat : MonoBehaviour
     // タイルサイズを0.125に設定
     private const float TILE_SIZE = 0.125f;
 
+    // マップのオフセット（端の座標）
+    private const float MAP_OFFSET_X = 0.125f;
+    private const float MAP_OFFSET_Z = 0.125f;
+
     // 四角形の情報を保持するクラス
     [System.Serializable]
     public class Rectangle
@@ -30,11 +34,11 @@ public class Cat : MonoBehaviour
             this.y = y;
             this.width = width;
             this.height = height;
-            // Unity座標系での中心点を計算（y座標は0に設定）
+            // Unity座標系での中心点を計算（マップ座標系を考慮）
             this.center = new Vector3(
-                (x + width / 2.0f) * TILE_SIZE,
+                MAP_OFFSET_X + (x + width / 2.0f) * TILE_SIZE,
                 0f, // y座標を0に設定
-                (y + height / 2.0f) * TILE_SIZE
+                MAP_OFFSET_Z + (y + height / 2.0f) * TILE_SIZE
             );
         }
     }
@@ -67,6 +71,7 @@ public class Cat : MonoBehaviour
     {
         Debug.Log("=== Start() 開始 ===");
         Debug.Log($"タイルサイズ設定: {TILE_SIZE}");
+        Debug.Log($"マップオフセット: X={MAP_OFFSET_X}, Z={MAP_OFFSET_Z}");
 
         // GameManagerが初期化されるまで待つ
         StartCoroutine(WaitForGameManagerAndInitialize());
@@ -83,7 +88,10 @@ public class Cat : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        Debug.Log("GameManager初期化完了、四角形分割を開始します");
+        Debug.Log("GameManager初期化完了、マップ情報を確認します");
+
+        // マップの端の座標を確認するデバッグコード
+        DebugMapBounds();
 
         // マップを四角形に分割
         DivideMapIntoRectangles();
@@ -162,12 +170,20 @@ public class Cat : MonoBehaviour
             Debug.Log("Rキーで四角形を再生成");
             if (GameManager.instance?.wallMap != null)
             {
+                DebugMapBounds(); // マップ境界を再確認
                 DivideMapIntoRectangles();
             }
             else
             {
                 CreateTestRectangles();
             }
+        }
+
+        // テスト用：Dキーでマップ境界デバッグ情報を表示
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Debug.Log("Dキーでマップ境界デバッグ");
+            DebugMapBounds();
         }
     }
 
@@ -269,11 +285,11 @@ public class Cat : MonoBehaviour
         int mapWidth = GameManager.instance.wallMap.GetLength(0);
         int mapHeight = GameManager.instance.wallMap.GetLength(1);
 
-        // ワールド座標をマップ座標に変換
-        int startX = Mathf.RoundToInt(start.x / TILE_SIZE);
-        int startZ = Mathf.RoundToInt(start.z / TILE_SIZE);
-        int endX = Mathf.RoundToInt(end.x / TILE_SIZE);
-        int endZ = Mathf.RoundToInt(end.z / TILE_SIZE);
+        // ワールド座標をマップ座標に変換（オフセットを考慮）
+        int startX = Mathf.RoundToInt((start.x - MAP_OFFSET_X) / TILE_SIZE);
+        int startZ = Mathf.RoundToInt((start.z - MAP_OFFSET_Z) / TILE_SIZE);
+        int endX = Mathf.RoundToInt((end.x - MAP_OFFSET_X) / TILE_SIZE);
+        int endZ = Mathf.RoundToInt((end.z - MAP_OFFSET_Z) / TILE_SIZE);
 
         // 境界チェック
         startX = Mathf.Clamp(startX, 0, mapWidth - 1);
@@ -381,9 +397,9 @@ public class Cat : MonoBehaviour
         while (currentNode != null)
         {
             Vector3 worldPos = new Vector3(
-                currentNode.x * TILE_SIZE,
+                MAP_OFFSET_X + currentNode.x * TILE_SIZE,
                 0f,
-                currentNode.y * TILE_SIZE
+                MAP_OFFSET_Z + currentNode.y * TILE_SIZE
             );
             path.Add(worldPos);
             currentNode = currentNode.parent;
@@ -431,6 +447,50 @@ public class Cat : MonoBehaviour
         }
 
         Debug.Log($"分割された四角形数: {rectangles.Count}");
+    }
+
+    // マップの端の座標を確認するデバッグ関数
+    private void DebugMapBounds()
+    {
+        if (GameManager.instance?.wallMap == null) return;
+
+        int mapWidth = GameManager.instance.wallMap.GetLength(0);
+        int mapHeight = GameManager.instance.wallMap.GetLength(1);
+
+        Debug.Log("=== マップ境界デバッグ情報 ===");
+        Debug.Log($"マップ配列サイズ: {mapWidth} x {mapHeight}");
+
+        // マップの4つ角の座標を計算して表示
+        Vector3 corner00 = new Vector3(MAP_OFFSET_X + 0 * TILE_SIZE, 0f, MAP_OFFSET_Z + 0 * TILE_SIZE);
+        Vector3 cornerMax = new Vector3(MAP_OFFSET_X + (mapWidth - 1) * TILE_SIZE, 0f, MAP_OFFSET_Z + (mapHeight - 1) * TILE_SIZE);
+
+        Debug.Log($"マップ左下角 (0,0): {corner00}");
+        Debug.Log($"マップ右上角 ({mapWidth - 1},{mapHeight - 1}): {cornerMax}");
+
+        // 現在のオフセット設定を表示
+        Debug.Log($"現在のオフセット設定: X={MAP_OFFSET_X}, Z={MAP_OFFSET_Z}");
+        Debug.Log($"タイルサイズ: {TILE_SIZE}");
+
+        // 最初の非壁タイルの位置を見つけて表示
+        for (int y = 0; y < mapHeight; y++)
+        {
+            for (int x = 0; x < mapWidth; x++)
+            {
+                if (!GameManager.instance.wallMap[x, y])
+                {
+                    Vector3 firstOpenTile = new Vector3(
+                        MAP_OFFSET_X + x * TILE_SIZE,
+                        0f,
+                        MAP_OFFSET_Z + y * TILE_SIZE
+                    );
+                    Debug.Log($"最初の通行可能タイル位置 ({x},{y}): {firstOpenTile}");
+                    goto FoundFirst;
+                }
+            }
+        }
+    FoundFirst:
+
+        Debug.Log("=== デバッグ情報終了 ===");
     }
 
     private Rectangle FindLargestRectangle(int startX, int startY, bool[,] visited)
