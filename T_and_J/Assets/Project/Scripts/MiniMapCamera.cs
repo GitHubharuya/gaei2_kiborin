@@ -36,5 +36,9 @@ public class MiniMapCamera : MonoBehaviour
         {
             camera.orthographicSize = mapSize * l * sizeMultiplier;
         }
+        else
+        {
+            camera.fieldOfView = mapSize * l * sizeMultiplier　* 10;
+        }
     }
 }

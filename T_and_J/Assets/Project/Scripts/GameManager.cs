@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     //*timerはFieldGeneratorで初期化！！！*
     public int cheeseCount = 0;
 
+    [Header("モード(0,1,2)")]
     public int gameMode;
 
     private void Awake()
@@ -37,5 +38,10 @@ public class GameManager : MonoBehaviour
     {
         cheeseCount++;
         Debug.Log(cheeseCount);
+    }
+
+    private void Start()
+    {
+        
     }
 }

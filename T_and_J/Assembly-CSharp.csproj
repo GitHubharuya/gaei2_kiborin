@@ -60,20 +60,21 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.47f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Project\Scripts\PlayerCamera.cs" />
     <Compile Include="Assets\Project\Scripts\MouseMovement.cs" />
     <Compile Include="Assets\Project\Scripts\GameManager.cs" />
     <Compile Include="Assets\Project\Scripts\Cheese.cs" />
     <Compile Include="Assets\EmergencyState.cs" />
     <Compile Include="Assets\Project\Scripts\Mouse.cs" />
-    <Compile Include="Assets\Project\Scripts\MouseCamera.cs" />
     <Compile Include="Assets\Project\Scripts\FieldGenerator.cs" />
-    <Compile Include="Assets\Project\Scripts\MouseController.cs" />
     <Compile Include="Assets\Project\Scripts\UI.cs" />
     <Compile Include="Assets\Project\Scripts\Cat.cs" />
     <Compile Include="Assets\Project\Scripts\Wall.cs" />
     <Compile Include="Assets\Project\Scripts\MiniMapCamera.cs" />
     <Compile Include="Assets\Project\Scripts\Title.cs" />
     <Compile Include="Assets\Project\Scripts\ObstacleAvoidance.cs" />
+    <Compile Include="Assets\Project\Scripts\GameModeSetting.cs" />
+    <Compile Include="Assets\Project\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Project\Scripts\TestMouse.cs" />
   </ItemGroup>
   <ItemGroup>

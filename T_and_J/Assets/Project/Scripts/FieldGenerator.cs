@@ -34,6 +34,18 @@ public class FieldGenerator : MonoBehaviour
     private int[] dx = { 1, 0, -1, 0 };
     private int[] dy = { 0, 1, 0, -1 };
 
+    [SerializeField]
+    GameObject catPrefab;
+    [SerializeField]
+    GameObject mousePrefab;
+    [SerializeField]
+    GameObject catCamera;
+    [SerializeField]
+    GameObject mouseCamera;
+
+    //障害物の一片の長さl
+    float l = 0.5f;
+
     void Start()
     {
         if (mapSize % 2 == 0)
@@ -44,6 +56,23 @@ public class FieldGenerator : MonoBehaviour
         {
             GenerateField();
             //20250522追加←20250604修正
+            // CatとMouseの初期位置を設定
+            if (catPrefab)
+            {
+                // 左上のスタート位置に配置する例
+                Vector3 startPos = new Vector3(l, 0,l);
+                catPrefab.transform.position = startPos;
+                startPos.y = catCamera.transform.position.y;
+                catCamera.transform.position = startPos;
+            }
+            if (mousePrefab)
+            {
+                Vector3 startPos = new Vector3(l * (mapSize - 2), 0, l * (mapSize - 2));
+                mousePrefab.transform.position = startPos;
+                startPos.y = mouseCamera.transform.position.y;
+                mouseCamera.transform.position = startPos;
+            }
+
             ChangeAllChildLayers();
             ChangeAllChildTags();
         }
@@ -153,9 +182,6 @@ public class FieldGenerator : MonoBehaviour
 
         // プレハブを配置
 
-        //障害物の一片の長さl
-        float l = 0.5f;
-
         //まずは壁
         for (int r = 0; r < 4; r++)
         {
@@ -226,6 +252,12 @@ public class FieldGenerator : MonoBehaviour
                 Vector3 ceilingPos = new Vector3(_i, 3f, _j);
                 Quaternion ceilingQt = ceilingPrefab.transform.rotation;
                 Instantiate(ceilingPrefab, ceilingPos, ceilingQt, transform);
+
+                // ネコ・ネズミエリア：右上(1,1)・左下(mapSize-2, mapSize-2)は空けておく
+                if ((i == 1 && j == 1) || (i == mapSize - 2 && j == mapSize - 2))
+                {
+                    continue;
+                }
 
                 if (preWallMap[i, j] == true && !furnitureCheck[i, j])
                 {
