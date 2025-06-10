@@ -59,12 +59,61 @@ public class ObstacleAvoidance : MonoBehaviour
 
     void Update()
     {
+        if (isCommitted || isEmergency)
+        {
 
+        }
+        else if (findCat())
+        {
+            isEmergency = true; // 猫を見つけたら緊急状態にする
+
+
+            if (!emergencyCoroutineRunning) // 緊急状態のコルーチンが実行中でない場合
+            {
+                StartCoroutine(EmergencyEscapeState()); // 緊急状態のコルーチンを開始
+            }
+        }
+        else if (!isCommitted && !isEmergency)
+        {
+            //Debug.Log(isCommitted);
+            bool flag = AvoidObstaclesAndMove();
+            if (!flag)
+            {
+                if (cheese == null)
+                {
+                    if (useView)
+                    {
+                        FindNearestCheese_View(); //視界を使ってチーズを探す
+                        //Quaternion mouseRotation = Quaternion.LookRotation(-transform.forward);
+                        //transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotation, rotationSpeed * Time.deltaTime);
+                        //rb.MovePosition(rb.position + -transform.forward * moveSpeed * Time.fixedDeltaTime);
+                        //CommitMovement(-transform.forward, commitDuration); 
+                    }
+                    else
+                    {
+                        FindNearestCheese(); //視界を使わずにチーズを探す 
+                    }
+                }
+
+                if (cheese != null)
+                {
+                    moveSpeed = 0.5f; // チーズに向かうときは通常の速度で移動
+                    rotationSpeed = 10f; // チーズに向かうときは通常の回転速度
+                    Vector3 direction = cheese.position - transform.position;
+                    direction.Normalize();
+                    direction.y = 0; // Y軸の成分をゼロにして水平移動にする
+                    //transform.position += direction * speed * Time.deltaTime;
+                    Quaternion mouseRotaion = Quaternion.LookRotation(direction);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotaion, rotationSpeed * Time.deltaTime);
+                    rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+                }
+            }
+        }
     }
 
     private void FixedUpdate()
     {
-        if ( isCommitted || isEmergency )
+        /*if ( isCommitted || isEmergency )
         {
             
         }
@@ -114,6 +163,7 @@ public class ObstacleAvoidance : MonoBehaviour
                 }
             }
         }
+        */
     }
 
 
@@ -307,7 +357,7 @@ public class ObstacleAvoidance : MonoBehaviour
         Gizmos.DrawRay(transform.position, leftRay * viewDistance);
         Gizmos.DrawRay(transform.position, rightRay * viewDistance);
     }
-
+    
     void FindNearestCheese_View()
     {
         GameObject[] cheeses = GameObject.FindGameObjectsWithTag("Cheese");
@@ -359,6 +409,10 @@ public class ObstacleAvoidance : MonoBehaviour
 
         while (Time.time < startTime + commitTime)
         {
+            if (!isCommitted)
+            {
+                
+            }
             rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotaion, rotationSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
