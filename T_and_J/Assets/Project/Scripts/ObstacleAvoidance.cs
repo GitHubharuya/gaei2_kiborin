@@ -29,7 +29,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
     [Header("視界設定")]
     public float viewDistance = 6f; // 視界の距離
-    public float findCatDistance = 1f; // 猫を見つける距離
+    public float findCatDistance = 0.7f; // 猫を見つける距離
     public float viewAngle = 90f;   // 視野角（左右45度）
 
     [Header("緊急状態の最低秒数")]
@@ -84,11 +84,7 @@ public class ObstacleAvoidance : MonoBehaviour
                 {
                     if (useView)
                     {
-                        FindNearestCheese_View(); //視界を使ってチーズを探す
-                        //Quaternion mouseRotation = Quaternion.LookRotation(-transform.forward);
-                        //transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotation, rotationSpeed * Time.deltaTime);
-                        //rb.MovePosition(rb.position + -transform.forward * moveSpeed * Time.fixedDeltaTime);
-                        //CommitMovement(-transform.forward, commitDuration); 
+                        FindNearestCheese_View();
                     }
                     else
                     {
@@ -114,57 +110,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
     private void FixedUpdate()
     {
-        /*if ( isCommitted || isEmergency )
-        {
-            
-        }
-        else if (findCat())
-        {
-            isEmergency = true; // 猫を見つけたら緊急状態にする
-
-
-            if (!emergencyCoroutineRunning) // 緊急状態のコルーチンが実行中でない場合
-            {
-                StartCoroutine(EmergencyEscapeState()); // 緊急状態のコルーチンを開始
-            }
-        }
-        else if (!isCommitted && !isEmergency)
-        {
-            //Debug.Log(isCommitted);
-            bool flag = AvoidObstaclesAndMove();
-            if (!flag)
-            {
-                if (cheese == null)
-                {
-                    if (useView)
-                    {
-                        FindNearestCheese_View(); //視界を使ってチーズを探す
-                        //Quaternion mouseRotation = Quaternion.LookRotation(-transform.forward);
-                        //transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotation, rotationSpeed * Time.deltaTime);
-                        //rb.MovePosition(rb.position + -transform.forward * moveSpeed * Time.fixedDeltaTime);
-                        //CommitMovement(-transform.forward, commitDuration); 
-                    }
-                    else
-                    {
-                        FindNearestCheese(); //視界を使わずにチーズを探す 
-                    }
-                }
-
-                if (cheese != null)
-                {
-                    moveSpeed = 0.5f; // チーズに向かうときは通常の速度で移動
-                    rotationSpeed = 10f; // チーズに向かうときは通常の回転速度
-                    Vector3 direction = cheese.position - transform.position;
-                    direction.Normalize();
-                    direction.y = 0; // Y軸の成分をゼロにして水平移動にする
-                    //transform.position += direction * speed * Time.deltaTime;
-                    Quaternion mouseRotaion = Quaternion.LookRotation(direction);
-                    transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotaion, rotationSpeed * Time.deltaTime);
-                    rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
-                }
-            }
-        }
-        */
+        
     }
 
 
@@ -247,24 +193,14 @@ public class ObstacleAvoidance : MonoBehaviour
         }
 
 
-        //transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        
 
         return facingObstacle;
     }
 
     public Vector3 ChoiceVector(Vector3 origin, Vector3  forwardDir, Vector3[] directions, int flag)
     {
-        /*bool clearDir1 = !Physics.Raycast(origin, directions[0], avoidDistance, obstacleLayer);
-        bool clearDir2 = !Physics.Raycast(origin, directions[1], avoidDistance, obstacleLayer);
-        bool clearDir3 = !Physics.Raycast(origin, directions[2], avoidDistance, obstacleLayer);
-        bool clearDir4 = !Physics.Raycast(origin, directions[3], avoidDistance, obstacleLayer);
-        bool clearLeft = !Physics.Raycast(origin, directions[4], avoidDistance, obstacleLayer);
-        bool clearRight = !Physics.Raycast(origin, directions[5], avoidDistance, obstacleLayer);
-        bool clearDir5 = !Physics.Raycast(origin, directions[6], avoidDistance, obstacleLayer);
-        bool clearDir6 = !Physics.Raycast(origin, directions[7], avoidDistance, obstacleLayer);
-        bool clearDir7 = !Physics.Raycast(origin, directions[8], avoidDistance, obstacleLayer);
-        bool clearDir8 = !Physics.Raycast(origin, directions[9], avoidDistance, obstacleLayer);
-        */
+        origin.y += 0.05f;
         List<Vector3> clearDirections = new List<Vector3>();
 
         int avoidIndex;
@@ -292,8 +228,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
                 avoidIndex = randNum;
             }
-                Debug.Log("move to avoid obstacle");
-            //int randomIndex = avoidIndex; 
+            Debug.Log("move to avoid obstacle"); 
             desiredDirection = clearDirections[avoidIndex];
         }
         else
@@ -307,41 +242,6 @@ public class ObstacleAvoidance : MonoBehaviour
     
     public void mouseMovement(Vector3 origin, Vector3 forwardDir, Vector3[] directions)
     {
-        /* bool clearDir1 = !Physics.Raycast(origin, directions[0], avoidDistance, obstacleLayer);
-         bool clearDir2 = !Physics.Raycast(origin, directions[1], avoidDistance, obstacleLayer);
-         bool clearDir3 = !Physics.Raycast(origin, directions[2], avoidDistance, obstacleLayer);
-         bool clearDir4 = !Physics.Raycast(origin, directions[3], avoidDistance, obstacleLayer);
-         bool clearLeft = !Physics.Raycast(origin, directions[4], avoidDistance, obstacleLayer);
-         bool clearRight = !Physics.Raycast(origin, directions[5], avoidDistance, obstacleLayer);
-         bool clearDir5 = !Physics.Raycast(origin, directions[6], avoidDistance, obstacleLayer);
-         bool clearDir6 = !Physics.Raycast(origin, directions[7], avoidDistance, obstacleLayer);
-         bool clearDir7 = !Physics.Raycast(origin, directions[8], avoidDistance, obstacleLayer);
-         bool clearDir8 = !Physics.Raycast(origin, directions[9], avoidDistance, obstacleLayer);
-         List<Vector3> clearDirections = new List<Vector3>();
-
-         int avoidIndex = 0;
-
-         foreach (Vector3 dir in directions)
-         {
-             if (!Physics.Raycast(origin, dir, avoidDistance, obstacleLayer))
-             {
-                 clearDirections.Add(dir);
-             }
-         }
-
-         Vector3 desiredDirection = Vector3.zero;
-
-         if (clearDirections.Count > 0)
-         {
-             Debug.Log("move to avoid obstacle");
-             //int randomIndex = avoidIndex; 
-             desiredDirection = clearDirections[avoidIndex];
-         }
-         else
-         {
-             Debug.Log("move to backward");
-             desiredDirection = -forwardDir;
-         }*/
 
         Vector3 desiredDirection = ChoiceVector(origin, forwardDir, directions, 0);
 
@@ -429,7 +329,7 @@ public class ObstacleAvoidance : MonoBehaviour
             Vector3[] directions = new Vector3[] { dir1, dir2, dir3, dir4, dir5, dir6, dir7, dir8, dir9, dir10, dir11 };
 
             Vector3 direction = ChoiceVector(transform.position, transform.forward, directions, 1);
-            StartCoroutine(NoCheeseMovement(direction, commitDuration)); // 視界内にチーズがない場合は後退
+            StartCoroutine(NoCheeseMovement(direction, commitDuration));
         }
         else
         {
@@ -505,7 +405,7 @@ public class ObstacleAvoidance : MonoBehaviour
         cheese = closest;
     }
 
-    private bool findCat()
+    private bool findCat() //すごい近くに猫がいたとき，緊急退避
     {
         Vector3 toCat = cat.transform.position - transform.position;
         float distance = toCat.magnitude;
@@ -513,12 +413,10 @@ public class ObstacleAvoidance : MonoBehaviour
 
         if (distance < findCatDistance)
         {
-
-            if (angle < viewAngle / 2f)
-            {
-                Debug.Log("Cat found in view!");
-                return true;
-            }
+           
+            Debug.Log("Escape!!");
+            return true;
+            
         }
         return false;
 
