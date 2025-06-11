@@ -216,7 +216,7 @@ MonoBehaviour:
   isFinished: 0
   timer: 0
   cheeseCount: 0
-  gameMode: 1
+  gameMode: 0
 --- !u!4 &186663028
 Transform:
   m_ObjectHideFlags: 0
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464185496}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bc01b95eb534da479521ec7f8653cf9, type: 3}
   m_Name: 
@@ -2293,8 +2293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533920a4bd7486b44bb794c79084d510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 13
-  seed: 5
+  mapSize: 21
+  seed: 12
   groundPrefab: {fileID: 919132149155446097, guid: 70b51a382134e864e8b813a268fb364d, type: 3}
   wallPrefabs:
   - {fileID: 356117396}
@@ -2680,7 +2680,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6104272071443322280, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 6104272071443322280, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
       propertyPath: m_LocalPosition.z
