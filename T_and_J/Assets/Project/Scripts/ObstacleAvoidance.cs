@@ -25,6 +25,7 @@ public class ObstacleAvoidance : MonoBehaviour
     [Header("コミット時処理")]
     public float commitDuration = 0.6f;
     private bool isCommitted = false;
+    private bool isNoCheeseCommitted = false;
 
     [Header("視界設定")]
     public float viewDistance = 6f; // 視界の距離
@@ -59,7 +60,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
     void Update()
     {
-        if (isCommitted || isEmergency)
+        if (isCommitted || isEmergency || isNoCheeseCommitted)
         {
 
         }
@@ -251,11 +252,9 @@ public class ObstacleAvoidance : MonoBehaviour
         return facingObstacle;
     }
 
-
-    // Update is called once per frame
-    public void mouseMovement(Vector3 origin, Vector3 forwardDir, Vector3[] directions)
+    public Vector3 ChoiceVector(Vector3 origin, Vector3  forwardDir, Vector3[] directions, int flag)
     {
-        bool clearDir1 = !Physics.Raycast(origin, directions[0], avoidDistance, obstacleLayer);
+        /*bool clearDir1 = !Physics.Raycast(origin, directions[0], avoidDistance, obstacleLayer);
         bool clearDir2 = !Physics.Raycast(origin, directions[1], avoidDistance, obstacleLayer);
         bool clearDir3 = !Physics.Raycast(origin, directions[2], avoidDistance, obstacleLayer);
         bool clearDir4 = !Physics.Raycast(origin, directions[3], avoidDistance, obstacleLayer);
@@ -265,9 +264,10 @@ public class ObstacleAvoidance : MonoBehaviour
         bool clearDir6 = !Physics.Raycast(origin, directions[7], avoidDistance, obstacleLayer);
         bool clearDir7 = !Physics.Raycast(origin, directions[8], avoidDistance, obstacleLayer);
         bool clearDir8 = !Physics.Raycast(origin, directions[9], avoidDistance, obstacleLayer);
+        */
         List<Vector3> clearDirections = new List<Vector3>();
 
-        int avoidIndex = 0;
+        int avoidIndex;
 
         foreach (Vector3 dir in directions)
         {
@@ -278,10 +278,21 @@ public class ObstacleAvoidance : MonoBehaviour
         }
 
         Vector3 desiredDirection = Vector3.zero;
-
+        
         if (clearDirections.Count > 0)
         {
-            Debug.Log("move to avoid obstacle");
+            if(flag == 0)
+            {
+                avoidIndex = 0;
+            }
+            else
+            {
+                System.Random r = new System.Random();
+                int randNum = r.Next(0, clearDirections.Count);
+
+                avoidIndex = randNum;
+            }
+                Debug.Log("move to avoid obstacle");
             //int randomIndex = avoidIndex; 
             desiredDirection = clearDirections[avoidIndex];
         }
@@ -291,28 +302,48 @@ public class ObstacleAvoidance : MonoBehaviour
             desiredDirection = -forwardDir;
         }
 
-        /*if (clearLeft && clearRight) 
-        {
-           
-            desiredDirection = Random.value < 0.5f ? -transform.right : transform.right;   
-        }
-        else if (clearLeft)
-        {
-            
-            desiredDirection = -transform.right;  
-        }
-        else if (clearRight)
-        {
-            
-            desiredDirection = transform.right; 
-        
-        else
-        {
-            
-            desiredDirection = -forwardDir; 
-        }
-        */
+        return desiredDirection;
+    }
+    
+    public void mouseMovement(Vector3 origin, Vector3 forwardDir, Vector3[] directions)
+    {
+        /* bool clearDir1 = !Physics.Raycast(origin, directions[0], avoidDistance, obstacleLayer);
+         bool clearDir2 = !Physics.Raycast(origin, directions[1], avoidDistance, obstacleLayer);
+         bool clearDir3 = !Physics.Raycast(origin, directions[2], avoidDistance, obstacleLayer);
+         bool clearDir4 = !Physics.Raycast(origin, directions[3], avoidDistance, obstacleLayer);
+         bool clearLeft = !Physics.Raycast(origin, directions[4], avoidDistance, obstacleLayer);
+         bool clearRight = !Physics.Raycast(origin, directions[5], avoidDistance, obstacleLayer);
+         bool clearDir5 = !Physics.Raycast(origin, directions[6], avoidDistance, obstacleLayer);
+         bool clearDir6 = !Physics.Raycast(origin, directions[7], avoidDistance, obstacleLayer);
+         bool clearDir7 = !Physics.Raycast(origin, directions[8], avoidDistance, obstacleLayer);
+         bool clearDir8 = !Physics.Raycast(origin, directions[9], avoidDistance, obstacleLayer);
+         List<Vector3> clearDirections = new List<Vector3>();
 
+         int avoidIndex = 0;
+
+         foreach (Vector3 dir in directions)
+         {
+             if (!Physics.Raycast(origin, dir, avoidDistance, obstacleLayer))
+             {
+                 clearDirections.Add(dir);
+             }
+         }
+
+         Vector3 desiredDirection = Vector3.zero;
+
+         if (clearDirections.Count > 0)
+         {
+             Debug.Log("move to avoid obstacle");
+             //int randomIndex = avoidIndex; 
+             desiredDirection = clearDirections[avoidIndex];
+         }
+         else
+         {
+             Debug.Log("move to backward");
+             desiredDirection = -forwardDir;
+         }*/
+
+        Vector3 desiredDirection = ChoiceVector(origin, forwardDir, directions, 0);
 
         Quaternion targetRotation = Quaternion.LookRotation(desiredDirection, Vector3.up);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
@@ -384,11 +415,21 @@ public class ObstacleAvoidance : MonoBehaviour
         {
             Debug.Log("No cheese found in view.");
             // 視界内にチーズがない場合の挙動については検討の余地あり
-            System.Random rand = new System.Random();
-            float randNum = rand.Next(10, 180);
+            Vector3 dir1 = Quaternion.Euler(0, 0, 0) * transform.forward;
+            Vector3 dir2 = Quaternion.Euler(0, 30, 0) * transform.forward;
+            Vector3 dir3 = Quaternion.Euler(0, -30, 0) * transform.forward;
+            Vector3 dir4 = Quaternion.Euler(0, 60, 0) * transform.forward;
+            Vector3 dir5 = Quaternion.Euler(0, -60, 0) * transform.forward;
+            Vector3 dir6 = Quaternion.Euler(0, 90, 0) * transform.forward;
+            Vector3 dir7 = Quaternion.Euler(0, -90, 0) * transform.forward;
+            Vector3 dir8 = Quaternion.Euler(0, 120, 0) * transform.forward;
+            Vector3 dir9 = Quaternion.Euler(0, -120, 0) * transform.forward;
+            Vector3 dir10 = Quaternion.Euler(0, 150, 0) * transform.forward;
+            Vector3 dir11 = Quaternion.Euler(0, -150, 0) * transform.forward;
+            Vector3[] directions = new Vector3[] { dir1, dir2, dir3, dir4, dir5, dir6, dir7, dir8, dir9, dir10, dir11 };
 
-
-            StartCoroutine(CommitMovement(Quaternion.Euler(0, randNum, 0) * -transform.forward, commitDuration)); // 視界内にチーズがない場合は後退
+            Vector3 direction = ChoiceVector(transform.position, transform.forward, directions, 1);
+            StartCoroutine(NoCheeseMovement(direction, commitDuration)); // 視界内にチーズがない場合は後退
         }
         else
         {
@@ -420,6 +461,29 @@ public class ObstacleAvoidance : MonoBehaviour
         isCommitted = false;
 
         Debug.Log("Commit complete.");
+    }
+
+    private IEnumerator NoCheeseMovement(Vector3 direction, float commitTime)
+    {
+        Debug.Log("No Cheese Movement Committing...");
+        moveSpeed = 0.5f;
+        rotationSpeed = 10f;
+        isNoCheeseCommitted = true;
+        float startTime = Time.time;
+        direction.y = 0;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+        while(Time.time < startTime + commitTime)
+        {
+            rb.MovePosition(rb.position + direction*moveSpeed * Time.fixedDeltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+        }
+
+        isNoCheeseCommitted = false;
+
+        Debug.Log("No Cheese Movement Complete.");
     }
 
     void FindNearestCheese()
