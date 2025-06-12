@@ -67,6 +67,7 @@
     <Compile Include="Assets\EmergencyState.cs" />
     <Compile Include="Assets\Project\Scripts\Mouse.cs" />
     <Compile Include="Assets\Project\Scripts\FieldGenerator.cs" />
+    <Compile Include="Assets\Project\Scripts\AnimatedImage.cs" />
     <Compile Include="Assets\Project\Scripts\UI.cs" />
     <Compile Include="Assets\Project\Scripts\Cat.cs" />
     <Compile Include="Assets\Project\Scripts\Wall.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Assets\Project\Scripts\ObstacleAvoidance.cs" />
     <Compile Include="Assets\Project\Scripts\GameModeSetting.cs" />
     <Compile Include="Assets\Project\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Project\Scripts\mgGif.cs" />
     <Compile Include="Assets\Project\Scripts\TestMouse.cs" />
   </ItemGroup>
   <ItemGroup>
