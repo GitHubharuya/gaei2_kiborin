@@ -223,6 +223,11 @@ public class Cat : MonoBehaviour
         {
             // 目標点に向かって移動
             Vector3 direction = (targetPos - currentPos).normalized;
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f); // 曲がる早さを調節
+            }
             transform.position = currentPos + direction * moveDistance;
         }
     }
