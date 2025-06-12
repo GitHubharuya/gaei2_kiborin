@@ -331,7 +331,7 @@ public class ObstacleAvoidance : MonoBehaviour
                 float t_dis = toC.magnitude;
                 ang = Vector3.Angle(transform.forward, toC);
 
-                if(dis > t_dis && ang > viewAngle / 2f)
+                if(dis > t_dis && ang < viewAngle / 2f)
                 {
                     dis = t_dis;
                     flag = true;
