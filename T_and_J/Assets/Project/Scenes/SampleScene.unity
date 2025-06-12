@@ -520,16 +520,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cat: {fileID: 58874517}
+  sofa: []
+  chest: []
   detectionRange: 0.2
   avoidDistance: 0.7
   moveSpeed: 0.5
   rotationSpeed: 10
   commitDuration: 0.7
-  viewDistance: 6
+  viewDistance: 3
   findCatDistance: 1
+  findObstacle: 1
+  findCattoEscape: 3
   viewAngle: 90
   emergencyDuration: 2
-  emergencySpeed: 0.5
+  escapeTime: 2
+  emergencySpeed: 0.7
   emergencyRotationSpeed: 10
   obstacleLayer:
     serializedVersion: 2
@@ -2293,7 +2298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533920a4bd7486b44bb794c79084d510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 21
+  mapSize: 13
   seed: 12
   groundPrefab: {fileID: 919132149155446097, guid: 70b51a382134e864e8b813a268fb364d, type: 3}
   wallPrefabs:

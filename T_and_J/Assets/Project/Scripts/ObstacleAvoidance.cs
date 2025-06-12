@@ -6,12 +6,19 @@ using UnityEngine;
 using static UnityEngine.UI.Image;
 using System;
 using System.Net;
+using System.Security.Cryptography;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class ObstacleAvoidance : MonoBehaviour
 {
 
     [SerializeField]
     GameObject cat;
+
+    [SerializeField]
+    GameObject[] sofa; // Change the type of 'sofa' to an array of GameObjects.
+    [SerializeField]
+    GameObject[] chest;
 
     [Header("障害物回避設定")]
     public float detectionRange = 0.2f;
@@ -29,14 +36,23 @@ public class ObstacleAvoidance : MonoBehaviour
 
     [Header("視界設定")]
     public float viewDistance = 6f; // 視界の距離
-    public float findCatDistance = 0.7f; // 猫を見つける距離
+    public float findCatDistance = 0.7f; // 猫を見つける距離(視野ではなく，ネズミ周りの円の半径を示す)
+    public float findObstacle = 1.0f; //隠れる障害物を見つける距離
+    public float findCattoEscape = 6f;
     public float viewAngle = 90f;   // 視野角（左右45度）
 
     [Header("緊急状態の最低秒数")]
     public float emergencyDuration = 2.0f;
     private bool isEmergency = false; // 緊急状態かどうかのフラグ
-    private bool ismoveMouseinEmergency = false; 
+    private bool isMoveMouseinEmergency = false; 
     private bool emergencyCoroutineRunning = false; // 緊急状態のコルーチンが実行中かどうかのフラグ
+
+    [Header("障害物に隠れるときの設定")]
+    private bool foundCat = false; //視界内に猫がいるかどうか
+    private bool isMoveMouseinFindingCat = false;
+    private bool escapeCatCoroutineRunning = false;
+    //private bool backwardCoroutineRunning = false;
+    public float escapeTime = 2.0f;
 
 
     [Header("緊急状態の移動速度")]
@@ -60,7 +76,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
     void Update()
     {
-        if (isCommitted || isEmergency || isNoCheeseCommitted)
+        if (isCommitted || isEmergency || isNoCheeseCommitted || foundCat)
         {
 
         }
@@ -73,6 +89,22 @@ public class ObstacleAvoidance : MonoBehaviour
             {
                 StartCoroutine(EmergencyEscapeState()); // 緊急状態のコルーチンを開始
             }
+        }
+        else if(HidetoObstacle())
+        {
+            foundCat = true;
+            
+            if(!escapeCatCoroutineRunning)
+            {
+                Vector3 dir = DetectEscapeObstacle();
+                StartCoroutine(MovetoObstacleCoroutine(escapeTime, dir));
+                
+            }
+            else
+            {
+
+            }
+
         }
         else if (!isCommitted && !isEmergency)
         {
@@ -252,6 +284,136 @@ public class ObstacleAvoidance : MonoBehaviour
         StartCoroutine(CommitMovement(desiredDirection, commitDuration));
 
     }
+
+    public bool HidetoObstacle()
+    {
+        Vector3 toCat = cat.transform.position - transform.position;
+        float distance = toCat.magnitude;
+        float angle = Vector3.Angle(transform.forward, toCat);
+
+        if (distance < findCattoEscape && angle < viewAngle / 2f) //視界内に猫居たらスタート
+        {
+            Debug.Log("find cat.");
+            return true;
+        }
+
+        return false;
+    }
+
+
+    private Vector3 DetectEscapeObstacle()
+    {
+        isMoveMouseinFindingCat = true;
+      
+        GameObject hiddenObstacle = null;
+
+        float dis = Mathf.Infinity;
+        float ang;
+        bool flag = false;
+        foreach (GameObject s in sofa)
+        {
+            Vector3 toS = s.transform.position - transform.position;
+            float t_dis = toS.magnitude;
+            ang = Vector3.Angle(transform.forward, toS);
+
+            if(dis > t_dis && ang > viewAngle/2f)
+            {
+                dis = t_dis;
+                flag = true;
+                hiddenObstacle = s;
+            }
+        }
+        if (!flag)
+        {
+            foreach(GameObject c in chest)
+            {
+                Vector3 toC = c.transform.position - transform.position;
+                float t_dis = toC.magnitude;
+                ang = Vector3.Angle(transform.forward, toC);
+
+                if(dis > t_dis && ang < viewAngle / 2f)
+                {
+                    dis = t_dis;
+                    flag = true;
+                    hiddenObstacle = c;
+                }
+            }
+        }
+
+        if (flag)
+        {
+            
+            Vector3 v = hiddenObstacle.transform.position - transform.position;
+            return v;
+        }
+        else
+        {
+            
+            Vector3 v = Vector3.zero;
+            return v;
+        }
+    }
+
+    /*private IEnumerator MoveToBackwardCoroutine(Vector3 dir)
+    {
+        backwardCoroutineRunning = true;
+        float startTime = Time.time;
+        while(Time.time < startTime + 0.3)
+        {
+            Quaternion backward = Quaternion.LookRotation(dir, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, backward, rotationSpeed * Time.deltaTime);
+            yield return new WaitForFixedUpdate();
+        }
+        backwardCoroutineRunning = false;
+    }*/
+
+    private IEnumerator MovetoObstacleCoroutine(float time, Vector3 dir)
+    {
+        Debug.Log("Move to Obstacle...");
+
+        escapeCatCoroutineRunning = true;
+        float startTime = Time.time;
+        dir.y = 0;
+        dir.Normalize();
+
+        while (Time.time < startTime + escapeTime)
+        {
+            rb.MovePosition(rb.position + dir * moveSpeed * Time.fixedDeltaTime);
+            Quaternion targetRotation = Quaternion.LookRotation(dir, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+
+            Vector3 dir1 = transform.position;
+            dir1.y += 0.05f;
+            Vector3 dir2 = transform.forward;
+            Vector3 dir3 = (dir2 + Vector3.up).normalized;
+            Vector3 dir4 = Quaternion.Euler(0, 10, 0) * dir2;
+            Vector3 dir5 = Quaternion.Euler(0, -10, 0) * dir2;
+
+            bool jug1 = Physics.Raycast(dir1, dir2, out RaycastHit hitinfo, 0.1f, obstacleLayer);
+            bool jug2 = Physics.Raycast(dir1, dir3, out RaycastHit hitinfo2, 0.1f, obstacleLayer);
+            bool jug3 = Physics.Raycast(dir1, dir4, out RaycastHit hitinfo3, 0.1f, obstacleLayer);
+            bool jug4 = Physics.Raycast(dir1, dir5, out RaycastHit hitinfo4, 0.1f, obstacleLayer);
+
+            if (jug1 || jug2 || jug3 || jug4)
+            {
+                break;
+            }
+
+            yield return new WaitForFixedUpdate();
+        }
+        escapeCatCoroutineRunning = false;
+        foundCat = false;
+        // StartCoroutine(HideBehindObstacleCoroutine());
+
+    }
+
+    /*private IEnumerator HideBehindObstacleCoroutine()
+    {
+        Vector3 hideDirection = 
+        float startTime = Time.time;
+    }*/
+    
+    
 
     void UpdateCheeseUI()
     {
@@ -446,9 +608,9 @@ public class ObstacleAvoidance : MonoBehaviour
             }
             if (!flag && !isCommitted) //障害物回避が成功した場合は緊急状態を維持する
             {
-                if(!ismoveMouseinEmergency)
+                if(!isMoveMouseinEmergency)
                 {
-                    ismoveMouseinEmergency = true;
+                    isMoveMouseinEmergency = true;
                     StartCoroutine(moveMouseinEmergency(0.3f, -dir));
                 }
                 
@@ -469,7 +631,7 @@ public class ObstacleAvoidance : MonoBehaviour
     {
         emergencySpeed = 0.5f; // 緊急状態の移動速度を設定
         emergencyRotationSpeed = 10f; // 緊急状態の回転速度を設定
-        ismoveMouseinEmergency = true;
+        isMoveMouseinEmergency = true;
         float startTime = Time.time;
 
         while( Time.time < startTime + time)
@@ -479,7 +641,7 @@ public class ObstacleAvoidance : MonoBehaviour
             rb.MovePosition(rb.position + dir * emergencySpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }
-        ismoveMouseinEmergency = false;
+        isMoveMouseinEmergency = false;
 
     }
 
