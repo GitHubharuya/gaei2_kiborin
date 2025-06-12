@@ -2134,7 +2134,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1001040933350534997, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4742114153685721984, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
       propertyPath: mouse

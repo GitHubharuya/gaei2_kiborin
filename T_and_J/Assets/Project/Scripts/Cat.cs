@@ -199,7 +199,7 @@ public class Cat : MonoBehaviour
             Debug.Log("目標到達！");
 
             // 少し待ってから次の目標を設定
-            Invoke(nameof(SetNextTarget), 0f);
+            Invoke(nameof(SetNextTarget), 0.5f);
             return;
         }
 
