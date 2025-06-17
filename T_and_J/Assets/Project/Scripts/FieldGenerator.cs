@@ -7,9 +7,9 @@ using UnityEngine;
 public class FieldGenerator : MonoBehaviour
 {
     [Header("マップサイズ(奇数)")]
-    public int mapSize = 11;
+    public int mapSize;
     [Header("シード")]
-    public int seed = 0;
+    public int seed;
 
     [SerializeField]
     private GameObject groundPrefab;
@@ -48,6 +48,8 @@ public class FieldGenerator : MonoBehaviour
 
     void Start()
     {
+
+
         if (mapSize % 2 == 0)
         {
             Debug.Log("サイズが偶数になってるよ");

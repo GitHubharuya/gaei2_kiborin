@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     [Header("モード(0,1,2)")]
     public int gameMode;
 
+    public int mapSize;
+    public int seed;
+
     private void Awake()
     {
         if (instance == null)

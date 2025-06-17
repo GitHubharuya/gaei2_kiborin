@@ -76,9 +76,11 @@
     <Compile Include="Assets\Project\Scripts\Wall.cs" />
     <Compile Include="Assets\Project\Scripts\MiniMapCamera.cs" />
     <Compile Include="Assets\Project\Scripts\Title.cs" />
+    <Compile Include="Assets\Project\Scripts\InputInteger.cs" />
     <Compile Include="Assets\Project\Scripts\ObstacleAvoidance.cs" />
     <Compile Include="Assets\Project\Scripts\GameModeSetting.cs" />
     <Compile Include="Assets\Project\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Project\Scripts\InputField.cs" />
     <Compile Include="Assets\Project\Scripts\mgGif.cs" />
     <Compile Include="Assets\Project\Scripts\TestMouse.cs" />
   </ItemGroup>
