@@ -402,8 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cat: {fileID: 58874517}
-  sofa: []
-  chest: []
+  obstacles: []
   detectionRange: 0.2
   avoidDistance: 0.7
   moveSpeed: 0.5
@@ -858,7 +857,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 877365550}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &877365553
 Camera:
   m_ObjectHideFlags: 0
@@ -999,7 +998,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &963194227
 Camera:
   m_ObjectHideFlags: 0

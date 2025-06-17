@@ -78,7 +78,7 @@ public class PlayerController : MonoBehaviour
             moveSpeed += moveSpeedIn * cameraRight;
         }
 
-        Debug.Log($"W:{Input.GetKey(KeyCode.W)} S:{Input.GetKey(KeyCode.S)} moveSpeed:{moveSpeed}");
+        //Debug.Log($"W:{Input.GetKey(KeyCode.W)} S:{Input.GetKey(KeyCode.S)} moveSpeed:{moveSpeed}");
 
         Move();
 
