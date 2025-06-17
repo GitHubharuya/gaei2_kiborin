@@ -5,23 +5,28 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class InputGenerator : MonoBehaviour
+public class InputField : MonoBehaviour
 {
-
-    //繧ｪ繝悶ず繧ｧ繧ｯ繝医→邨舌�ｳ縺､縺代ｋ
-    public TMP_InputField inputField;
+    //オブジェクトと結びつける
+    TMP_InputField inputField;
 
     void Start()
     {
-        //Component繧呈桶縺医ｋ繧医≧縺ｫ縺吶ｋ
+        //Componentを扱えるようにする
         inputField = GetComponent<TMP_InputField>();
 
     }
 
-    public void Input()
+    public void Input(string st)
     {
-        GameManager.instance.mapSize = int.Parse(inputField.text);
-
+        if (st == "MapSize")
+        {
+            GameManager.instance.mapSize = int.Parse(inputField.text);
+        }
+        if (st == "Seed")
+        {
+            GameManager.instance.seed = int.Parse(inputField.text);
+        }
     }
 
 }
