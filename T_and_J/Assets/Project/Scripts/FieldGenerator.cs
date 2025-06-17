@@ -46,6 +46,17 @@ public class FieldGenerator : MonoBehaviour
     //障害物の一片の長さl
     float l = 0.5f;
 
+    private void Awake()
+    {
+        // GameManagerからmapSizeとseedを受け取る！！
+
+        mapSize = GameManager.instance.mapSize;
+        seed = GameManager.instance.seed;
+        if (mapSize % 2 == 0)
+        {
+            mapSize++;
+        }
+    }
     void Start()
     {
 
