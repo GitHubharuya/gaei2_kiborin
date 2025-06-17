@@ -52,9 +52,17 @@ public class FieldGenerator : MonoBehaviour
 
         mapSize = GameManager.instance.mapSize;
         seed = GameManager.instance.seed;
+        if (mapSize <= 0)
+        {
+            mapSize = 11;
+        }
         if (mapSize % 2 == 0)
         {
             mapSize++;
+        }
+        if (seed <= 0)
+        {
+            seed = 1;
         }
     }
     void Start()

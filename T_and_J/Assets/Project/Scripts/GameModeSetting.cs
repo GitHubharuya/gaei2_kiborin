@@ -16,9 +16,6 @@ public class GameModeSetting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //ネズミの初期位置設定
-
-
         switch (GameManager.instance.gameMode)
         {
             case 0:
