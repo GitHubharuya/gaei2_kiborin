@@ -146,6 +146,9 @@ public class Cat : MonoBehaviour
         }
     }
 
+    bool discover = false;
+    int lostSight = 0;
+
     private void Update()
     {
         if (rectangles.Count == 0)
@@ -154,37 +157,32 @@ public class Cat : MonoBehaviour
             return;
         }
 
-        // パスに沿って移動
-        MoveAlongPath();
-
-        // テスト用：スペースキーで次の目標に移動
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (SeeSight())
         {
-            Debug.Log("スペースキーで次の目標に移動");
-            SetNextTarget();
+            //ネズミを見つけたときの動き
+            discover = true;
         }
-
-        // テスト用：Rキーで四角形を再生成
-        if (Input.GetKeyDown(KeyCode.R))
+        else
         {
-            Debug.Log("Rキーで四角形を再生成");
-            if (GameManager.instance?.wallMap != null)
+            if (discover && lostSight<600)
             {
-                DebugMapBounds(); // マップ境界を再確認
-                DivideMapIntoRectangles();
+                //ネズミが物陰に隠れたときの動き
+                lostSight++;
             }
             else
             {
-                CreateTestRectangles();
+                discover = false;
+                lostSight = 0;
+                // パスに沿って移動
+                MoveAlongPath();
             }
         }
+    }
 
-        // テスト用：Dキーでマップ境界デバッグ情報を表示
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Debug.Log("Dキーでマップ境界デバッグ");
-            DebugMapBounds();
-        }
+    //視界内にネズミがいるかを返すメソッド
+    private bool SeeSight()
+    {
+        return false;
     }
 
     private void MoveAlongPath()
