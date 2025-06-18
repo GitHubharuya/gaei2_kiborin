@@ -16,9 +16,7 @@ public class ObstacleAvoidance : MonoBehaviour
     GameObject cat;
 
     [SerializeField]
-    GameObject[] sofa; // Change the type of 'sofa' to an array of GameObjects.
-    [SerializeField]
-    GameObject[] chest;
+    GameObject[] obstacles; //障害物を格納する配列
 
     [Header("障害物回避設定")]
     public float detectionRange = 0.2f;
@@ -72,6 +70,7 @@ public class ObstacleAvoidance : MonoBehaviour
         UpdateCheeseUI();
         rb = GetComponent<Rigidbody>();
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        obstacles = GameObject.FindGameObjectsWithTag("Obstacle"); // "Obstacle"タグを持つ障害物を取得
     }
 
     void Update()
@@ -97,6 +96,7 @@ public class ObstacleAvoidance : MonoBehaviour
             if(!escapeCatCoroutineRunning)
             {
                 Vector3 dir = DetectEscapeObstacle();
+                Debug.Log("to obstacle dir:"+dir);
                 StartCoroutine(MovetoObstacleCoroutine(escapeTime, dir));
                 
             }
@@ -307,17 +307,19 @@ public class ObstacleAvoidance : MonoBehaviour
       
         GameObject hiddenObstacle = null;
 
-        float dis = Mathf.Infinity;
+        float dis = viewDistance;
         float ang;
         bool flag = false;
-        foreach (GameObject s in sofa)
+        foreach (GameObject s in obstacles)
         {
+            Debug.Log("check sofa");
             Vector3 toS = s.transform.position - transform.position;
             float t_dis = toS.magnitude;
             ang = Vector3.Angle(transform.forward, toS);
 
-            if(dis > t_dis && ang > viewAngle/2f)
+            if((s.name.Contains("Sofa")) && (dis > t_dis))
             {
+                Debug.Log("Sofa found.");
                 dis = t_dis;
                 flag = true;
                 hiddenObstacle = s;
@@ -325,14 +327,16 @@ public class ObstacleAvoidance : MonoBehaviour
         }
         if (!flag)
         {
-            foreach(GameObject c in chest)
+            foreach(GameObject c in obstacles)
             {
+                Debug.Log("check chest");
                 Vector3 toC = c.transform.position - transform.position;
                 float t_dis = toC.magnitude;
                 ang = Vector3.Angle(transform.forward, toC);
 
-                if(dis > t_dis && ang < viewAngle / 2f)
+                if((dis > t_dis && ang < viewAngle / 2f) && (c.name.Contains("Chest")))
                 {
+                    Debug.Log("Chest found.");
                     dis = t_dis;
                     flag = true;
                     hiddenObstacle = c;
@@ -379,8 +383,8 @@ public class ObstacleAvoidance : MonoBehaviour
         while (Time.time < startTime + escapeTime)
         {
             rb.MovePosition(rb.position + dir * moveSpeed * Time.fixedDeltaTime);
-            Quaternion targetRotation = Quaternion.LookRotation(dir, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            //Quaternion targetRotation = Quaternion.LookRotation(dir, Vector3.up);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
 
             Vector3 dir1 = transform.position;
             dir1.y += 0.05f;
