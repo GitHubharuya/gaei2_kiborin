@@ -4,16 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Obstacle
-  - Cheese
+  - target
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - MiniMapLayer
+  - 
   - Water
   - UI
-  - obstacleLayer
+  - 
   - 
   - 
   - 
