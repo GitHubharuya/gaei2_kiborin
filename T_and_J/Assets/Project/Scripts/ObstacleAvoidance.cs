@@ -78,7 +78,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
         if (isCommitted || isEmergency || isNoCheeseCommitted || foundCat)
         {
-
+            //何もしない
         }
         else if (findCat())
         {
@@ -406,13 +406,15 @@ public class ObstacleAvoidance : MonoBehaviour
 
             if (jug1 || jug2 || jug3 || jug4)
             {
-                break;
+                Debug.Log("障害物の近くに来たよ！");
+                dir = Vector3.zero; //障害物の近くに来たら移動は停止する
             }
 
             yield return new WaitForFixedUpdate();
         }
         escapeCatCoroutineRunning = false;
         foundCat = false;
+        cheese = null; //チーズは一回リセット
         // StartCoroutine(HideBehindObstacleCoroutine());
 
     }
@@ -531,7 +533,7 @@ public class ObstacleAvoidance : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         isCommitted = false;
-
+        cheese = null; // コミット後はチーズをリセット
         Debug.Log("Commit complete.");
     }
 
@@ -627,11 +629,13 @@ public class ObstacleAvoidance : MonoBehaviour
                 yield return new WaitForFixedUpdate();
 
             }
+
             yield return new WaitForFixedUpdate();
 
         }
         isEmergency = false;
         emergencyCoroutineRunning = false;
+        cheese = null; //チーズを一回リセット
         //detectionRange = 0.2f; // 元の設定に戻す
         //avoidDistance = 0.7f; // 元の設定に戻す
         Debug.Log("Emergency escape state ended.");
@@ -651,6 +655,7 @@ public class ObstacleAvoidance : MonoBehaviour
             rb.MovePosition(rb.position + dir * emergencySpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }
+        cheese = null; //緊急状態の移動後はチーズをリセット
         isMoveMouseinEmergency = false;
 
     }

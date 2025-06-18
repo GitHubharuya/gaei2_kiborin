@@ -416,7 +416,7 @@ MonoBehaviour:
   findCattoEscape: 3
   viewAngle: 90
   emergencyDuration: 2
-  escapeTime: 2
+  escapeTime: 5
   emergencySpeed: 0.7
   emergencyRotationSpeed: 10
   obstacleLayer:
