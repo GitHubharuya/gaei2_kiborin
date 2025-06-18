@@ -14,6 +14,11 @@ public class Cat : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 1.0f;
 
+    [Header("視界の距離・角度設定")]
+    public float viewDistance = 6.0f;
+    public float viewAngle = 90.0f;
+
+
     // タイルサイズを0.125に設定
     private const float TILE_SIZE = 0.125f;
 
@@ -182,7 +187,18 @@ public class Cat : MonoBehaviour
     //視界内にネズミがいるかを返すメソッド
     private bool SeeSight()
     {
-        return false;
+        Vector3 toMouse = mouse.transform.position - transform.position; //猫の現在位置からネズミまでのベクトル
+        float dis = toMouse.magnitude; //上記ベクトルの長さ→距離
+        float ang = Vector3.Angle(transform.forward, toMouse); //猫の正面からネズミまでの角度
+
+        if(dis < viewDistance && ang < viewAngle / 2.0f)
+        {
+            return true; //視界内
+        }
+        else
+        {
+            return false; //視界外
+        }
     }
 
     private void MoveAlongPath()

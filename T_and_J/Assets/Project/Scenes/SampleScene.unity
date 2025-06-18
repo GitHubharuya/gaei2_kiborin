@@ -141,6 +141,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouse: {fileID: 464185496}
   moveSpeed: 1
+  viewDistance: 6
+  viewAngle: 90
 --- !u!114 &58874521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,7 +218,7 @@ MonoBehaviour:
   isFinished: 0
   timer: 0
   cheeseCount: 0
-  gameMode: 1
+  gameMode: 0
   mapSize: 0
   seed: 0
 --- !u!4 &186663028
@@ -396,7 +398,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464185496}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bc01b95eb534da479521ec7f8653cf9, type: 3}
   m_Name: 
@@ -1939,8 +1941,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 533920a4bd7486b44bb794c79084d510, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapSize: 13
-  seed: 12
+  mapSize: 15
+  seed: 15
   groundPrefab: {fileID: 919132149155446097, guid: 70b51a382134e864e8b813a268fb364d, type: 3}
   wallPrefabs:
   - {fileID: 356117396}

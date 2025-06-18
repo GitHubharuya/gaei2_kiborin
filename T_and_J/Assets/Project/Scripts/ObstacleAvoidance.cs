@@ -70,11 +70,12 @@ public class ObstacleAvoidance : MonoBehaviour
         UpdateCheeseUI();
         rb = GetComponent<Rigidbody>();
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-        obstacles = GameObject.FindGameObjectsWithTag("Obstacle"); // "Obstacle"タグを持つ障害物を取得
     }
 
     void Update()
     {
+        obstacles = GameObject.FindGameObjectsWithTag("Obstacle"); // "Obstacle"タグを持つ障害物を取得
+
         if (isCommitted || isEmergency || isNoCheeseCommitted || foundCat)
         {
 
@@ -315,9 +316,10 @@ public class ObstacleAvoidance : MonoBehaviour
             Debug.Log("check sofa");
             Vector3 toS = s.transform.position - transform.position;
             float t_dis = toS.magnitude;
-            ang = Vector3.Angle(transform.forward, toS);
+            ang = Vector3.Angle(-transform.forward, toS); //後ろ側の視界を確認する
 
-            if((s.name.Contains("Sofa")) && (dis > t_dis))
+            Debug.Log("obstacle name : " + s.name + " t_dis; " + t_dis);
+            if ((s.name.Contains("Sofa(Clone)")) && (dis > t_dis && ang < viewAngle))
             {
                 Debug.Log("Sofa found.");
                 dis = t_dis;
@@ -373,6 +375,10 @@ public class ObstacleAvoidance : MonoBehaviour
 
     private IEnumerator MovetoObstacleCoroutine(float time, Vector3 dir)
     {
+        if(dir == Vector3.zero)
+        {
+            dir = -transform.forward; //障害物が視界内にない場合は後方退避
+        }
         Debug.Log("Move to Obstacle...");
 
         escapeCatCoroutineRunning = true;
@@ -383,8 +389,8 @@ public class ObstacleAvoidance : MonoBehaviour
         while (Time.time < startTime + escapeTime)
         {
             rb.MovePosition(rb.position + dir * moveSpeed * Time.fixedDeltaTime);
-            //Quaternion targetRotation = Quaternion.LookRotation(dir, Vector3.up);
-            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            Quaternion targetRotation = Quaternion.LookRotation(dir, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
 
             Vector3 dir1 = transform.position;
             dir1.y += 0.05f;
