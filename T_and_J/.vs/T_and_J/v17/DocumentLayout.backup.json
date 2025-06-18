@@ -7,12 +7,12 @@
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\mitsu\\githubdesktop\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -52,7 +52,7 @@
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
               "ToolTip": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
-              "ViewState": "AgIAABQBAAAAAAAAAAAIwB8BAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAIUBAAAAAAAAAAAkwD4BAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-17T14:39:17.959Z",
               "EditorCaption": ""
@@ -60,18 +60,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "Cat.cs",
-              "DocumentMoniker": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cat.cs",
-              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Cat.cs",
-              "ToolTip": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cat.cs",
-              "RelativeToolTip": "Assets\\Project\\Scripts\\Cat.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T01:52:35.747Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "PlayerController.cs",
               "DocumentMoniker": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\PlayerController.cs",
@@ -79,8 +67,7 @@
               "RelativeToolTip": "Assets\\Project\\Scripts\\PlayerController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAFAAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T01:52:16.098Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-17T01:52:16.098Z"
             },
             {
               "$type": "Document",
@@ -141,6 +128,40 @@
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAB8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-17T01:26:08.476Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "30db7039-deda-4658-8638-654ba963dd0f",
+        "Display": 0,
+        "X": 902,
+        "Y": 181,
+        "Width": 1511,
+        "Height": 752,
+        "WindowState": 0
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Cat.cs",
+              "DocumentMoniker": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cat.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Cat.cs",
+              "ToolTip": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cat.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\Cat.cs",
+              "ViewState": "AgIAAJ8AAAAAumg1MhYqwLQAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-17T01:52:35.747Z",
+              "EditorCaption": ""
             }
           ]
         }
