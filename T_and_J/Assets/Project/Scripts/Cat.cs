@@ -162,14 +162,43 @@ public class Cat : MonoBehaviour
             return;
         }
 
+        // テスト用：スペースキーで次の目標に移動
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("スペースキーで次の目標に移動");
+            SetNextTarget();
+        }
+
+        // テスト用：Rキーで四角形を再生成
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Debug.Log("Rキーで四角形を再生成");
+            if (GameManager.instance.wallMap != null)
+            {
+                DebugMapBounds(); // マップ境界を再確認
+                DivideMapIntoRectangles();
+            }
+            else
+            {
+                CreateTestRectangles();
+            }
+        }
+        // テスト用：Dキーでマップ境界デバッグ情報を表示
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            Debug.Log("Dキーでマップ境界デバッグ");
+            DebugMapBounds();
+        }
+
         if (SeeSight())
         {
             //ネズミを見つけたときの動き
             discover = true;
+
         }
         else
         {
-            if (discover && lostSight<600)
+            if (discover && lostSight<6)
             {
                 //ネズミが物陰に隠れたときの動き
                 lostSight++;
@@ -268,7 +297,7 @@ public class Cat : MonoBehaviour
 
         // GameManagerが利用可能な場合はA*を使用、そうでなければ直線移動
         List<Vector3> path = null;
-        if (GameManager.instance?.wallMap != null)
+        if (GameManager.instance.wallMap != null)
         {
             path = FindPathAStar(startPos, endPos);
         }
@@ -299,7 +328,7 @@ public class Cat : MonoBehaviour
 
     private List<Vector3> FindPathAStar(Vector3 start, Vector3 end)
     {
-        if (GameManager.instance?.wallMap == null) return null;
+        if (GameManager.instance.wallMap == null) return null;
 
         int mapWidth = GameManager.instance.wallMap.GetLength(0);
         int mapHeight = GameManager.instance.wallMap.GetLength(1);
@@ -325,6 +354,33 @@ public class Cat : MonoBehaviour
         AStarNode endNode = new AStarNode(endX, endZ);
 
         openSet.Add(startNode);
+
+        bool[,] newMap = new bool[mapWidth, mapHeight];
+        for( int i = 0;  i < mapWidth; i++)
+        {
+            for (int j = 0; j < mapHeight; j++)
+            {
+                for (int dx = -1; dx <= 1; dx++)
+                {
+                    for (int dy = -1; dy <= 1; dy++)
+                    {
+
+                        int newX = i + dx;
+                        int newY = j + dy;
+
+                        // 境界チェック
+                        if (newX < 0 || newX >= mapWidth || newY < 0 || newY >= mapHeight)
+                            continue;
+
+                        if (GameManager.instance.wallMap[newX, newY])
+                        {
+                            newMap[i, j] = true;
+                        }
+                    }
+
+                }
+            }
+        }
 
         while (openSet.Count > 0)
         {
@@ -360,7 +416,7 @@ public class Cat : MonoBehaviour
                         continue;
 
                     // 障害物チェック
-                    if (GameManager.instance.wallMap[newX, newY])
+                    if (newMap[newX, newY])
                         continue;
 
                     // 閉じたセットにあるかチェック
@@ -372,8 +428,8 @@ public class Cat : MonoBehaviour
                     if (dx != 0 && dy != 0)
                     {
                         // 斜め移動時は隣接する2つのマスも空である必要がある
-                        if (GameManager.instance.wallMap[currentNode.x + dx, currentNode.y] ||
-                            GameManager.instance.wallMap[currentNode.x, currentNode.y + dy])
+                        if (newMap[currentNode.x + dx, currentNode.y] ||
+                            newMap[currentNode.x, currentNode.y + dy])
                             continue;
                     }
 
@@ -437,7 +493,7 @@ public class Cat : MonoBehaviour
     {
         rectangles.Clear();
 
-        if (GameManager.instance?.wallMap == null)
+        if (GameManager.instance.wallMap == null)
         {
             Debug.LogError("GameManager.instance.wallMap が null です！");
             return;
@@ -449,11 +505,38 @@ public class Cat : MonoBehaviour
 
         bool[,] visited = new bool[mapWidth, mapHeight];
 
+        bool[,] newMap = new bool[mapWidth, mapHeight];
+        for (int i = 0; i < mapWidth; i++)
+        {
+            for (int j = 0; j < mapHeight; j++)
+            {
+                for (int dx = -1; dx <= 1; dx++)
+                {
+                    for (int dy = -1; dy <= 1; dy++)
+                    {
+
+                        int newX = i + dx;
+                        int newY = j + dy;
+
+                        // 境界チェック
+                        if (newX < 0 || newX >= mapWidth || newY < 0 || newY >= mapHeight)
+                            continue;
+
+                        if (GameManager.instance.wallMap[newX, newY])
+                        {
+                            newMap[i, j] = true;
+                        }
+                    }
+
+                }
+            }
+        }
+
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
             {
-                if (!visited[x, y] && !GameManager.instance.wallMap[x, y])
+                if (!visited[x, y] && !newMap[x, y])
                 {
                     Rectangle rect = FindLargestRectangle(x, y, visited);
                     if (rect != null && rect.width > 0 && rect.height > 0)
@@ -471,7 +554,7 @@ public class Cat : MonoBehaviour
     // マップの端の座標を確認するデバッグ関数
     private void DebugMapBounds()
     {
-        if (GameManager.instance?.wallMap == null) return;
+        if (GameManager.instance.wallMap == null) return;
 
         int mapWidth = GameManager.instance.wallMap.GetLength(0);
         int mapHeight = GameManager.instance.wallMap.GetLength(1);
@@ -490,12 +573,39 @@ public class Cat : MonoBehaviour
         Debug.Log($"現在のオフセット設定: X={MAP_OFFSET_X}, Z={MAP_OFFSET_Z}");
         Debug.Log($"タイルサイズ: {TILE_SIZE}");
 
+        bool[,] newMap = new bool[mapWidth, mapHeight];
+        for (int i = 0; i < mapWidth; i++)
+        {
+            for (int j = 0; j < mapHeight; j++)
+            {
+                for (int dx = -1; dx <= 1; dx++)
+                {
+                    for (int dy = -1; dy <= 1; dy++)
+                    {
+
+                        int newX = i + dx;
+                        int newY = j + dy;
+
+                        // 境界チェック
+                        if (newX < 0 || newX >= mapWidth || newY < 0 || newY >= mapHeight)
+                            continue;
+
+                        if (GameManager.instance.wallMap[newX, newY])
+                        {
+                            newMap[i, j] = true;
+                        }
+                    }
+
+                }
+            }
+        }
+
         // 最初の非壁タイルの位置を見つけて表示
         for (int y = 0; y < mapHeight; y++)
         {
             for (int x = 0; x < mapWidth; x++)
             {
-                if (!GameManager.instance.wallMap[x, y])
+                if (!newMap[x, y])
                 {
                     Vector3 firstOpenTile = new Vector3(
                         MAP_OFFSET_X + x * TILE_SIZE,
@@ -520,10 +630,37 @@ public class Cat : MonoBehaviour
         int maxWidth = 0;
         int maxHeight = 0;
 
+        bool[,] newMap = new bool[mapWidth, mapHeight];
+        for (int i = 0; i < mapWidth; i++)
+        {
+            for (int j = 0; j < mapHeight; j++)
+            {
+                for (int dx = -1; dx <= 1; dx++)
+                {
+                    for (int dy = -1; dy <= 1; dy++)
+                    {
+
+                        int newX = i + dx;
+                        int newY = j + dy;
+
+                        // 境界チェック
+                        if (newX < 0 || newX >= mapWidth || newY < 0 || newY >= mapHeight)
+                            continue;
+
+                        if (GameManager.instance.wallMap[newX, newY])
+                        {
+                            newMap[i, j] = true;
+                        }
+                    }
+
+                }
+            }
+        }
+
         // 右方向への最大幅を計算
         for (int x = startX; x < mapWidth; x++)
         {
-            if (GameManager.instance.wallMap[x, startY] || visited[x, startY])
+            if (newMap[x, startY] || visited[x, startY])
                 break;
             maxWidth++;
         }
@@ -534,7 +671,7 @@ public class Cat : MonoBehaviour
             bool canExtend = true;
             for (int x = startX; x < startX + maxWidth; x++)
             {
-                if (GameManager.instance.wallMap[x, y] || visited[x, y])
+                if (newMap[x, y] || visited[x, y])
                 {
                     canExtend = false;
                     break;
@@ -555,7 +692,7 @@ public class Cat : MonoBehaviour
                 int currentWidth = 0;
                 for (int x = startX; x < mapWidth; x++)
                 {
-                    if (GameManager.instance.wallMap[x, y] || visited[x, y])
+                    if (newMap[x, y] || visited[x, y])
                         break;
                     currentWidth++;
                 }
