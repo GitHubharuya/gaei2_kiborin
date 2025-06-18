@@ -70,7 +70,6 @@
     <Compile Include="Assets\Project\Scripts\AnimatedImage.cs" />
     <Compile Include="Assets\Project\Scripts\UI.cs" />
     <Compile Include="Assets\Project\Scripts\Cat.cs" />
-    <Compile Include="Assets\Project\Scripts\Wall.cs" />
     <Compile Include="Assets\Project\Scripts\MiniMapCamera.cs" />
     <Compile Include="Assets\Project\Scripts\Title.cs" />
     <Compile Include="Assets\Project\Scripts\ObstacleAvoidance.cs" />
