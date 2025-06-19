@@ -23,6 +23,8 @@ public class GameModeSetting : MonoBehaviour
             case 0:
                 catPrefab.GetComponent<Cat>().enabled = true;
                 mousePrefab.GetComponent<ObstacleAvoidance>().enabled = true;
+                mousePrefab.GetComponent<CapsuleCollider>().enabled = false;
+                catPrefab.GetComponent<CapsuleCollider>().enabled = false;
                 break;
             case 1:
                 catPrefab.GetComponent<PlayerController>().enabled = true;
