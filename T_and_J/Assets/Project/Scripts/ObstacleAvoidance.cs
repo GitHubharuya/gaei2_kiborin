@@ -237,14 +237,17 @@ public class ObstacleAvoidance : MonoBehaviour
         List<Vector3> clearDirections = new List<Vector3>();
 
         int avoidIndex;
-
+        int dir_cnt = 0;
         foreach (Vector3 dir in directions)
         {
             if (!Physics.Raycast(origin, dir, avoidDistance, obstacleLayer))
             {
                 clearDirections.Add(dir);
+                dir_cnt++;
             }
         }
+
+        Debug.Log("clear directions count: " + dir_cnt);
 
         Vector3 desiredDirection = Vector3.zero;
         
@@ -319,7 +322,7 @@ public class ObstacleAvoidance : MonoBehaviour
             ang = Vector3.Angle(-transform.forward, toS); //後ろ側の視界を確認する
 
             Debug.Log("obstacle name : " + s.name + " t_dis; " + t_dis);
-            if ((s.name.Contains("Sofa(Clone)")) && (dis > t_dis && ang < viewAngle))
+            if ((s.name.Contains("Sofa(Clone)")) && (dis > t_dis && ang < viewAngle / 2f))
             {
                 Debug.Log("Sofa found.");
                 dis = t_dis;

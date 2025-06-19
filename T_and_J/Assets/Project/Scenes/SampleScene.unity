@@ -218,7 +218,7 @@ MonoBehaviour:
   isFinished: 0
   timer: 0
   cheeseCount: 0
-  gameMode: 1
+  gameMode: 0
   mapSize: 11
   seed: 11
 --- !u!4 &186663028
@@ -416,12 +416,12 @@ MonoBehaviour:
   findCattoEscape: 3
   viewAngle: 90
   emergencyDuration: 2
-  escapeTime: 0.1
+  escapeTime: 5
   emergencySpeed: 0.7
   emergencyRotationSpeed: 10
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   cheeseText: {fileID: 0}
   cheese: {fileID: 0}
   useView: 1
