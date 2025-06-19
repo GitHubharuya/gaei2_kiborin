@@ -78,15 +78,13 @@ public class PlayerController : MonoBehaviour
             moveSpeed += moveSpeedIn * cameraRight;
         }
 
-        //Debug.Log($"W:{Input.GetKey(KeyCode.W)} S:{Input.GetKey(KeyCode.S)} moveSpeed:{moveSpeed}");
-
         Move();
 
         //慣性を消す
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
         {
             //playerRb.velocity = Vector3.zero;
-           // playerRb.angularVelocity = Vector3.zero;
+            // playerRb.angularVelocity = Vector3.zero;
         }
 
         //------プレイヤーの回転------
@@ -101,7 +99,7 @@ public class PlayerController : MonoBehaviour
         //過去の位置の更新
         pastPos = currentPos;
 
-        if (delta == Vector3.zero)
+        if (delta.magnitude < 0.01f || moveSpeed.magnitude < 1)
             return;
 
         playerRot = Quaternion.LookRotation(delta, Vector3.up);
@@ -127,7 +125,7 @@ public class PlayerController : MonoBehaviour
 
         playerRb.velocity = moveSpeed;
     }
-    
+
 }
 
 
