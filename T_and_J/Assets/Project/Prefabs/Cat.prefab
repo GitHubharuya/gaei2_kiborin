@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4229165224750475181}
   - component: {fileID: 2699278258030279855}
   - component: {fileID: 418055089719424888}
-  m_Layer: 3
+  m_Layer: 5
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,6 +208,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouse: {fileID: 6916803040528289554, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
   moveSpeed: 1
+  viewDistance: 6
+  viewAngle: 90
 --- !u!136 &6692175303142635443
 CapsuleCollider:
   m_ObjectHideFlags: 0
