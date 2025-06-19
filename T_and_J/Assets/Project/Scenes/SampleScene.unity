@@ -245,7 +245,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 222969157}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,6 +270,16 @@ Transform:
   - {fileID: 781943001}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &226090945 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8245785112732179937, guid: f46daab346b9b794ab349d88f0c33644, type: 3}
+  m_PrefabInstance: {fileID: 7127911922651643948}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &241416117 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6705752505768191313, guid: da5dabb0a524f484bba458cf298344e9, type: 3}
+  m_PrefabInstance: {fileID: 9170391067415462191}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &356117395 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 110928582667449168, guid: 289c734e002410740840f62849909b31, type: 3}
@@ -398,7 +408,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 464185496}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bc01b95eb534da479521ec7f8653cf9, type: 3}
   m_Name: 
@@ -416,12 +426,12 @@ MonoBehaviour:
   findCattoEscape: 3
   viewAngle: 90
   emergencyDuration: 2
-  escapeTime: 5
+  escapeTime: 4
   emergencySpeed: 0.7
   emergencyRotationSpeed: 10
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   cheeseText: {fileID: 0}
   cheese: {fileID: 0}
   useView: 1
@@ -1080,6 +1090,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 464185496}
+--- !u!1 &1069669311 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1167990151108364477, guid: b7cc24cdb81d4794f9eeb99d568942c5, type: 3}
+  m_PrefabInstance: {fileID: 832425491899516200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1129571326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,7 +1350,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1286476122}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Obstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1559,6 +1574,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 37.721, y: 0, z: 1}
+--- !u!1 &1425599764 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4890497815286435197, guid: 996df3262c24c5e498f4e166479012c9, type: 3}
+  m_PrefabInstance: {fileID: 2606308162496044530}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1664822471
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,7 +1942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2122317634}
   - component: {fileID: 2122317633}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: FieldGenerator
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -1942,18 +1962,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapSize: 15
-  seed: 15
+  seed: 17
   groundPrefab: {fileID: 919132149155446097, guid: 70b51a382134e864e8b813a268fb364d, type: 3}
   wallPrefabs:
   - {fileID: 356117396}
   - {fileID: 684820853}
   - {fileID: 781943002}
   furniturePrefabsS:
-  - {fileID: 6705752505768191313, guid: da5dabb0a524f484bba458cf298344e9, type: 3}
-  - {fileID: 1167990151108364477, guid: b7cc24cdb81d4794f9eeb99d568942c5, type: 3}
+  - {fileID: 241416117}
+  - {fileID: 1069669311}
   furniturePrefabsL:
-  - {fileID: 4890497815286435197, guid: 996df3262c24c5e498f4e166479012c9, type: 3}
-  - {fileID: 8245785112732179937, guid: f46daab346b9b794ab349d88f0c33644, type: 3}
+  - {fileID: 1425599764}
+  - {fileID: 226090945}
   ceilingPrefab: {fileID: 440469099}
   lightPrefab: {fileID: 5497717562607429501, guid: d47e14e5a81b42e419e552660db9d1ad, type: 3}
   cheesePrefab: {fileID: 2083255693}
@@ -1990,6 +2010,10 @@ PrefabInstance:
     - target: {fileID: 1167990151108364477, guid: b7cc24cdb81d4794f9eeb99d568942c5, type: 3}
       propertyPath: m_Name
       value: Chair
+      objectReference: {fileID: 0}
+    - target: {fileID: 1167990151108364477, guid: b7cc24cdb81d4794f9eeb99d568942c5, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1981118150779359751, guid: b7cc24cdb81d4794f9eeb99d568942c5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2127,6 +2151,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sofa
       objectReference: {fileID: 0}
+    - target: {fileID: 4890497815286435197, guid: 996df3262c24c5e498f4e166479012c9, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5230184907821062087, guid: 996df3262c24c5e498f4e166479012c9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.3979087
@@ -2183,6 +2211,10 @@ PrefabInstance:
     - target: {fileID: 2820305047188092012, guid: c565831c58b8d5b499dd8aa60af48516, type: 3}
       propertyPath: m_Name
       value: Wall1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2820305047188092012, guid: c565831c58b8d5b499dd8aa60af48516, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3199927192856522454, guid: c565831c58b8d5b499dd8aa60af48516, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2354,6 +2386,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall0
       objectReference: {fileID: 0}
+    - target: {fileID: 775120899084184042, guid: 289c734e002410740840f62849909b31, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2370,6 +2406,10 @@ PrefabInstance:
     - target: {fileID: 1259909475297051613, guid: c995f19ee9348c94699d16fc967ad93a, type: 3}
       propertyPath: m_Name
       value: Wall2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1259909475297051613, guid: c995f19ee9348c94699d16fc967ad93a, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1889198825609533799, guid: c995f19ee9348c94699d16fc967ad93a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2427,6 +2467,10 @@ PrefabInstance:
     - target: {fileID: 8245785112732179937, guid: f46daab346b9b794ab349d88f0c33644, type: 3}
       propertyPath: m_Name
       value: Table
+      objectReference: {fileID: 0}
+    - target: {fileID: 8245785112732179937, guid: f46daab346b9b794ab349d88f0c33644, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8729446621498787675, guid: f46daab346b9b794ab349d88f0c33644, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2618,6 +2662,10 @@ PrefabInstance:
     - target: {fileID: 6705752505768191313, guid: da5dabb0a524f484bba458cf298344e9, type: 3}
       propertyPath: m_Name
       value: Chest
+      objectReference: {fileID: 0}
+    - target: {fileID: 6705752505768191313, guid: da5dabb0a524f484bba458cf298344e9, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

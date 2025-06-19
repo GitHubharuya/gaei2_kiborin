@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - target
+  - Obstacle
+  - Cheese
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - obstacleLayer
   - Water
   - UI
   - 
