@@ -42,7 +42,7 @@ public class ObstacleAvoidance : MonoBehaviour
     [Header("緊急状態の最低秒数")]
     public float emergencyDuration = 2.0f;
     private bool isEmergency = false; // 緊急状態かどうかのフラグ
-    private bool isMoveMouseinEmergency = false; 
+    private bool isMoveMouseinEmergency = false;
     private bool emergencyCoroutineRunning = false; // 緊急状態のコルーチンが実行中かどうかのフラグ
 
     [Header("障害物に隠れるときの設定")]
@@ -70,15 +70,14 @@ public class ObstacleAvoidance : MonoBehaviour
         UpdateCheeseUI();
         rb = GetComponent<Rigidbody>();
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        obstacles = GameObject.FindGameObjectsWithTag("Obstacle"); // "Obstacle"タグを持つ障害物を取得
     }
 
     void Update()
     {
-        obstacles = GameObject.FindGameObjectsWithTag("Obstacle"); // "Obstacle"タグを持つ障害物を取得
-
         if (isCommitted || isEmergency || isNoCheeseCommitted || foundCat)
         {
-            //何もしない
+
         }
         else if (findCat())
         {
@@ -90,16 +89,16 @@ public class ObstacleAvoidance : MonoBehaviour
                 StartCoroutine(EmergencyEscapeState()); // 緊急状態のコルーチンを開始
             }
         }
-        else if(HidetoObstacle())
+        else if (HidetoObstacle())
         {
             foundCat = true;
-            
-            if(!escapeCatCoroutineRunning)
+
+            if (!escapeCatCoroutineRunning)
             {
                 Vector3 dir = DetectEscapeObstacle();
-                Debug.Log("to obstacle dir:"+dir);
+                Debug.Log("to obstacle dir:" + dir);
                 StartCoroutine(MovetoObstacleCoroutine(escapeTime, dir));
-                
+
             }
             else
             {
@@ -143,7 +142,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+
     }
 
 
@@ -154,7 +153,7 @@ public class ObstacleAvoidance : MonoBehaviour
         Vector3 origin = transform.position;
         Vector3 forwardDir = transform.forward;
         Vector3 upwardDirection = (forwardDir + Vector3.up).normalized;
-        Vector3 forwardDir2 = Quaternion.Euler(0, 10, 0) * forwardDir; 
+        Vector3 forwardDir2 = Quaternion.Euler(0, 10, 0) * forwardDir;
         Vector3 forwardDir3 = Quaternion.Euler(0, -10, 0) * forwardDir;
         Vector3 dir1 = Quaternion.Euler(0, 30, 0) * transform.forward;
         Vector3 dir2 = Quaternion.Euler(0, -30, 0) * transform.forward;
@@ -226,12 +225,12 @@ public class ObstacleAvoidance : MonoBehaviour
         }
 
 
-        
+
 
         return facingObstacle;
     }
 
-    public Vector3 ChoiceVector(Vector3 origin, Vector3  forwardDir, Vector3[] directions, int flag)
+    public Vector3 ChoiceVector(Vector3 origin, Vector3 forwardDir, Vector3[] directions, int flag)
     {
         origin.y += 0.05f;
         List<Vector3> clearDirections = new List<Vector3>();
@@ -247,10 +246,10 @@ public class ObstacleAvoidance : MonoBehaviour
         }
 
         Vector3 desiredDirection = Vector3.zero;
-        
+
         if (clearDirections.Count > 0)
         {
-            if(flag == 0)
+            if (flag == 0)
             {
                 avoidIndex = 0;
             }
@@ -261,7 +260,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
                 avoidIndex = randNum;
             }
-            Debug.Log("move to avoid obstacle"); 
+            Debug.Log("move to avoid obstacle");
             desiredDirection = clearDirections[avoidIndex];
         }
         else
@@ -272,7 +271,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
         return desiredDirection;
     }
-    
+
     public void mouseMovement(Vector3 origin, Vector3 forwardDir, Vector3[] directions)
     {
 
@@ -305,7 +304,7 @@ public class ObstacleAvoidance : MonoBehaviour
     private Vector3 DetectEscapeObstacle()
     {
         isMoveMouseinFindingCat = true;
-      
+
         GameObject hiddenObstacle = null;
 
         float dis = viewDistance;
@@ -316,10 +315,9 @@ public class ObstacleAvoidance : MonoBehaviour
             Debug.Log("check sofa");
             Vector3 toS = s.transform.position - transform.position;
             float t_dis = toS.magnitude;
-            ang = Vector3.Angle(-transform.forward, toS); //後ろ側の視界を確認する
+            ang = Vector3.Angle(transform.forward, toS);
 
-            Debug.Log("obstacle name : " + s.name + " t_dis; " + t_dis);
-            if ((s.name.Contains("Sofa(Clone)")) && (dis > t_dis && ang < viewAngle))
+            if ((s.name.Contains("Sofa")) && (dis > t_dis))
             {
                 Debug.Log("Sofa found.");
                 dis = t_dis;
@@ -329,14 +327,14 @@ public class ObstacleAvoidance : MonoBehaviour
         }
         if (!flag)
         {
-            foreach(GameObject c in obstacles)
+            foreach (GameObject c in obstacles)
             {
                 Debug.Log("check chest");
                 Vector3 toC = c.transform.position - transform.position;
                 float t_dis = toC.magnitude;
                 ang = Vector3.Angle(transform.forward, toC);
 
-                if((dis > t_dis && ang < viewAngle / 2f) && (c.name.Contains("Chest")))
+                if ((dis > t_dis && ang < viewAngle / 2f) && (c.name.Contains("Chest")))
                 {
                     Debug.Log("Chest found.");
                     dis = t_dis;
@@ -348,13 +346,13 @@ public class ObstacleAvoidance : MonoBehaviour
 
         if (flag)
         {
-            
+
             Vector3 v = hiddenObstacle.transform.position - transform.position;
             return v;
         }
         else
         {
-            
+
             Vector3 v = Vector3.zero;
             return v;
         }
@@ -375,10 +373,6 @@ public class ObstacleAvoidance : MonoBehaviour
 
     private IEnumerator MovetoObstacleCoroutine(float time, Vector3 dir)
     {
-        if(dir == Vector3.zero)
-        {
-            dir = -transform.forward; //障害物が視界内にない場合は後方退避
-        }
         Debug.Log("Move to Obstacle...");
 
         escapeCatCoroutineRunning = true;
@@ -389,8 +383,8 @@ public class ObstacleAvoidance : MonoBehaviour
         while (Time.time < startTime + escapeTime)
         {
             rb.MovePosition(rb.position + dir * moveSpeed * Time.fixedDeltaTime);
-            Quaternion targetRotation = Quaternion.LookRotation(dir, Vector3.up);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            //Quaternion targetRotation = Quaternion.LookRotation(dir, Vector3.up);
+            //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
 
             Vector3 dir1 = transform.position;
             dir1.y += 0.05f;
@@ -406,15 +400,13 @@ public class ObstacleAvoidance : MonoBehaviour
 
             if (jug1 || jug2 || jug3 || jug4)
             {
-                Debug.Log("障害物の近くに来たよ！");
-                dir = Vector3.zero; //障害物の近くに来たら移動は停止する
+                break;
             }
 
             yield return new WaitForFixedUpdate();
         }
         escapeCatCoroutineRunning = false;
         foundCat = false;
-        cheese = null; //チーズは一回リセット
         // StartCoroutine(HideBehindObstacleCoroutine());
 
     }
@@ -424,8 +416,8 @@ public class ObstacleAvoidance : MonoBehaviour
         Vector3 hideDirection = 
         float startTime = Time.time;
     }*/
-    
-    
+
+
 
     void UpdateCheeseUI()
     {
@@ -462,7 +454,7 @@ public class ObstacleAvoidance : MonoBehaviour
         Gizmos.DrawRay(transform.position, leftRay * viewDistance);
         Gizmos.DrawRay(transform.position, rightRay * viewDistance);
     }
-    
+
     void FindNearestCheese_View()
     {
         GameObject[] cheeses = GameObject.FindGameObjectsWithTag("Cheese");
@@ -526,14 +518,14 @@ public class ObstacleAvoidance : MonoBehaviour
         {
             if (!isCommitted)
             {
-                
+
             }
             rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotaion, rotationSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }
         isCommitted = false;
-        cheese = null; // コミット後はチーズをリセット
+
         Debug.Log("Commit complete.");
     }
 
@@ -548,9 +540,9 @@ public class ObstacleAvoidance : MonoBehaviour
 
         Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
 
-        while(Time.time < startTime + commitTime)
+        while (Time.time < startTime + commitTime)
         {
-            rb.MovePosition(rb.position + direction*moveSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }
@@ -587,10 +579,10 @@ public class ObstacleAvoidance : MonoBehaviour
 
         if (distance < findCatDistance)
         {
-           
+
             Debug.Log("Escape!!");
             return true;
-            
+
         }
         return false;
 
@@ -620,22 +612,20 @@ public class ObstacleAvoidance : MonoBehaviour
             }
             if (!flag && !isCommitted) //障害物回避が成功した場合は緊急状態を維持する
             {
-                if(!isMoveMouseinEmergency)
+                if (!isMoveMouseinEmergency)
                 {
                     isMoveMouseinEmergency = true;
                     StartCoroutine(moveMouseinEmergency(0.3f, -dir));
                 }
-                
+
                 yield return new WaitForFixedUpdate();
 
             }
-
             yield return new WaitForFixedUpdate();
 
         }
         isEmergency = false;
         emergencyCoroutineRunning = false;
-        cheese = null; //チーズを一回リセット
         //detectionRange = 0.2f; // 元の設定に戻す
         //avoidDistance = 0.7f; // 元の設定に戻す
         Debug.Log("Emergency escape state ended.");
@@ -648,14 +638,13 @@ public class ObstacleAvoidance : MonoBehaviour
         isMoveMouseinEmergency = true;
         float startTime = Time.time;
 
-        while( Time.time < startTime + time)
+        while (Time.time < startTime + time)
         {
             Quaternion mouseRotation = Quaternion.LookRotation(dir, Vector3.up);
             transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotation, emergencyRotationSpeed * Time.fixedDeltaTime);
             rb.MovePosition(rb.position + dir * emergencySpeed * Time.fixedDeltaTime);
             yield return new WaitForFixedUpdate();
         }
-        cheese = null; //緊急状態の移動後はチーズをリセット
         isMoveMouseinEmergency = false;
 
     }
