@@ -190,11 +190,13 @@ public class Cat : MonoBehaviour
             DebugMapBounds();
         }
 
-        if (SeeSight())
+        MoveAlongPath();
+
+        /*if (SeeSight())
         {
             //ネズミを見つけたときの動き
             discover = true;
-
+            
         }
         else
         {
@@ -210,7 +212,7 @@ public class Cat : MonoBehaviour
                 // パスに沿って移動
                 MoveAlongPath();
             }
-        }
+        }*/
     }
 
     //視界内にネズミがいるかを返すメソッド
@@ -227,6 +229,35 @@ public class Cat : MonoBehaviour
         else
         {
             return false; //視界外
+        }
+    }
+
+    private void MoveOkkakePath()
+    {
+        Vector3 targetPos = mouse.transform.position;
+        Vector3 currentPos = transform.position;
+
+        // 現在の目標点までの距離
+        float distanceToTarget = Vector3.Distance(currentPos, targetPos);
+
+        // 移動距離を計算（一定速度）
+        float moveDistance = moveSpeed * Time.deltaTime;
+
+        if (distanceToTarget <= moveDistance)
+        {
+            // 目標点に到達
+            transform.position = targetPos;
+        }
+        else
+        {
+            // 目標点に向かって移動
+            Vector3 direction = (targetPos - currentPos).normalized;
+            if (direction != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f); // 曲がる早さを調節
+            }
+            transform.position = currentPos + direction * moveDistance;
         }
     }
 
