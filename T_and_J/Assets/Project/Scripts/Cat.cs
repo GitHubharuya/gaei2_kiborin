@@ -190,7 +190,7 @@ public class Cat : MonoBehaviour
             DebugMapBounds();
         }
 
-        if (SeeSight())
+        /*if (SeeSight())
         {
             //ネズミを見つけたときの動き
             discover = true;
@@ -198,7 +198,7 @@ public class Cat : MonoBehaviour
         }
         else
         {
-            if (discover && lostSight<6)
+            if (discover && lostSight < 6)
             {
                 //ネズミが物陰に隠れたときの動き
                 lostSight++;
@@ -210,7 +210,8 @@ public class Cat : MonoBehaviour
                 // パスに沿って移動
                 MoveAlongPath();
             }
-        }
+        }*/
+        MoveAlongPath();
     }
 
     //視界内にネズミがいるかを返すメソッド
@@ -220,7 +221,7 @@ public class Cat : MonoBehaviour
         float dis = toMouse.magnitude; //上記ベクトルの長さ→距離
         float ang = Vector3.Angle(transform.forward, toMouse); //猫の正面からネズミまでの角度
 
-        if(dis < viewDistance && ang < viewAngle / 2.0f)
+        if (dis < viewDistance && ang < viewAngle / 2.0f)
         {
             return true; //視界内
         }
@@ -356,7 +357,7 @@ public class Cat : MonoBehaviour
         openSet.Add(startNode);
 
         bool[,] newMap = new bool[mapWidth, mapHeight];
-        for( int i = 0;  i < mapWidth; i++)
+        for (int i = 0; i < mapWidth; i++)
         {
             for (int j = 0; j < mapHeight; j++)
             {
