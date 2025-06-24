@@ -38,18 +38,45 @@ public class UI : MonoBehaviour
         if (GameManager.instance.isFinished)
         {
             gameUI.SetActive(false);
-            if (GameManager.instance.gameMode == 0)
+
+            if (!GameManager.instance.allCollected)
             {
-                finishUIText.text = "The Mouse was CAUGHT";
+                if (GameManager.instance.gameMode == 0)
+                {
+                    finishUIText.color = new Color(0.5198904f, 1f, 0.5137255f, 1.0f);
+                    finishUIText.text = "The Mouse was CAUGHT";
+                }
+                else if (GameManager.instance.gameMode == 1)
+                {
+                    finishUIText.color = new Color(1f, 0.4705006f, 0.2122642f, 1.0f);
+                    finishUIText.text = "You CAUGHT The Mouse!!";
+                }
+                else if (GameManager.instance.gameMode == 2)
+                {
+                    finishUIText.color = new Color(0.6721697f, 0.514151f, 1.0f, 1.0f);
+                    finishUIText.text = "You were CAUGHT by Cat...";
+                }
             }
-            else if (GameManager.instance.gameMode == 1)
+
+            else
             {
-                finishUIText.text = "You CAUGHT The Mouse!!";
+                if (GameManager.instance.gameMode == 0)
+                {
+                    finishUIText.color = new Color(0.5198904f, 1f, 0.5137255f, 1.0f);
+                    finishUIText.text = "All Cheeses were COLLECTED";
+                }
+                else if (GameManager.instance.gameMode == 1)
+                {
+                    finishUIText.color = new Color(0.6721697f, 0.514151f, 1.0f, 1.0f);
+                    finishUIText.text = "All Cheeses were COLLECTED...";
+                }
+                else if (GameManager.instance.gameMode == 2)
+                {
+                    finishUIText.color = new Color(1f, 0.6098194f, 0.5137255f, 1.0f);
+                    finishUIText.text = "You COLLECTED all Cheeses!!";
+                }
             }
-            else if (GameManager.instance.gameMode == 2)
-            {
-                finishUIText.text = "You were CAUGHT by Cat...";
-            }
+
             finishUI.SetActive(true);
         }
     }

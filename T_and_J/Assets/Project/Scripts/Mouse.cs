@@ -13,7 +13,7 @@ public class Mouse : MonoBehaviour
         if (other.name == "Cat")
         {
             //GameModeSettingにネズミと衝突した合図を送る
-            gameModeSetting.finishGame();
+            gameModeSetting.winCat();
             beEaten();
             Debug.Log("食べられた！");
         }
