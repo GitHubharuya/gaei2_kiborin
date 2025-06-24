@@ -356,6 +356,7 @@ public class FieldGenerator : MonoBehaviour
                     {
                         Vector3 cheesePos = new Vector3(_i, l * 0.2f, _j);
                         Instantiate(cheesePrefab, cheesePos, Quaternion.identity, transform);
+                        GameManager.instance.cheeseSum++;
                     }
 
                     //wallMap更新

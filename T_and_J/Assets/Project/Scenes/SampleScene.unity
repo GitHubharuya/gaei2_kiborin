@@ -215,10 +215,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f5b6669478d29141b72ffcbada3f476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allCollected: 0
   isFinished: 0
   timer: 0
   cheeseCount: 0
-  gameMode: 1
+  cheeseSum: 0
+  gameMode: 2
   mapSize: 11
   seed: 11
 --- !u!4 &186663028
@@ -807,8 +809,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Cheese :'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 770b602a50b3196498f431b4b82bd40b, type: 2}
+  m_sharedMaterial: {fileID: 5986336947993010090, guid: 770b602a50b3196498f431b4b82bd40b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1688,15 +1690,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: The mouse was caught...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d1bcbde2c453358448c96806ce060ad8, type: 2}
+  m_sharedMaterial: {fileID: 3277979392836437973, guid: d1bcbde2c453358448c96806ce060ad8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294914420
-  m_fontColor: {r: 0.45298457, g: 0.19339621, b: 1, a: 1}
+    rgba: 4281759999
+  m_fontColor: {r: 1, g: 0.47050062, b: 0.21226418, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1720,12 +1722,12 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 32.45
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1749,7 +1751,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -19.248093, w: -34.398808}
+  m_margin: {x: -48.701797, y: -15.756426, z: -49.328606, w: -34.398808}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1779,7 +1781,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 106}
+  m_AnchoredPosition: {x: 0, y: 27}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1664822471
@@ -1841,8 +1843,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Time : '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 770b602a50b3196498f431b4b82bd40b, type: 2}
+  m_sharedMaterial: {fileID: 5986336947993010090, guid: 770b602a50b3196498f431b4b82bd40b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2321,6 +2323,10 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2396749620406921279, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
+      propertyPath: catCamera
+      value: 
+      objectReference: {fileID: 877365550}
     - target: {fileID: 4742114153685721984, guid: f14be95ce97ca9348a46317ecf94ac2f, type: 3}
       propertyPath: mouse
       value: 
@@ -2876,9 +2882,9 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1382513185}
   - {fileID: 963194228}
   - {fileID: 877365554}
+  - {fileID: 1382513185}
   - {fileID: 705507995}
   - {fileID: 1338153496}
   - {fileID: 440469103}

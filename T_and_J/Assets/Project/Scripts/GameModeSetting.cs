@@ -15,6 +15,8 @@ public class GameModeSetting : MonoBehaviour
     [SerializeField]
     GameObject catMouse;
 
+    private CatFinish catFinish;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,10 +44,22 @@ public class GameModeSetting : MonoBehaviour
                 mouseCamera.SetActive(true);
                 break;
         }
+
+        catFinish = catPrefab.GetComponent<CatFinish>();
+    }
+
+    private void Update()
+    {
+        if (GameManager.instance.allCollected)
+        {
+            catFinish.beCollected();
+            mouseCamera.SetActive(true);
+            GameManager.instance.isFinished = true;
+        }
     }
 
     // Update is called once per frame
-    public void finishGame()
+    public void winCat()
     {
         catMouse.SetActive(true);
         catCamera.SetActive(true);

@@ -66,6 +66,7 @@
     <Compile Include="Assets\Project\Scripts\Cheese.cs" />
     <Compile Include="Assets\EmergencyState.cs" />
     <Compile Include="Assets\Project\Scripts\Mouse.cs" />
+    <Compile Include="Assets\Project\Scripts\CatFinish.cs" />
     <Compile Include="Assets\Project\Scripts\FieldGenerator.cs" />
     <Compile Include="Assets\Project\Scripts\AnimatedImage.cs" />
     <Compile Include="Assets\Project\Scripts\UI.cs" />
