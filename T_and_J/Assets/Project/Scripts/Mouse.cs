@@ -6,6 +6,8 @@ public class Mouse : MonoBehaviour
 {
     [SerializeField]
     GameModeSetting gameModeSetting;
+    [SerializeField]
+    GameObject mouseCamera;
     public void OnTriggerEnter(Collider other)
     {
         if (other.name == "Cat")
@@ -19,5 +21,6 @@ public class Mouse : MonoBehaviour
     public void beEaten()
     {
         Destroy(gameObject);
+        Destroy(mouseCamera);
     }
 }

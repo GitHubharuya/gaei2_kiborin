@@ -378,8 +378,11 @@ public class FieldGenerator : MonoBehaviour
         }
 
         //ライト
-        Vector3 lightPos = new Vector3(l * (mapSize / 2), 3, l * (mapSize / 2));
-        Instantiate(lightPrefab, lightPos, Quaternion.identity, transform);
+        if (GameManager.instance.gameMode != 0)
+        {
+            Vector3 lightPos = new Vector3(l * (mapSize / 2), 3, l * (mapSize / 2));
+            Instantiate(lightPrefab, lightPos, Quaternion.identity, transform);
+        }
 
         printWallMap();
 
