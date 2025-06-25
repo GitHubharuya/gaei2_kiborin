@@ -64,6 +64,7 @@ public class ObstacleAvoidance : MonoBehaviour
     public Transform cheese;
     public bool useView = false;
     private Rigidbody rb;
+    private int emergencyCount = 0;
 
     private void Start()
     {
@@ -85,6 +86,7 @@ public class ObstacleAvoidance : MonoBehaviour
                 escapeCatCoroutineRunning = false; // 猫から逃げるコルーチンを停止
                 isCommitted = false; // コミット状態を解除
                 StartCoroutine(EmergencyEscapeState()); // 緊急状態のコルーチンを開始
+                emergencyCount++; //緊急状態に遷移にした回数を管理
             }
             return;
         }
