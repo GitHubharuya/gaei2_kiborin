@@ -15,7 +15,7 @@ public class Cat : MonoBehaviour
     private float moveSpeed = 1.0f;
 
     [Header("視界の距離・角度設定")]
-    public float viewDistance = 6.0f;
+    public float viewDistance = 10.0f;
     public float viewAngle = 90.0f;
 
 
@@ -71,6 +71,28 @@ public class Cat : MonoBehaviour
     private Vector3 startPosition;
     private float totalDistance = 0f;
     private float currentDistance = 0f;
+
+    // 既存のフィールドの後に追加
+    private enum CatState
+    {
+        Patrolling,     // 巡回中
+        Chasing,        // 追跡中
+        Searching       // 捜索中
+    }
+
+    private CatState currentState = CatState.Patrolling;
+    private Vector3 lastSeenMousePosition;
+    private Vector3 previousMousePosition;
+    private float lostSightTimer = 0f;
+    private const float LOST_SIGHT_TIMEOUT = 10f;
+    private Vector3 predictedMousePosition;
+    private float mouseTrackingInterval = 0.1f;
+    private float lastMouseTrackTime = 0f;
+
+    // フィールドに追加
+    private float stateChangeDelay = 0.5f;
+    private float lastStateChangeTime = 0f;
+
 
     void Start()
     {
@@ -151,9 +173,6 @@ public class Cat : MonoBehaviour
         }
     }
 
-    bool discover = false;
-    int lostSight = 0;
-
     private void Update()
     {
         if (rectangles.Count == 0)
@@ -162,20 +181,26 @@ public class Cat : MonoBehaviour
             return;
         }
 
-        // テスト用：スペースキーで次の目標に移動
+        // 初回のマウス位置記録
+        if (lastSeenMousePosition == Vector3.zero && mouse != null)
+        {
+            lastSeenMousePosition = mouse.transform.position;
+            previousMousePosition = mouse.transform.position;
+        }
+
+        // テスト用キー入力処理
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Debug.Log("スペースキーで次の目標に移動");
             SetNextTarget();
         }
 
-        // テスト用：Rキーで四角形を再生成
         if (Input.GetKeyDown(KeyCode.R))
         {
             Debug.Log("Rキーで四角形を再生成");
             if (GameManager.instance.wallMap != null)
             {
-                DebugMapBounds(); // マップ境界を再確認
+                DebugMapBounds();
                 DivideMapIntoRectangles();
             }
             else
@@ -183,52 +208,167 @@ public class Cat : MonoBehaviour
                 CreateTestRectangles();
             }
         }
-        // テスト用：Dキーでマップ境界デバッグ情報を表示
+
         if (Input.GetKeyDown(KeyCode.D))
         {
             Debug.Log("Dキーでマップ境界デバッグ");
             DebugMapBounds();
         }
 
-        /*if (SeeSight())
-        {
-            //ネズミを見つけたときの動き
-            discover = true;
+        // 状態のデバッグ出力
+        Debug.Log($"現在の状態: {currentState}");
 
-        }
-        else
+        // 状態変更遅延処理を完全に削除
+        switch (currentState)
         {
-            if (discover && lostSight < 6)
-            {
-                //ネズミが物陰に隠れたときの動き
-                lostSight++;
-            }
-            else
-            {
-                discover = false;
-                lostSight = 0;
-                // パスに沿って移動
-                MoveAlongPath();
-            }
-        }*/
-        MoveAlongPath();
+            case CatState.Patrolling:
+                Debug.Log("巡回状態 - 視界チェック中");
+                if (SeeSight())
+                {
+                    Debug.Log("ネズミを発見！追跡開始");
+                    currentState = CatState.Chasing;
+
+                    // パス関連をクリア
+                    currentPath.Clear();
+                    isMovingToTarget = false;
+
+                    // マウス位置を記録
+                    lastSeenMousePosition = mouse.transform.position;
+                    previousMousePosition = mouse.transform.position;
+                }
+                else
+                {
+                    Debug.Log("ネズミが見えない - 巡回継続");
+                    MoveAlongPath();
+                }
+                break;
+
+            case CatState.Chasing:
+                Debug.Log("追跡状態");
+                if (SeeSight())
+                {
+                    Debug.Log("ネズミを追跡中");
+                    // マウス位置の記録
+                    if (Time.time - lastMouseTrackTime > mouseTrackingInterval)
+                    {
+                        previousMousePosition = lastSeenMousePosition;
+                        lastSeenMousePosition = mouse.transform.position;
+                        lastMouseTrackTime = Time.time;
+                    }
+
+                    // 直線移動でネズミを追跡
+                    ChaseMouseDirectly();
+                    lostSightTimer = 0f;
+                }
+                else
+                {
+                    Debug.Log("ネズミを見失った - 捜索状態に移行");
+                    currentState = CatState.Searching;
+                    lostSightTimer = 0f;
+
+                    // 予測位置を計算
+                    CalculatePredictedPosition();
+
+                    // 予測位置への経路を設定
+                    SetPath(transform.position, predictedMousePosition);
+                }
+                break;
+
+            case CatState.Searching:
+                Debug.Log("捜索状態");
+                lostSightTimer += Time.deltaTime;
+
+                if (SeeSight())
+                {
+                    Debug.Log("ネズミを再発見！");
+                    currentState = CatState.Chasing;
+                    currentPath.Clear();
+                    isMovingToTarget = false;
+                }
+                else if (lostSightTimer >= LOST_SIGHT_TIMEOUT)
+                {
+                    Debug.Log("捜索タイムアウト - 巡回に戻る");
+                    currentState = CatState.Patrolling;
+
+                    currentPath.Clear();
+                    isMovingToTarget = false;
+
+                    // 最寄りの四角形を探して設定
+                    currentRectIndex = FindNearestRectangle(transform.position);
+                    Debug.Log($"最寄りの四角形({currentRectIndex})へ移動開始");
+
+                    // 最寄りの四角形への経路を設定
+                    Vector3 nearestCenter = rectangles[currentRectIndex].center;
+                    SetPath(transform.position, nearestCenter);
+                }
+                else
+                {
+                    Debug.Log("予測位置への移動継続");
+                    MoveAlongPath();
+                }
+                break;
+        }
     }
 
     //視界内にネズミがいるかを返すメソッド
     private bool SeeSight()
     {
-        Vector3 toMouse = mouse.transform.position - transform.position; //猫の現在位置からネズミまでのベクトル
-        float dis = toMouse.magnitude; //上記ベクトルの長さ→距離
-        float ang = Vector3.Angle(transform.forward, toMouse); //猫の正面からネズミまでの角度
+        if (mouse == null)
+        {
+            Debug.Log("マウスオブジェクトがnullです");
+            return false;
+        }
 
-        if (dis < viewDistance && ang < viewAngle / 2.0f)
+        Vector3 catPosition = transform.position;
+        Vector3 mousePosition = mouse.transform.position;
+
+        // y座標を統一
+        catPosition.y = 0f;
+        mousePosition.y = 0f;
+
+        Vector3 toMouse = mousePosition - catPosition;
+        float dis = toMouse.magnitude;
+
+        // 距離の基本チェック
+        if (dis >= viewDistance)
         {
-            return true; //視界内
+            Debug.Log("距離が視界範囲外");
+            return false;
         }
-        else
+
+        // 非常に近い場合は常に見えているとする
+        if (dis < 0.2f)
         {
-            return false; //視界外
+            Debug.Log("非常に近距離 - 視界内と判定");
+            return true;
         }
+
+        // 角度チェック
+        float ang = Vector3.Angle(transform.forward, toMouse);
+        if (ang >= viewAngle / 2.0f)
+        {
+            Debug.Log("角度が視界範囲外");
+            return false;
+        }
+
+        // 障害物チェック（レイキャスト）
+        Vector3 rayStart = catPosition + Vector3.up * 0.1f;
+        Vector3 rayDirection = toMouse.normalized;
+
+        RaycastHit hit;
+        if (Physics.Raycast(rayStart, rayDirection, out hit, dis))
+        {
+            if (hit.collider.gameObject != mouse)
+            {
+                Debug.Log($"障害物により視界遮蔽: {hit.collider.name}");
+                return false;
+            }
+        }
+
+        // 常にデバッグ情報を出力
+        Debug.Log($"SeeSight: 距離={dis:F2}, 角度={ang:F2}, 視界距離={viewDistance}, 視界角度={viewAngle / 2:F2}");
+        Debug.Log("ネズミを視界内で発見！");
+        return true;
     }
 
     private void MoveAlongPath()
@@ -242,8 +382,13 @@ public class Cat : MonoBehaviour
             currentDistance = 0f;
             Debug.Log("目標到達！");
 
-            // 少し待ってから次の目標を設定
-            Invoke(nameof(SetNextTarget), 0f);
+            // 状態に応じて次の行動を決定
+            if (currentState == CatState.Patrolling)
+            {
+                // 巡回中の場合のみ次の目標を設定
+                Invoke(nameof(SetNextTarget), 0.5f);
+            }
+            // 捜索中の場合は何もしない（その場で待機）
             return;
         }
 
@@ -270,9 +415,54 @@ public class Cat : MonoBehaviour
             if (direction != Vector3.zero)
             {
                 Quaternion targetRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f); // 曲がる早さを調節
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 5f);
             }
-            transform.position = currentPos + direction * moveDistance;
+            Vector3 newPosition = currentPos + direction * moveDistance;
+            newPosition.y = 0f; // y座標を0に固定
+            transform.position = newPosition;
+        }
+    }
+
+    public void MoveAlongPath(Vector3 startPos, Vector3 endPos)
+    {
+        // 新しいパスを設定
+        SetPath(startPos, endPos);
+    }
+
+    private void SetPath(Vector3 startPos, Vector3 endPos)
+    {
+        // y座標を0に設定
+        startPos.y = 0f;
+        endPos.y = 0f;
+
+        Debug.Log($"経路探索開始: {startPos} -> {endPos}");
+
+        // GameManagerが利用可能な場合はA*を使用、そうでなければ直線移動
+        List<Vector3> path = null;
+        if (GameManager.instance != null && GameManager.instance.wallMap != null)
+        {
+            path = FindPathAStar(startPos, endPos);
+        }
+
+        if (path != null && path.Count > 0)
+        {
+            currentPath = path;
+            currentPathIndex = 0;
+            isMovingToTarget = true;
+
+            Debug.Log($"パス生成完了: {path.Count}個の点");
+            for (int i = 0; i < path.Count; i++)
+            {
+                Debug.Log($"  パス点{i}: {path[i]}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("A*パスが見つからないか利用不可、直線移動を使用します");
+            // 直線移動にフォールバック
+            currentPath = new List<Vector3> { endPos };
+            currentPathIndex = 0;
+            isMovingToTarget = true;
         }
     }
 
@@ -290,41 +480,92 @@ public class Cat : MonoBehaviour
         Vector3 startPos = rectangles[currentRectIndex].center;
         Vector3 endPos = rectangles[nextIndex].center;
 
-        // y座標を0に設定
-        startPos.y = 0f;
-        endPos.y = 0f;
+        // パスを設定
+        SetPath(startPos, endPos);
 
-        Debug.Log($"経路探索開始: {startPos} -> {endPos}");
+        // インデックスを更新
+        currentRectIndex = nextIndex;
+    }
 
-        // GameManagerが利用可能な場合はA*を使用、そうでなければ直線移動
-        List<Vector3> path = null;
-        if (GameManager.instance.wallMap != null)
+    private void ChaseMouseDirectly()
+    {
+        if (mouse == null)
         {
-            path = FindPathAStar(startPos, endPos);
+            Debug.LogWarning("ChaseMouseDirectly: マウスがnull");
+            return;
         }
 
-        if (path != null && path.Count > 0)
-        {
-            currentPath = path;
-            currentPathIndex = 0;
-            isMovingToTarget = true;
-            currentRectIndex = nextIndex;
+        Vector3 mousePosition = mouse.transform.position;
+        Vector3 currentPosition = transform.position;
 
-            Debug.Log($"パス生成完了: {path.Count}個の点");
-            for (int i = 0; i < path.Count; i++)
-            {
-                Debug.Log($"  パス点{i}: {path[i]}");
-            }
+        // y座標を0に統一
+        mousePosition.y = 0f;
+        currentPosition.y = 0f;
+
+        Vector3 toMouse = mousePosition - currentPosition;
+
+        // 距離をチェック（normalizeする前に）
+        if (toMouse.magnitude < 0.1f)
+        {
+            Debug.Log("ChaseMouseDirectly: マウスに非常に近い位置にいます");
+            return;
+        }
+
+        Vector3 direction = toMouse.normalized;
+
+        Debug.Log($"ChaseMouseDirectly: 現在位置={currentPosition}, マウス位置={mousePosition}, 方向={direction}");
+
+        // 回転（角度差が大きい場合のみ回転）
+        float angleDifference = Vector3.Angle(transform.forward, direction);
+        if (angleDifference > 5f) // 5度以上の差がある場合のみ回転
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 3f);
+        }
+
+        // 移動
+        float moveDistance = moveSpeed * Time.deltaTime * 1.5f;
+        Vector3 newPosition = currentPosition + direction * moveDistance;
+        newPosition.y = 0f;
+
+        transform.position = newPosition;
+
+        Debug.Log($"ChaseMouseDirectly: 新しい位置={newPosition}");
+    }
+
+    private void CalculatePredictedPosition()
+    {
+        if (previousMousePosition != Vector3.zero && lastSeenMousePosition != Vector3.zero)
+        {
+            // 前回位置から最後に見た位置への移動ベクトル
+            Vector3 mouseVelocity = (lastSeenMousePosition - previousMousePosition) / mouseTrackingInterval;
+
+            // 1秒後の予測位置を計算
+            predictedMousePosition = lastSeenMousePosition + mouseVelocity * 1f;
         }
         else
         {
-            Debug.LogWarning("A*パスが見つからないか利用不可、直線移動を使用します");
-            // 直線移動にフォールバック
-            currentPath = new List<Vector3> { endPos };
-            currentPathIndex = 0;
-            isMovingToTarget = true;
-            currentRectIndex = nextIndex;
+            // 予測できない場合は最後に見た位置を使用
+            predictedMousePosition = lastSeenMousePosition;
         }
+
+        // y座標を0に設定
+        predictedMousePosition.y = 0f;
+
+        // マップ境界内にクランプ（オプション）
+        if (GameManager.instance != null && GameManager.instance.wallMap != null)
+        {
+            int mapWidth = GameManager.instance.wallMap.GetLength(0);
+            int mapHeight = GameManager.instance.wallMap.GetLength(1);
+
+            float maxX = MAP_OFFSET_X + (mapWidth - 1) * TILE_SIZE;
+            float maxZ = MAP_OFFSET_Z + (mapHeight - 1) * TILE_SIZE;
+
+            predictedMousePosition.x = Mathf.Clamp(predictedMousePosition.x, MAP_OFFSET_X, maxX);
+            predictedMousePosition.z = Mathf.Clamp(predictedMousePosition.z, MAP_OFFSET_Z, maxZ);
+        }
+
+        Debug.Log($"予測位置計算: 前回={previousMousePosition}, 最後に見た={lastSeenMousePosition}, 予測={predictedMousePosition}");
     }
 
     private List<Vector3> FindPathAStar(Vector3 start, Vector3 end)
@@ -552,6 +793,26 @@ public class Cat : MonoBehaviour
         Debug.Log($"分割された四角形数: {rectangles.Count}");
     }
 
+    private int FindNearestRectangle(Vector3 position)
+    {
+        if (rectangles.Count == 0) return 0;
+
+        int nearestIndex = 0;
+        float nearestDistance = Vector3.Distance(position, rectangles[0].center);
+
+        for (int i = 1; i < rectangles.Count; i++)
+        {
+            float distance = Vector3.Distance(position, rectangles[i].center);
+            if (distance < nearestDistance)
+            {
+                nearestDistance = distance;
+                nearestIndex = i;
+            }
+        }
+
+        return nearestIndex;
+    }
+
     // マップの端の座標を確認するデバッグ関数
     private void DebugMapBounds()
     {
@@ -756,5 +1017,28 @@ public class Cat : MonoBehaviour
                 Gizmos.DrawSphere(point, 0.02f);
             }
         }
+
+         // 視界の可視化
+        if (mouse != null)
+        {
+            Vector3 toMouse = mouse.transform.position - transform.position;
+            float dis = toMouse.magnitude;
+            
+            if (dis < viewDistance)
+            {
+             // レイキャストの可視化
+                 Gizmos.color = SeeSight() ? Color.green : Color.red;
+                Gizmos.DrawLine(transform.position + Vector3.up * 0.1f, mouse.transform.position);
+            }
+        }
+
+        // 視界範囲の可視化
+        Gizmos.color = Color.yellow;
+        Vector3 forward = transform.forward;
+        Vector3 right = Quaternion.AngleAxis(viewAngle / 2, Vector3.up) * forward;
+        Vector3 left = Quaternion.AngleAxis(-viewAngle / 2, Vector3.up) * forward;
+
+        Gizmos.DrawRay(transform.position, right * viewDistance);
+        Gizmos.DrawRay(transform.position, left * viewDistance);
     }
 }
