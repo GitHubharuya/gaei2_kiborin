@@ -220,7 +220,7 @@ MonoBehaviour:
   timer: 0
   cheeseCount: 0
   cheeseSum: 0
-  gameMode: 2
+  gameMode: 0
   mapSize: 11
   seed: 11
 --- !u!4 &186663028
