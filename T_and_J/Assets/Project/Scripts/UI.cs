@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UI : MonoBehaviour
 {
@@ -12,11 +13,15 @@ public class UI : MonoBehaviour
     [SerializeField]
     GameObject gameUI;
     [SerializeField]
+    GameObject finishUIs;
+    [SerializeField]
     GameObject finishUI;
 
     private TextMeshProUGUI timerText;
     private TextMeshProUGUI cheeseText;
     private TextMeshProUGUI finishUIText;
+
+    private bool isPressed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +29,7 @@ public class UI : MonoBehaviour
         timerText = timer.GetComponent<TextMeshProUGUI>();
         cheeseText = cheese.GetComponent<TextMeshProUGUI>();
         finishUIText = finishUI.GetComponent<TextMeshProUGUI>();
-        finishUI.SetActive(false);
+        finishUIs.SetActive(false);
     }
 
     // Update is called once per frame
@@ -77,7 +82,22 @@ public class UI : MonoBehaviour
                 }
             }
 
-            finishUI.SetActive(true);
+            finishUIs.SetActive(true);
+        }
+    }
+
+    public void ReturnToTitle()
+    {
+        if (!isPressed)
+        {
+            isPressed = true;
+            // 初期化
+            GameManager.instance.isFinished = false;
+            GameManager.instance.allCollected = false;
+            GameManager.instance.cheeseCount = 0;
+            GameManager.instance.cheeseSum = 0;
+            //シーン遷移
+            SceneManager.LoadScene("TitleScene");
         }
     }
 }
