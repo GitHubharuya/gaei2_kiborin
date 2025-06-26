@@ -16,7 +16,7 @@ public class Cat : MonoBehaviour
 
     [Header("視界の距離・角度設定")]
     public float viewDistance = 1.25f;  // 10.0f から 20.0f に変更
-    public float viewAngle = 180.0f;    // 90.0f から 180.0f に変更
+    public float viewAngle = 360.0f;    // 90.0f から 180.0f に変更
 
 
     // タイルサイズを0.125に設定
