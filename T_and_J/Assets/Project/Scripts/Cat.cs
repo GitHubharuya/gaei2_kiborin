@@ -15,8 +15,8 @@ public class Cat : MonoBehaviour
     private float moveSpeed = 1.0f;
 
     [Header("視界の距離・角度設定")]
-    public float viewDistance = 10.0f;
-    public float viewAngle = 90.0f;
+    public float viewDistance = 1.25f;  // 10.0f から 20.0f に変更
+    public float viewAngle = 180.0f;    // 90.0f から 180.0f に変更
 
 
     // タイルサイズを0.125に設定
@@ -96,6 +96,9 @@ public class Cat : MonoBehaviour
 
     void Start()
     {
+        viewDistance = 1.25f; // 強制的に設定
+        Debug.Log($"Start()でviewDistanceを設定: {viewDistance}");
+    
         Debug.Log("=== Start() 開始 ===");
         Debug.Log($"タイルサイズ設定: {TILE_SIZE}");
         Debug.Log($"マップオフセット: X={MAP_OFFSET_X}, Z={MAP_OFFSET_Z}");
@@ -223,7 +226,10 @@ public class Cat : MonoBehaviour
         {
             case CatState.Patrolling:
                 Debug.Log("巡回状態 - 視界チェック中");
-                if (SeeSight())
+                bool canSeeMouse = SeeSight();
+                Debug.Log($"視界チェック結果: {canSeeMouse}");
+
+                if (canSeeMouse)
                 {
                     Debug.Log("ネズミを発見！追跡開始");
                     currentState = CatState.Chasing;
@@ -313,14 +319,21 @@ public class Cat : MonoBehaviour
     //視界内にネズミがいるかを返すメソッド
     private bool SeeSight()
     {
+        Debug.Log("=== SeeSight() 開始 ===");
+        Debug.Log($"現在のviewDistance設定値: {viewDistance}"); // この行を追加
+
         if (mouse == null)
         {
             Debug.Log("マウスオブジェクトがnullです");
             return false;
         }
+        // 以下既存のコード...
 
         Vector3 catPosition = transform.position;
         Vector3 mousePosition = mouse.transform.position;
+
+        Debug.Log($"猫の位置: {catPosition}");
+        Debug.Log($"ネズミの位置: {mousePosition}");
 
         // y座標を統一
         catPosition.y = 0f;
@@ -329,6 +342,8 @@ public class Cat : MonoBehaviour
         Vector3 toMouse = mousePosition - catPosition;
         float dis = toMouse.magnitude;
 
+        Debug.Log($"距離: {dis:F2}, 視界距離: {viewDistance}");
+
         // 距離の基本チェック
         if (dis >= viewDistance)
         {
@@ -336,38 +351,48 @@ public class Cat : MonoBehaviour
             return false;
         }
 
-        // 非常に近い場合は常に見えているとする
-        if (dis < 0.2f)
-        {
-            Debug.Log("非常に近距離 - 視界内と判定");
-            return true;
-        }
-
         // 角度チェック
-        float ang = Vector3.Angle(transform.forward, toMouse);
+        Vector3 catForward = transform.forward;
+        Debug.Log($"猫の前方向: {catForward}");
+        Debug.Log($"ネズミへの方向: {toMouse.normalized}");
+
+        float ang = Vector3.Angle(catForward, toMouse);
+        Debug.Log($"角度: {ang:F2}, 視界角度の半分: {viewAngle / 2:F2}");
+
         if (ang >= viewAngle / 2.0f)
         {
             Debug.Log("角度が視界範囲外");
             return false;
         }
 
-        // 障害物チェック（レイキャスト）
-        Vector3 rayStart = catPosition + Vector3.up * 0.1f;
+        // 障害物チェック（レイキャスト）- 猫自身を無視するように修正
+        Vector3 rayStart = catPosition + Vector3.up * 0.5f; // 高さを0.5fに変更
         Vector3 rayDirection = toMouse.normalized;
 
+        Debug.Log($"レイキャスト開始: {rayStart} -> 方向: {rayDirection}");
+
         RaycastHit hit;
-        if (Physics.Raycast(rayStart, rayDirection, out hit, dis))
+        // 猫自身のコライダーを無視するため、LayerMaskを使用するか距離を少し短くする
+        if (Physics.Raycast(rayStart, rayDirection, out hit, dis - 0.1f))
         {
-            if (hit.collider.gameObject != mouse)
+            Debug.Log($"レイキャストヒット: {hit.collider.name}");
+            if (hit.collider.gameObject != mouse && hit.collider.gameObject != gameObject)
             {
                 Debug.Log($"障害物により視界遮蔽: {hit.collider.name}");
                 return false;
             }
+            else
+            {
+                Debug.Log("レイキャストがネズミにヒットまたは猫自身");
+            }
+        }
+        else
+        {
+            Debug.Log("レイキャストは何にもヒットしませんでした");
         }
 
-        // 常にデバッグ情報を出力
-        Debug.Log($"SeeSight: 距離={dis:F2}, 角度={ang:F2}, 視界距離={viewDistance}, 視界角度={viewAngle / 2:F2}");
         Debug.Log("ネズミを視界内で発見！");
+        Debug.Log("=== SeeSight() 終了 ===");
         return true;
     }
 
