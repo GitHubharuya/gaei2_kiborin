@@ -93,6 +93,8 @@ public class Cat : MonoBehaviour
     private float stateChangeDelay = 0.5f;
     private float lastStateChangeTime = 0f;
 
+    Animator catAnimator;
+
 
     void Start()
     {
@@ -105,6 +107,8 @@ public class Cat : MonoBehaviour
 
         // GameManagerが初期化されるまで待つ
         StartCoroutine(WaitForGameManagerAndInitialize());
+
+        catAnimator = GetComponent<Animator>();
 
         Debug.Log("=== Start() 終了 ===");
     }
