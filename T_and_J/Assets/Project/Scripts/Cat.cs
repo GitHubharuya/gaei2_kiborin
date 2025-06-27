@@ -15,8 +15,8 @@ public class Cat : MonoBehaviour
     private float moveSpeed = 1.0f;
 
     [Header("視界の距離・角度設定")]
-    public float viewDistance = 1.25f;  // 10.0f から 20.0f に変更
-    public float viewAngle = 360.0f;    // 90.0f から 180.0f に変更
+    public float viewDistance;
+    public float viewAngle;
 
 
     // タイルサイズを0.125に設定
@@ -93,12 +93,13 @@ public class Cat : MonoBehaviour
     private float stateChangeDelay = 0.5f;
     private float lastStateChangeTime = 0f;
 
-    Animator catAnimator;
+    private Animator catAnimator;
 
 
     void Start()
     {
         viewDistance = 1.25f; // 強制的に設定
+        viewAngle = 180;
         Debug.Log($"Start()でviewDistanceを設定: {viewDistance}");
     
         Debug.Log("=== Start() 開始 ===");
@@ -229,6 +230,7 @@ public class Cat : MonoBehaviour
         switch (currentState)
         {
             case CatState.Patrolling:
+                catAnimator.SetBool("isFindMouse", false);
                 Debug.Log("巡回状態 - 視界チェック中");
                 bool canSeeMouse = SeeSight();
                 Debug.Log($"視界チェック結果: {canSeeMouse}");
@@ -257,6 +259,7 @@ public class Cat : MonoBehaviour
                 Debug.Log("追跡状態");
                 if (SeeSight())
                 {
+                    catAnimator.SetBool("isFindMouse", true);
                     Debug.Log("ネズミを追跡中");
                     // マウス位置の記録
                     if (Time.time - lastMouseTrackTime > mouseTrackingInterval)
@@ -394,6 +397,11 @@ public class Cat : MonoBehaviour
         {
             Debug.Log("レイキャストは何にもヒットしませんでした");
         }
+        /*if (dis < 0.250f)
+        {
+            Debug.Log("非常に近距離 - 視界内と判定");
+            return true;
+        }*/
 
         Debug.Log("ネズミを視界内で発見！");
         Debug.Log("=== SeeSight() 終了 ===");
