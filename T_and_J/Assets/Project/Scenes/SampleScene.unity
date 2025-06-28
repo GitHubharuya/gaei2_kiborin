@@ -288,7 +288,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68db2079edbb2084f9e1acb8fcb02729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeedIn: 1
+  moveSpeedIn: 0.8
   playerCamera: {fileID: 877365550}
   maxAngularVelocity: Infinity
   smoothTime: 0.1
@@ -390,7 +390,7 @@ MonoBehaviour:
   timer: 0
   cheeseCount: 0
   cheeseSum: 0
-  gameMode: 2
+  gameMode: 1
   mapSize: 11
   seed: 11
 --- !u!4 &186663028
