@@ -14,6 +14,12 @@ public class UI : MonoBehaviour
     GameObject finishUIs;
     [SerializeField]
     GameObject finishUI;
+    [SerializeField]
+    GameObject wasd;
+    [SerializeField]
+    GameObject changeCamera;
+    [SerializeField]
+    SpectatorCamera spCamera;
 
     private TextMeshProUGUI timerText;
     private TextMeshProUGUI cheeseText;
@@ -28,6 +34,15 @@ public class UI : MonoBehaviour
         cheeseText = cheese.GetComponent<TextMeshProUGUI>();
         finishUIText = finishUI.GetComponent<TextMeshProUGUI>();
         finishUIs.SetActive(false);
+
+        if (GameManager.instance.gameMode == 0)
+        {
+            changeCamera.SetActive(true);
+        }
+        else
+        {
+            wasd.SetActive(true);
+        }
     }
 
     // Update is called once per frame
@@ -83,6 +98,12 @@ public class UI : MonoBehaviour
 
             finishUIs.SetActive(true);
         }
+
+        if (GameManager.instance.isFinished)
+        {
+            wasd.SetActive(false);
+            changeCamera.SetActive(false);
+        }
     }
 
     public void ReturnToTitle()
@@ -98,5 +119,10 @@ public class UI : MonoBehaviour
             //シーン遷移
             SceneManager.LoadScene("TitleScene");
         }
+    }
+
+    public void changeCameraButton()
+    {
+        spCamera.changeCamera();
     }
 }
