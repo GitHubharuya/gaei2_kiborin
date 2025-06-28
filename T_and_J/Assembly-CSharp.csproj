@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Project\Scripts\PlayerCamera.cs" />
+    <Compile Include="Assets\Project\Scripts\SpectatorCamera.cs" />
     <Compile Include="Assets\Project\Scripts\MouseMovement.cs" />
     <Compile Include="Assets\Project\Scripts\GameManager.cs" />
     <Compile Include="Assets\Project\Scripts\Cheese.cs" />

@@ -13,6 +13,10 @@ public class GameModeSetting : MonoBehaviour
     [SerializeField]
     GameObject mouseCamera;
     [SerializeField]
+    GameObject catSPCamera;
+    [SerializeField]
+    GameObject mouseSPCamera;
+    [SerializeField]
     GameObject catMouse;
 
     private CatFinish catFinish;
@@ -20,6 +24,8 @@ public class GameModeSetting : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        catCamera.SetActive(false);
+        mouseCamera.SetActive(false);
         switch (GameManager.instance.gameMode)
         {
             case 0:
@@ -53,7 +59,10 @@ public class GameModeSetting : MonoBehaviour
         if (GameManager.instance.allCollected)
         {
             catFinish.beCollected();
-            mouseCamera.SetActive(true);
+            if (GameManager.instance.gameMode != 2)
+            {
+                mouseSPCamera.SetActive(true);
+            }
             GameManager.instance.isFinished = true;
         }
     }
@@ -62,7 +71,10 @@ public class GameModeSetting : MonoBehaviour
     public void winCat()
     {
         catMouse.SetActive(true);
-        catCamera.SetActive(true);
+        if (GameManager.instance.gameMode != 1)
+        {
+            catSPCamera.SetActive(true);
+        }
         GameManager.instance.isFinished = true;
     }
 }

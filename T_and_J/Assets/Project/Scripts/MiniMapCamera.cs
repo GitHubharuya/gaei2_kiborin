@@ -9,12 +9,12 @@ public class MiniMapCamera : MonoBehaviour
     [Header("カメラのサイズ")]
     float sizeMultiplier = 0.5f;
 
-    private Camera camera;
+    private Camera _camera;
 
     // Start is called before the first frame update
     void Start()
     {
-        camera = GetComponent<Camera>();
+        _camera = GetComponent<Camera>();
         AdjustCamera();
     }
 
@@ -32,13 +32,13 @@ public class MiniMapCamera : MonoBehaviour
         transform.rotation = Quaternion.Euler(90f, 0f, 0f); // 真上から見下ろす
 
         // Orthographicサイズをマップサイズに応じて調整
-        if (camera.orthographic)
+        if (_camera.orthographic)
         {
-            camera.orthographicSize = mapSize * l * sizeMultiplier;
+            _camera.orthographicSize = mapSize * l * sizeMultiplier;
         }
         else
         {
-            camera.fieldOfView = mapSize * l * sizeMultiplier　* 10;
+            _camera.fieldOfView = mapSize * l * sizeMultiplier　* 10;
         }
     }
 }
