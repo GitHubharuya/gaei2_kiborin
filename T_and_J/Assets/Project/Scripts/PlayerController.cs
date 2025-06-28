@@ -34,6 +34,8 @@ public class PlayerController : MonoBehaviour
     float rotAngle;//現在の回転する角度
 
     private Animator catAnim;
+    private bool isMoving;
+    private float catTimer;
 
     Quaternion nextRot;//どんくらい回転するか
     void Start()
@@ -45,11 +47,14 @@ public class PlayerController : MonoBehaviour
         if (gameObject.name == "Cat")
         {
             catAnim = GetComponent<Animator>();
+            catAnim.SetBool("isSearching", false);
         }
     }
 
     void Update()
     {
+        catTimer += Time.deltaTime;
+        isMoving = false;
         Vector3 rawForward = playerCamera.transform.forward;
         Vector3 cameraForward = new Vector3(rawForward.x, 0, rawForward.z);
 
@@ -71,28 +76,53 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey(KeyCode.W))
         {
             moveSpeed += moveSpeedIn * cameraForward;
+            isMoving = true;
+            catTimer = 0;
         }
         if (Input.GetKey(KeyCode.A))
         {
             moveSpeed += -moveSpeedIn * cameraRight;
+            isMoving = true;
+            catTimer = 0;
         }
         if (Input.GetKey(KeyCode.S))
         {
             moveSpeed += -moveSpeedIn * cameraForward;
+            isMoving = true;
+            catTimer = 0;
         }
         if (Input.GetKey(KeyCode.D))
         {
             moveSpeed += moveSpeedIn * cameraRight;
+            isMoving = true;
+            catTimer = 0;
         }
 
         Move();
 
+        if (gameObject.name == "Cat")
+        {
+            catAnim.SetBool("isSearching", isMoving);
+            catAnim.SetBool("isFindMouse", isMoving);
+
+            if (catTimer > 5 && !GameManager.instance.isFinished)
+            {
+                catAnim.SetBool("isBored", true);
+            }
+            else
+            {
+                catAnim.SetBool("isBored", false);
+            }
+        }
+
         //慣性を消す
+        /*
         if (Input.GetKeyUp(KeyCode.W) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.S) || Input.GetKeyUp(KeyCode.D))
         {
             //playerRb.velocity = Vector3.zero;
             // playerRb.angularVelocity = Vector3.zero;
         }
+        */
 
         //------プレイヤーの回転------
 
@@ -106,7 +136,7 @@ public class PlayerController : MonoBehaviour
         //過去の位置の更新
         pastPos = currentPos;
 
-        if (delta.magnitude < 0.01f || moveSpeed.magnitude < 1)
+        if (delta.magnitude < 0.01f || moveSpeed.magnitude < 0.5f)
             return;
 
         playerRot = Quaternion.LookRotation(delta, Vector3.up);
