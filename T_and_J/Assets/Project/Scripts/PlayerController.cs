@@ -33,12 +33,19 @@ public class PlayerController : MonoBehaviour
 
     float rotAngle;//現在の回転する角度
 
+    private Animator catAnim;
+
     Quaternion nextRot;//どんくらい回転するか
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
 
         pastPos = transform.position;
+
+        if (gameObject.name == "Cat")
+        {
+            catAnim = GetComponent<Animator>();
+        }
     }
 
     void Update()
