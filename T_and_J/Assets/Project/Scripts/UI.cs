@@ -11,8 +11,6 @@ public class UI : MonoBehaviour
     [SerializeField]
     GameObject timer;
     [SerializeField]
-    GameObject gameUI;
-    [SerializeField]
     GameObject finishUIs;
     [SerializeField]
     GameObject finishUI;
@@ -42,7 +40,8 @@ public class UI : MonoBehaviour
 
         if (GameManager.instance.isFinished)
         {
-            gameUI.SetActive(false);
+            cheeseText.color = Color.yellow;
+            timerText.color = Color.yellow;
 
             if (!GameManager.instance.allCollected)
             {
