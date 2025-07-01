@@ -68,7 +68,7 @@ public class PlayerController : MonoBehaviour
             cameraForward.Normalize();
         }
 
-        Vector3 rawRight = Camera.main.transform.right;
+        Vector3 rawRight = playerCamera.transform.right;
         Vector3 cameraRight = new Vector3(rawRight.x, 0, rawRight.z).normalized;
 
         moveSpeed = Vector3.zero;
