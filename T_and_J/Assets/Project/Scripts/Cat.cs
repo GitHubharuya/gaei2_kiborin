@@ -561,7 +561,7 @@ public class Cat : MonoBehaviour
         }
 
         // 移動
-        float moveDistance = moveSpeed * Time.deltaTime * 1.5f;
+        float moveDistance = moveSpeed * Time.deltaTime * 0.1f;
         Vector3 newPosition = currentPosition + direction * moveDistance;
         newPosition.y = 0f;
 
