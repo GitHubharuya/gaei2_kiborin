@@ -1,4 +1,4 @@
-〈2025年度　画像・映像コンテンツ演習2 希望の林檎によるプロジェクト「T and J ~The Chase Simulation~」〉
+〈2025年度　画像・映像コンテンツ演習2 希望の林檎によるプロジェクト「T and J -The Chase Simulation-」〉
 
 
 【概要】
