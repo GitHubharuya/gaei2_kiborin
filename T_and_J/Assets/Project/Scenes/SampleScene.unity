@@ -685,7 +685,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Change Camrea
+  m_text: Change Camera
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 770b602a50b3196498f431b4b82bd40b, type: 2}
   m_sharedMaterial: {fileID: 5986336947993010090, guid: 770b602a50b3196498f431b4b82bd40b, type: 2}
@@ -948,7 +948,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Change Camrea
+  m_text: Change Camera
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 770b602a50b3196498f431b4b82bd40b, type: 2}
   m_sharedMaterial: {fileID: 5986336947993010090, guid: 770b602a50b3196498f431b4b82bd40b, type: 2}
