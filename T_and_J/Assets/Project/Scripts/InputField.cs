@@ -7,14 +7,25 @@ using TMPro;
 
 public class InputField : MonoBehaviour
 {
-    //ƒIƒuƒWƒFƒNƒg‚ÆŒ‹‚Ñ‚Â‚¯‚é
+    //ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½ÆŒï¿½ï¿½Ñ‚Â‚ï¿½ï¿½ï¿½
     TMP_InputField inputField;
+    public string type;
 
     void Start()
     {
-        //Component‚ðˆµ‚¦‚é‚æ‚¤‚É‚·‚é
+        //Componentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ‚¤ï¿½É‚ï¿½ï¿½ï¿½
         inputField = GetComponent<TMP_InputField>();
 
+        if (type == "MapSize")
+        {
+            inputField.text = GameManager.instance.mapSize.ToString();
+            Debug.Log(GameManager.instance.mapSize.ToString());
+        }
+        if (type == "Seed")
+        {
+            Debug.Log(GameManager.instance.seed.ToString());
+            inputField.text = GameManager.instance.seed.ToString();
+        }
     }
 
     public void Input(string st)
@@ -28,5 +39,4 @@ public class InputField : MonoBehaviour
             GameManager.instance.seed = int.Parse(inputField.text);
         }
     }
-
 }

@@ -14,8 +14,13 @@ public class MiniMapCamera : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _camera = GetComponent<Camera>();
-        AdjustCamera();
+        if (GameManager.instance.gameMode == 0)
+        {
+            gameObject.SetActive(true);
+            _camera = GetComponent<Camera>();
+            AdjustCamera();
+        }
+        else gameObject.SetActive(false);
     }
 
     // Update is called once per frame

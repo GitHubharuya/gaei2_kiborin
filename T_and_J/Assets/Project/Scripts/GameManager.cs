@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     [Header("モード(0,1,2)")]
     public int gameMode;
 
-    public int mapSize = 0;
-    public int seed = 0;
+    public int mapSize = 15;
+    public int seed = 1;
 
     private void Awake()
     {
