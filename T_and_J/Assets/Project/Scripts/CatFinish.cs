@@ -5,9 +5,15 @@ public class CatFinish : MonoBehaviour
     [SerializeField]
     GameObject catCamera;
 
+    private bool wasDestroyed = false;
+
     public void beCollected()
     {
-        Destroy(gameObject);
-        Destroy(catCamera);
+        if (!wasDestroyed)
+        {
+            Destroy(gameObject);
+            Destroy(catCamera);
+            wasDestroyed = true;
+        } 
     }
 }
