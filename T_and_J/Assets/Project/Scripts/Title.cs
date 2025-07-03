@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,13 @@ public class Title : MonoBehaviour
     GameObject buttons;
     [SerializeField]
     GameObject inputFields;
+    [SerializeField]
+    GameObject errorPanel;
+    [SerializeField]
+    TextMeshProUGUI errorText;
+
+    float timeS, timeE;
+    bool isError = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,17 +30,43 @@ public class Title : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timeE = GameManager.instance.timer;
+
+        if (timeE > timeS + 3)
+        {
+            errorPanel.SetActive(false);
+            isError = false;
+        }
     }
 
     public void pressStart()
     {
         if (!isPressed)
         {
-            isPressed = true;
-            Debug.Log("start!");
-            //シーン遷移
-            SceneManager.LoadScene("SampleScene");
+            errorText.text = null;
+            if (GameManager.instance.mapSize < 3)
+            {
+                errorText.text = "Map size is too small.";
+                showError();
+            }
+            else if (GameManager.instance.mapSize > 50)
+            {
+                errorText.text = "Map size is too large.";
+                showError();
+            }
+            if (GameManager.instance.seed <= 0)
+            {
+                if (errorText.text != null) errorText.text += "\n";
+                errorText.text += "The seed must be greater than or equal to 1.";
+                showError();
+            }
+            if (!isError)
+            {
+                isPressed = true;
+                Debug.Log("start!");
+                //シーン遷移
+                SceneManager.LoadScene("SampleScene");
+            }
         }
     }
 
@@ -47,5 +81,12 @@ public class Title : MonoBehaviour
     {
         buttons.SetActive(true);
         inputFields.SetActive(false);
+    }
+
+    void showError()
+    {
+        errorPanel.SetActive(true);
+        isError = true;
+        timeS = GameManager.instance.timer;
     }
 }
