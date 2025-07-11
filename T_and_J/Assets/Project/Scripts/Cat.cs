@@ -101,7 +101,7 @@ public class Cat : MonoBehaviour
         viewDistance = 1.25f; // 強制的に設定
         viewAngle = 180;
         Debug.Log($"Start()でviewDistanceを設定: {viewDistance}");
-    
+
         Debug.Log("=== Start() 開始 ===");
         Debug.Log($"タイルサイズ設定: {TILE_SIZE}");
         Debug.Log($"マップオフセット: X={MAP_OFFSET_X}, Z={MAP_OFFSET_Z}");
@@ -130,55 +130,26 @@ public class Cat : MonoBehaviour
 
         // マップを四角形に分割
         DivideMapIntoRectangles();
-
         Debug.Log($"四角形分割完了: {rectangles.Count}個");
 
+        // Dijkstraメソッドで巡回順路をソート
+        if (rectangles.Count > 0)
+        {
+            Debug.Log("Dijkstraメソッドで巡回順路をソートします。開始点: インデックス 0");
+            // 最初の四角形(インデックス0)を始点としてソートし、結果をrectanglesに上書き
+            rectangles = Dijkstra(0);
+            Debug.Log("ソート完了。");
+        }
+
         // 最初の目標位置を設定
-        if (rectangles.Count > 0)
-        {
-            // 最初の位置を現在位置に設定（y座標は0）
-            currentRectIndex = 0;
-            Vector3 initialPos = rectangles[0].center;
-            initialPos.y = 0f;
-            transform.position = initialPos;
-            Debug.Log($"初期位置設定: {initialPos}");
+        currentRectIndex = 0;
+        Vector3 initialPos = rectangles[0].center;
+        initialPos.y = 0f;
+        transform.position = initialPos;
+        Debug.Log($"初期位置設定: {initialPos}");
 
-            // 次の目標を設定
-            SetNextTarget();
-        }
-        else
-        {
-            Debug.LogWarning("四角形が見つかりませんでした！");
-            // フォールバック：簡単なテスト用の四角形を作成
-            CreateTestRectangles();
-        }
-    }
-
-    private void CreateTestRectangles()
-    {
-        Debug.Log("テスト用四角形を作成します");
-        rectangles.Clear();
-
-        // テスト用の四角形をいくつか作成
-        rectangles.Add(new Rectangle(5, 5, 3, 3));
-        rectangles.Add(new Rectangle(10, 8, 4, 2));
-        rectangles.Add(new Rectangle(15, 12, 2, 4));
-        rectangles.Add(new Rectangle(8, 15, 5, 3));
-
-        Debug.Log($"テスト用四角形を{rectangles.Count}個作成しました");
-
-        // 最初の位置を設定
-        if (rectangles.Count > 0)
-        {
-            currentRectIndex = 0;
-            Vector3 initialPos = rectangles[0].center;
-            initialPos.y = 0f;
-            transform.position = initialPos;
-            Debug.Log($"テスト用初期位置設定: {initialPos}");
-
-            // 次の目標を設定
-            SetNextTarget();
-        }
+        // 次の目標を設定
+        SetNextTarget();
     }
 
     private void Update()
@@ -194,33 +165,6 @@ public class Cat : MonoBehaviour
         {
             lastSeenMousePosition = mouse.transform.position;
             previousMousePosition = mouse.transform.position;
-        }
-
-        // テスト用キー入力処理
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log("スペースキーで次の目標に移動");
-            SetNextTarget();
-        }
-
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Debug.Log("Rキーで四角形を再生成");
-            if (GameManager.instance.wallMap != null)
-            {
-                DebugMapBounds();
-                DivideMapIntoRectangles();
-            }
-            else
-            {
-                CreateTestRectangles();
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            Debug.Log("Dキーでマップ境界デバッグ");
-            DebugMapBounds();
         }
 
         // 状態のデバッグ出力
@@ -763,11 +707,6 @@ public class Cat : MonoBehaviour
         return path;
     }
 
-    public void startDFS()
-    {
-        DivideMapIntoRectangles();
-    }
-
     private void DivideMapIntoRectangles()
     {
         rectangles.Clear();
@@ -830,6 +769,79 @@ public class Cat : MonoBehaviour
         Debug.Log($"分割された四角形数: {rectangles.Count}");
     }
 
+    private List<Rectangle> Dijkstra(int startNodeIndex)
+    {
+        int nodeCount = rectangles.Count;
+        var dist = new float[nodeCount];  // 始点からの距離を格納
+        var visited = new bool[nodeCount]; // 訪問済みかどうかのフラグ
+        var parent = new int[nodeCount];   // 最短経路の親ノードを記録
+
+        // 初期化
+        for (int i = 0; i < nodeCount; i++)
+        {
+            dist[i] = float.PositiveInfinity;
+            visited[i] = false;
+            parent[i] = -1;
+        }
+
+        dist[startNodeIndex] = 0; // 始点の距離は0
+
+        for (int i = 0; i < nodeCount - 1; i++)
+        {
+            // 未訪問のノードの中から最も距離が短いノードを見つける
+            int u = -1;
+            float minDistance = float.PositiveInfinity;
+            for (int j = 0; j < nodeCount; j++)
+            {
+                if (!visited[j] && dist[j] < minDistance)
+                {
+                    minDistance = dist[j];
+                    u = j;
+                }
+            }
+
+            if (u == -1) break; // 全ての到達可能なノードを訪問した
+
+            visited[u] = true;
+
+            // 隣接ノードの距離を更新
+            for (int v = 0; v < nodeCount; v++)
+            {
+                if (!visited[v])
+                {
+                    // ここでは単純な直線距離を重みとして使用
+                    float weight = Vector3.Distance(rectangles[u].center, rectangles[v].center);
+                    if (dist[u] + weight < dist[v])
+                    {
+                        dist[v] = dist[u] + weight;
+                        parent[v] = u;
+                    }
+                }
+            }
+        }
+
+        // 結果を距離順にソートしてリストを作成
+        var sortedIndices = Enumerable.Range(0, nodeCount)
+                  .OrderBy(i => dist[i])
+                  .ToList();
+
+        var res = new List<Rectangle>();
+        foreach (var index in sortedIndices)
+        {
+            res.Add(rectangles[index]);
+        }
+
+        return res;
+    }
+
+
+    public void startDFS()
+    {
+        DivideMapIntoRectangles();
+    }
+
+
+    // 最短距離
     private int FindNearestRectangle(Vector3 position)
     {
         if (rectangles.Count == 0) return 0;
@@ -1055,16 +1067,16 @@ public class Cat : MonoBehaviour
             }
         }
 
-         // 視界の可視化
+        // 視界の可視化
         if (mouse != null)
         {
             Vector3 toMouse = mouse.transform.position - transform.position;
             float dis = toMouse.magnitude;
-            
+
             if (dis < viewDistance)
             {
-             // レイキャストの可視化
-                 Gizmos.color = SeeSight() ? Color.green : Color.red;
+                // レイキャストの可視化
+                Gizmos.color = SeeSight() ? Color.green : Color.red;
                 Gizmos.DrawLine(transform.position + Vector3.up * 0.1f, mouse.transform.position);
             }
         }
