@@ -3,24 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\suzur\\github\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\suzur\\github\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\cheese.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\cheese.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\suzur\\github\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\title.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\title.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:Assets\\Project\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\inputfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\inputfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\suzur\\github\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:Assets\\Project\\Scripts\\FieldGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:Assets\\Project\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\suzur\\github\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\title.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\title.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\inputfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\inputfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,37 +42,75 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PlayerController.cs",
-              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\PlayerController.cs",
-              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\PlayerController.cs",
-              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\PlayerController.cs",
-              "RelativeToolTip": "Assets\\Project\\Scripts\\PlayerController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKMAAAAFAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Mouse.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Mouse.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Mouse.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Mouse.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\Mouse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-04T14:05:44.509Z",
+              "WhenOpened": "2025-07-11T13:25:05.724Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Cheese.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cheese.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Cheese.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cheese.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\Cheese.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-11T13:21:13.483Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UI.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\UI.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\UI.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAkwCAAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T13:16:47.288Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "FieldGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\FieldGenerator.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\FieldGenerator.cs",
+              "ViewState": "AgIAAF8BAAAAAAAAAAAAAJUAAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-28T13:04:52.521Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Title.cs",
-              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Title.cs",
-              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Title.cs",
-              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Title.cs",
-              "RelativeToolTip": "Assets\\Project\\Scripts\\Title.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAQwDoAAAArAAAAAAAAAA==",
+              "Title": "GameManager.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\GameManager.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\GameManager.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAUwBIAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-03T03:12:54.587Z",
+              "WhenOpened": "2025-06-28T13:25:23.737Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 6,
               "Title": "InputField.cs",
               "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\InputField.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\InputField.cs",
@@ -77,38 +123,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "UI.cs",
-              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs",
-              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\UI.cs",
-              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs",
-              "RelativeToolTip": "Assets\\Project\\Scripts\\UI.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAkwCAAAAA2AAAAAAAAAA==",
+              "Title": "Title.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Title.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Title.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Title.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\Title.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAQwDoAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T13:16:47.288Z"
+              "WhenOpened": "2025-07-03T03:12:54.587Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "GameManager.cs",
-              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\GameManager.cs",
-              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs",
-              "RelativeToolTip": "Assets\\Project\\Scripts\\GameManager.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAADwvxIAAAATAAAAAAAAAA==",
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\PlayerController.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\Project\\Scripts\\PlayerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAKMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T13:25:23.737Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FieldGenerator.cs",
-              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs",
-              "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\FieldGenerator.cs",
-              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs",
-              "RelativeToolTip": "Assets\\Project\\Scripts\\FieldGenerator.cs",
-              "ViewState": "AgIAAIoAAAAAAAAAAAAcwJUAAABeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-28T13:04:52.521Z"
+              "WhenOpened": "2025-07-04T14:05:44.509Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -6,6 +6,7 @@ public class Cheese : MonoBehaviour
 {
     private float cheesePosY;
     private float cheeseRotY;
+    bool wasGot = false;
 
     void Start()
     {
@@ -20,8 +21,9 @@ public class Cheese : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Mouse")
+        if (other.name == "Mouse" && !wasGot)
         {
+            wasGot = true;
             GameManager.instance.getCheese();
             Destroy(gameObject);
         }
