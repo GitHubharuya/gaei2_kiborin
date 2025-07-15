@@ -20,7 +20,7 @@ public class Cat : MonoBehaviour
 
 
     // タイルサイズを0.125に設定
-    private const float TILE_SIZE = 0.125f;
+    private const float TILE_SIZE = 0.025f;
 
     // マップのオフセット（端の座標）
     private const float MAP_OFFSET_X = 0.125f;
@@ -94,6 +94,11 @@ public class Cat : MonoBehaviour
     private float lastStateChangeTime = 0f;
 
     private Animator catAnimator;
+
+    [Header("追跡時の経路再計算の間隔（秒）")]
+    [SerializeField]
+    private float chasePathRecalculationInterval = 0.5f;
+    private float lastChasePathRecalculationTime = 0f;
 
 
     void Start()
@@ -204,17 +209,20 @@ public class Cat : MonoBehaviour
                 if (SeeSight())
                 {
                     catAnimator.SetBool("isFindMouse", true);
-                    Debug.Log("ネズミを追跡中");
-                    // マウス位置の記録
-                    if (Time.time - lastMouseTrackTime > mouseTrackingInterval)
+                    Debug.Log("ネズミを追跡中 (A*使用)");
+
+                    // 一定間隔で、現在の猫の位置からネズミの位置への経路を再計算する
+                    if (Time.time - lastChasePathRecalculationTime > chasePathRecalculationInterval)
                     {
-                        previousMousePosition = lastSeenMousePosition;
-                        lastSeenMousePosition = mouse.transform.position;
-                        lastMouseTrackTime = Time.time;
+                        Debug.Log("追跡経路を再計算します。");
+                        SetPath(transform.position, mouse.transform.position);
+                        lastChasePathRecalculationTime = Time.time;
                     }
 
-                    // 直線移動でネズミを追跡
-                    ChaseMouseDirectly();
+                    // 計算された経路に沿って移動する
+                    MoveAlongPath();
+
+                    // 見失ってはいないのでタイマーをリセット
                     lostSightTimer = 0f;
                 }
                 else
@@ -538,6 +546,8 @@ public class Cat : MonoBehaviour
         {
             int mapWidth = GameManager.instance.wallMap.GetLength(0);
             int mapHeight = GameManager.instance.wallMap.GetLength(1);
+            mapWidth *= 5; // 詳細マップのサイズに合わせる
+            mapHeight *= 5; // 詳細マップのサイズに合わせる
 
             float maxX = MAP_OFFSET_X + (mapWidth - 1) * TILE_SIZE;
             float maxZ = MAP_OFFSET_Z + (mapHeight - 1) * TILE_SIZE;
@@ -563,10 +573,10 @@ public class Cat : MonoBehaviour
         int endZ = Mathf.RoundToInt((end.z - MAP_OFFSET_Z) / TILE_SIZE);
 
         // 境界チェック
-        startX = Mathf.Clamp(startX, 0, mapWidth - 1);
-        startZ = Mathf.Clamp(startZ, 0, mapHeight - 1);
-        endX = Mathf.Clamp(endX, 0, mapWidth - 1);
-        endZ = Mathf.Clamp(endZ, 0, mapHeight - 1);
+        startX = Mathf.Clamp(startX, 0, mapWidth * 5 - 1);
+        startZ = Mathf.Clamp(startZ, 0, mapHeight * 5 - 1);
+        endX = Mathf.Clamp(endX, 0, mapWidth * 5 - 1);
+        endZ = Mathf.Clamp(endZ, 0, mapHeight * 5 - 1);
 
         Debug.Log($"マップ座標: ({startX}, {startZ}) -> ({endX}, {endZ})");
 
@@ -578,7 +588,7 @@ public class Cat : MonoBehaviour
 
         openSet.Add(startNode);
 
-        bool[,] newMap = new bool[mapWidth, mapHeight];
+        bool[,] collisionMap = new bool[mapWidth, mapHeight];
         for (int i = 0; i < mapWidth; i++)
         {
             for (int j = 0; j < mapHeight; j++)
@@ -597,10 +607,33 @@ public class Cat : MonoBehaviour
 
                         if (GameManager.instance.wallMap[newX, newY])
                         {
-                            newMap[i, j] = true;
+                            collisionMap[i, j] = true;
                         }
                     }
 
+                }
+            }
+        }
+
+        bool[,] detaildMap = new bool[mapWidth * 5, mapHeight * 5];
+        for (int i = 0; i < mapWidth; i++)
+        {
+            for (int j = 0; j < mapHeight; j++)
+            {
+                for (int ni = 0; ni < 5; ni++)
+                {
+                    for (int nj = 0; nj < 5; nj++)
+                    {
+                        int newX = i * 5 + ni;
+                        int newY = j * 5 + nj;
+                        // 境界チェック
+                        if (newX < 0 || newX >= mapWidth * 5 || newY < 0 || newY >= mapHeight * 5)
+                            continue;
+                        if (collisionMap[i, j])
+                        {
+                            detaildMap[newX, newY] = true;
+                        }
+                    }
                 }
             }
         }
@@ -635,11 +668,11 @@ public class Cat : MonoBehaviour
                     int newY = currentNode.y + dy;
 
                     // 境界チェック
-                    if (newX < 0 || newX >= mapWidth || newY < 0 || newY >= mapHeight)
+                    if (newX < 0 || newX >= mapWidth * 5 || newY < 0 || newY >= mapHeight * 5)
                         continue;
 
                     // 障害物チェック
-                    if (newMap[newX, newY])
+                    if (detaildMap[newX, newY])
                         continue;
 
                     // 閉じたセットにあるかチェック
@@ -651,8 +684,8 @@ public class Cat : MonoBehaviour
                     if (dx != 0 && dy != 0)
                     {
                         // 斜め移動時は隣接する2つのマスも空である必要がある
-                        if (newMap[currentNode.x + dx, currentNode.y] ||
-                            newMap[currentNode.x, currentNode.y + dy])
+                        if (detaildMap[currentNode.x + dx, currentNode.y] ||
+                            detaildMap[currentNode.x, currentNode.y + dy])
                             continue;
                     }
 
@@ -721,9 +754,7 @@ public class Cat : MonoBehaviour
         int mapHeight = GameManager.instance.wallMap.GetLength(1);
         Debug.Log($"マップサイズ: {mapWidth} x {mapHeight}");
 
-        bool[,] visited = new bool[mapWidth, mapHeight];
-
-        bool[,] newMap = new bool[mapWidth, mapHeight];
+        bool[,] collisionMap = new bool[mapWidth, mapHeight];
         for (int i = 0; i < mapWidth; i++)
         {
             for (int j = 0; j < mapHeight; j++)
@@ -742,7 +773,7 @@ public class Cat : MonoBehaviour
 
                         if (GameManager.instance.wallMap[newX, newY])
                         {
-                            newMap[i, j] = true;
+                            collisionMap[i, j] = true;
                         }
                     }
 
@@ -750,13 +781,38 @@ public class Cat : MonoBehaviour
             }
         }
 
-        for (int y = 0; y < mapHeight; y++)
+        bool[,] detailedMap = new bool[mapWidth * 5, mapHeight * 5];
+        for (int i = 0; i < mapWidth; i++)
         {
-            for (int x = 0; x < mapWidth; x++)
+            for (int j = 0; j < mapHeight; j++)
             {
-                if (!visited[x, y] && !newMap[x, y])
+                for (int ni = 0; ni < 5; ni++)
                 {
-                    Rectangle rect = FindLargestRectangle(x, y, visited);
+                    for (int nj = 0; nj < 5; nj++)
+                    {
+                        int newX = i * 5 + ni;
+                        int newY = j * 5 + nj;
+                        // 境界チェック
+                        if (newX < 0 || newX >= mapWidth * 5 || newY < 0 || newY >= mapHeight * 5)
+                            continue;
+                        if (collisionMap[i, j])
+                        {
+                            detailedMap[newX, newY] = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        bool[,] visited = new bool[mapWidth * 5, mapHeight * 5];
+
+        for (int y = 0; y < mapHeight * 5; y++)
+        {
+            for (int x = 0; x < mapWidth * 5; x++)
+            {
+                if (!visited[x, y] && !detailedMap[x, y])
+                {
+                    Rectangle rect = FindLargestRectangle(x, y, visited, detailedMap);
                     if (rect != null && rect.width > 0 && rect.height > 0)
                     {
                         rectangles.Add(rect);
@@ -933,45 +989,18 @@ public class Cat : MonoBehaviour
         Debug.Log("=== デバッグ情報終了 ===");
     }
 
-    private Rectangle FindLargestRectangle(int startX, int startY, bool[,] visited)
+    private Rectangle FindLargestRectangle(int startX, int startY, bool[,] visited, bool[,] detailedMap)
     {
-        int mapWidth = GameManager.instance.wallMap.GetLength(0);
-        int mapHeight = GameManager.instance.wallMap.GetLength(1);
+        int mapWidth = detailedMap.GetLength(0);
+        int mapHeight = detailedMap.GetLength(1);
 
         int maxWidth = 0;
         int maxHeight = 0;
 
-        bool[,] newMap = new bool[mapWidth, mapHeight];
-        for (int i = 0; i < mapWidth; i++)
-        {
-            for (int j = 0; j < mapHeight; j++)
-            {
-                for (int dx = -1; dx <= 1; dx++)
-                {
-                    for (int dy = -1; dy <= 1; dy++)
-                    {
-
-                        int newX = i + dx;
-                        int newY = j + dy;
-
-                        // 境界チェック
-                        if (newX < 0 || newX >= mapWidth || newY < 0 || newY >= mapHeight)
-                            continue;
-
-                        if (GameManager.instance.wallMap[newX, newY])
-                        {
-                            newMap[i, j] = true;
-                        }
-                    }
-
-                }
-            }
-        }
-
         // 右方向への最大幅を計算
-        for (int x = startX; x < mapWidth; x++)
+        for (int x = startX; x < mapWidth * 5; x++)
         {
-            if (newMap[x, startY] || visited[x, startY])
+            if (detailedMap[x, startY] || visited[x, startY])
                 break;
             maxWidth++;
         }
@@ -982,7 +1011,7 @@ public class Cat : MonoBehaviour
             bool canExtend = true;
             for (int x = startX; x < startX + maxWidth; x++)
             {
-                if (newMap[x, y] || visited[x, y])
+                if (detailedMap[x, y] || visited[x, y])
                 {
                     canExtend = false;
                     break;
@@ -1003,7 +1032,7 @@ public class Cat : MonoBehaviour
                 int currentWidth = 0;
                 for (int x = startX; x < mapWidth; x++)
                 {
-                    if (newMap[x, y] || visited[x, y])
+                    if (detailedMap[x, y] || visited[x, y])
                         break;
                     currentWidth++;
                 }
