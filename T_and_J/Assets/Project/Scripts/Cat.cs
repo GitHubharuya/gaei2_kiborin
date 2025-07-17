@@ -207,7 +207,7 @@ public class Cat : MonoBehaviour
             case CatState.Chasing:
                 //Debug.Log("追跡状態");
                 moveSpeed = 1.5f; // 追跡時の速度を上げる
-                if (SeeSight())
+                if (SeeSight() || lostSightTimer<1f)
                 {
                     catAnimator.SetBool("isFindMouse", true);
                     //Debug.Log("ネズミを追跡中 (A*使用)");
