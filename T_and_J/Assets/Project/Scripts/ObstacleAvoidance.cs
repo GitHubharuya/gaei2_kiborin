@@ -71,6 +71,7 @@ public class ObstacleAvoidance : MonoBehaviour
     {
         UpdateCheeseUI();
         rb = GetComponent<Rigidbody>();
+        StartCoroutine(NormalMovement(-transform.forward, 0.01f));
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }
 
