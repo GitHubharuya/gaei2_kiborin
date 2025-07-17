@@ -20,7 +20,7 @@ public class Cat : MonoBehaviour
 
 
     // タイルサイズを0.125に設定
-    private const float TILE_SIZE = 0.025f;
+    private const float TILE_SIZE = 0.0625f;
 
     // マップのオフセット（端の座標）
     private const float MAP_OFFSET_X = 0.125f;
@@ -546,8 +546,8 @@ public class Cat : MonoBehaviour
         {
             int mapWidth = GameManager.instance.wallMap.GetLength(0);
             int mapHeight = GameManager.instance.wallMap.GetLength(1);
-            mapWidth *= 5; // 詳細マップのサイズに合わせる
-            mapHeight *= 5; // 詳細マップのサイズに合わせる
+            mapWidth *= 2; // 詳細マップのサイズに合わせる
+            mapHeight *= 2; // 詳細マップのサイズに合わせる
 
             float maxX = MAP_OFFSET_X + (mapWidth - 1) * TILE_SIZE;
             float maxZ = MAP_OFFSET_Z + (mapHeight - 1) * TILE_SIZE;
@@ -573,10 +573,10 @@ public class Cat : MonoBehaviour
         int endZ = Mathf.RoundToInt((end.z - MAP_OFFSET_Z) / TILE_SIZE);
 
         // 境界チェック
-        startX = Mathf.Clamp(startX, 0, mapWidth * 5 - 1);
-        startZ = Mathf.Clamp(startZ, 0, mapHeight * 5 - 1);
-        endX = Mathf.Clamp(endX, 0, mapWidth * 5 - 1);
-        endZ = Mathf.Clamp(endZ, 0, mapHeight * 5 - 1);
+        startX = Mathf.Clamp(startX, 0, mapWidth * 2 - 1);
+        startZ = Mathf.Clamp(startZ, 0, mapHeight * 2 - 1);
+        endX = Mathf.Clamp(endX, 0, mapWidth * 2 - 1);
+        endZ = Mathf.Clamp(endZ, 0, mapHeight * 2 - 1);
 
         Debug.Log($"マップ座標: ({startX}, {startZ}) -> ({endX}, {endZ})");
 
@@ -615,19 +615,19 @@ public class Cat : MonoBehaviour
             }
         }
 
-        bool[,] detaildMap = new bool[mapWidth * 5, mapHeight * 5];
+        bool[,] detaildMap = new bool[mapWidth * 2, mapHeight * 2];
         for (int i = 0; i < mapWidth; i++)
         {
             for (int j = 0; j < mapHeight; j++)
             {
-                for (int ni = 0; ni < 5; ni++)
+                for (int ni = 0; ni < 2; ni++)
                 {
-                    for (int nj = 0; nj < 5; nj++)
+                    for (int nj = 0; nj < 2; nj++)
                     {
-                        int newX = i * 5 + ni;
-                        int newY = j * 5 + nj;
+                        int newX = i * 2 + ni;
+                        int newY = j * 2 + nj;
                         // 境界チェック
-                        if (newX < 0 || newX >= mapWidth * 5 || newY < 0 || newY >= mapHeight * 5)
+                        if (newX < 0 || newX >= mapWidth * 2 || newY < 0 || newY >= mapHeight * 2)
                             continue;
                         if (collisionMap[i, j])
                         {
@@ -668,7 +668,7 @@ public class Cat : MonoBehaviour
                     int newY = currentNode.y + dy;
 
                     // 境界チェック
-                    if (newX < 0 || newX >= mapWidth * 5 || newY < 0 || newY >= mapHeight * 5)
+                    if (newX < 0 || newX >= mapWidth * 2 || newY < 0 || newY >= mapHeight * 2)
                         continue;
 
                     // 障害物チェック
@@ -781,19 +781,19 @@ public class Cat : MonoBehaviour
             }
         }
 
-        bool[,] detailedMap = new bool[mapWidth * 5, mapHeight * 5];
+        bool[,] detailedMap = new bool[mapWidth * 2, mapHeight * 2];
         for (int i = 0; i < mapWidth; i++)
         {
             for (int j = 0; j < mapHeight; j++)
             {
-                for (int ni = 0; ni < 5; ni++)
+                for (int ni = 0; ni < 2; ni++)
                 {
-                    for (int nj = 0; nj < 5; nj++)
+                    for (int nj = 0; nj < 2; nj++)
                     {
-                        int newX = i * 5 + ni;
-                        int newY = j * 5 + nj;
+                        int newX = i * 2 + ni;
+                        int newY = j * 2 + nj;
                         // 境界チェック
-                        if (newX < 0 || newX >= mapWidth * 5 || newY < 0 || newY >= mapHeight * 5)
+                        if (newX < 0 || newX >= mapWidth * 2 || newY < 0 || newY >= mapHeight * 2)
                             continue;
                         if (collisionMap[i, j])
                         {
@@ -804,11 +804,11 @@ public class Cat : MonoBehaviour
             }
         }
 
-        bool[,] visited = new bool[mapWidth * 5, mapHeight * 5];
+        bool[,] visited = new bool[mapWidth * 2, mapHeight * 2];
 
-        for (int y = 0; y < mapHeight * 5; y++)
+        for (int y = 0; y < mapHeight * 2; y++)
         {
-            for (int x = 0; x < mapWidth * 5; x++)
+            for (int x = 0; x < mapWidth * 2; x++)
             {
                 if (!visited[x, y] && !detailedMap[x, y])
                 {
@@ -998,7 +998,7 @@ public class Cat : MonoBehaviour
         int maxHeight = 0;
 
         // 右方向への最大幅を計算
-        for (int x = startX; x < mapWidth * 5; x++)
+        for (int x = startX; x < mapWidth * 2; x++)
         {
             if (detailedMap[x, startY] || visited[x, startY])
                 break;
