@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\mitsu\\githubdesktop\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\mitsu\\githubdesktop\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -60,7 +60,7 @@
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
               "ToolTip": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
-              "ViewState": "AgIAACQAAAAAAAAAAAAcwDkAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAkwCoAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-17T06:47:42.303Z",
               "EditorCaption": ""
@@ -75,8 +75,7 @@
               "RelativeToolTip": "Assets\\Project\\Scripts\\Cat.cs",
               "ViewState": "AgIAACoAAAAAAAAAAABFwNAAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T02:49:27.543Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-17T02:49:27.543Z"
             },
             {
               "$type": "Document",

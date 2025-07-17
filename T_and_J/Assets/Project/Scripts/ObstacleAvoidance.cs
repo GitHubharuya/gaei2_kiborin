@@ -706,7 +706,7 @@ public class ObstacleAvoidance : MonoBehaviour
                 if (!isMoveMouseinEmergency)
                 {
                     isMoveMouseinEmergency = true;
-                    StartCoroutine(moveMouseinEmergency(0.3f, -dir));
+                    StartCoroutine(moveMouseinEmergency(0.05f, -dir));
                 }
 
                 yield return new WaitForFixedUpdate();
