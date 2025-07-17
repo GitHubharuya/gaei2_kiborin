@@ -274,7 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouse: {fileID: 464185496}
   moveSpeed: 1
-  viewDistance: 15
+  viewDistance: 7
   viewAngle: 100
   chasePathRecalculationInterval: 0.5
 --- !u!114 &58874521
