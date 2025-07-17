@@ -874,7 +874,7 @@ MonoBehaviour:
   timer: 0
   cheeseCount: 0
   cheeseSum: 0
-  gameMode: 2
+  gameMode: 0
   mapSize: 11
   seed: 11
 --- !u!4 &186663028
@@ -4854,8 +4854,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 58874517}
     - target: {fileID: 1131236324424135712, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
+      propertyPath: moveSpeed
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1131236324424135712, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
       propertyPath: viewAngle
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1131236324424135712, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
+      propertyPath: emergencySpeed
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 1416818443237116479, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
       propertyPath: playerCamera

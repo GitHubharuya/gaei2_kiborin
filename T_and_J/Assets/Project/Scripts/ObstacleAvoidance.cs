@@ -65,6 +65,7 @@ public class ObstacleAvoidance : MonoBehaviour
     public bool useView = false;
     private Rigidbody rb;
     private int emergencyCount = 0;
+    private bool isNormalCommitted = false;
 
     private void Start()
     {
@@ -137,14 +138,39 @@ public class ObstacleAvoidance : MonoBehaviour
                 Vector3 direction = cheese.position - transform.position;
                 direction.Normalize();
                 direction.y = 0; // Y軸の成分をゼロにして水平移動にする
+                if (!isNormalCommitted)
+                {
+                    StartCoroutine(NormalMovement(direction, 0.1f));
+                }
                 //transform.position += direction * speed * Time.deltaTime;
-                Quaternion mouseRotaion = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotaion, rotationSpeed * Time.deltaTime);
-                rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+                //Quaternion mouseRotaion = Quaternion.LookRotation(direction);
+                //transform.rotation = Quaternion.Slerp(transform.rotation, mouseRotaion, rotationSpeed * Time.deltaTime);
+                //rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
             }
         }
         return;
 
+    }
+
+    private IEnumerator NormalMovement(Vector3 direction, float commitTime)
+    {
+        isNormalCommitted = true;
+        float startTime = Time.time;
+        direction.y = 0; // 水平移動にするためY成分をゼロにする
+
+        Quaternion targetRotaion = Quaternion.LookRotation(direction, Vector3.up);
+
+        while (Time.time < startTime + commitTime)
+        {
+            if (!isNormalCommitted)
+            {
+                break;
+            }
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.fixedDeltaTime);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotaion, rotationSpeed * Time.fixedDeltaTime);
+            yield return new WaitForFixedUpdate();
+        }
+        isNormalCommitted = false;
     }
 
     private void FixedUpdate()
