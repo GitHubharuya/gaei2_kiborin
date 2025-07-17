@@ -103,7 +103,7 @@ public class Cat : MonoBehaviour
 
     void Start()
     {
-        viewDistance = 1.25f; // 強制的に設定
+        viewDistance = 15.0f; // 強制的に設定
         viewAngle = 180;
         Debug.Log($"Start()でviewDistanceを設定: {viewDistance}");
 
