@@ -274,8 +274,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mouse: {fileID: 464185496}
   moveSpeed: 1
-  viewDistance: 6
-  viewAngle: 90
+  viewDistance: 15
+  viewAngle: 100
+  chasePathRecalculationInterval: 0.5
 --- !u!114 &58874521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4852,6 +4853,10 @@ PrefabInstance:
       propertyPath: cat
       value: 
       objectReference: {fileID: 58874517}
+    - target: {fileID: 1131236324424135712, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
+      propertyPath: viewAngle
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 1416818443237116479, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
       propertyPath: playerCamera
       value: 
