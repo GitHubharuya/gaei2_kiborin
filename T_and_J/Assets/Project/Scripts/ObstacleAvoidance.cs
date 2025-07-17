@@ -20,10 +20,10 @@ public class ObstacleAvoidance : MonoBehaviour
 
     [Header("障害物回避設定")]
     public float detectionRange = 0.2f;
-    public float avoidDistance = 0.7f;
+    public float avoidDistance = 0.8f;
 
     [Header("速度・回転速度設定")]
-    public float moveSpeed = 0.5f;
+    public float moveSpeed = 0.7f;
     public float rotationSpeed = 10f;
 
 
@@ -54,7 +54,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
 
     [Header("緊急状態の移動速度")]
-    public float emergencySpeed = 0.5f;
+    public float emergencySpeed = 0.7f;
     public float emergencyRotationSpeed = 20f;
 
     [Header("その他")]
@@ -134,7 +134,7 @@ public class ObstacleAvoidance : MonoBehaviour
             }
             if (cheese != null)
             {
-                moveSpeed = 0.5f; // チーズに向かうときは通常の速度で移動
+                moveSpeed = 0.7f; // チーズに向かうときは通常の速度で移動
                 rotationSpeed = 10f; // チーズに向かうときは通常の回転速度
                 Vector3 direction = cheese.position - transform.position;
                 direction.Normalize();
@@ -593,7 +593,7 @@ public class ObstacleAvoidance : MonoBehaviour
     private IEnumerator CommitMovement(Vector3 direction, float commitTime)
     {
         Debug.Log("Committing...");
-        moveSpeed = 0.5f; // コミット中は通常の移動速度
+        moveSpeed = 0.7f; // コミット中は通常の移動速度
         rotationSpeed = 10f; // コミット中は通常の回転速度
         isCommitted = true;
         float startTime = Time.time;
@@ -619,7 +619,7 @@ public class ObstacleAvoidance : MonoBehaviour
     private IEnumerator NoCheeseMovement(Vector3 direction, float commitTime)
     {
         Debug.Log("No Cheese Movement Committing...");
-        moveSpeed = 0.5f;
+        moveSpeed = 0.7f;
         rotationSpeed = 10f;
         isNoCheeseCommitted = true;
         float startTime = Time.time;
@@ -681,7 +681,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
     private IEnumerator EmergencyEscapeState()
     {
-        emergencySpeed = 0.5f; // 緊急状態の移動速度を設定
+        emergencySpeed = 0.7f; // 緊急状態の移動速度を設定
         emergencyRotationSpeed = 10f; // 緊急状態の回転速度を設定
         Debug.Log("Emergency escape state started.");
         emergencyCoroutineRunning = true;
@@ -726,7 +726,7 @@ public class ObstacleAvoidance : MonoBehaviour
 
     private IEnumerator moveMouseinEmergency(float time, Vector3 dir)
     {
-        emergencySpeed = 0.5f; // 緊急状態の移動速度を設定
+        emergencySpeed = 0.7f; // 緊急状態の移動速度を設定
         emergencyRotationSpeed = 10f; // 緊急状態の回転速度を設定
         isMoveMouseinEmergency = true;
         float startTime = Time.time;
