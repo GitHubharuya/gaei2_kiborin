@@ -183,7 +183,7 @@ public class Cat : MonoBehaviour
                 //Debug.Log("巡回状態 - 視界チェック中");
                 bool canSeeMouse = SeeSight();
                 //Debug.Log($"視界チェック結果: {canSeeMouse}");
-                moveSpeed = 1.0f;
+                moveSpeed = 0.6f;
                 if (canSeeMouse)
                 {
                     //Debug.Log("ネズミを発見！追跡開始");
@@ -206,7 +206,7 @@ public class Cat : MonoBehaviour
 
             case CatState.Chasing:
                 //Debug.Log("追跡状態");
-                moveSpeed = 1.5f; // 追跡時の速度を上げる
+                moveSpeed = 1.0f; // 追跡時の速度を上げる
                 if (SeeSight() || lostSightTimer<1f)
                 {
                     catAnimator.SetBool("isFindMouse", true);

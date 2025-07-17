@@ -4862,6 +4862,10 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 1131236324424135712, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
+      propertyPath: avoidDistance
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1131236324424135712, guid: 080367400ba98cb47a8a46cd64a66537, type: 3}
       propertyPath: emergencySpeed
       value: 0.7
       objectReference: {fileID: 0}

@@ -3,28 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\mitsu\\githubdesktop\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\mitsu\\githubdesktop\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:Assets\\Project\\Scripts\\FieldGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\cheese.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\cheese.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:Assets\\Project\\Scripts\\GameManager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:Assets\\Project\\Scripts\\FieldGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -60,26 +60,27 @@
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
               "ToolTip": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAowEkAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAACQAAAAAAAAAAAAcwDkAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-17T06:47:42.303Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "Cat.cs",
               "DocumentMoniker": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cat.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Cat.cs",
               "ToolTip": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cat.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\Cat.cs",
-              "ViewState": "AgIAAFwAAAAAAAAAAAAcwGkAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAABFwNAAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-17T02:49:27.543Z"
+              "WhenOpened": "2025-07-17T02:49:27.543Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "Mouse.cs",
               "DocumentMoniker": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Mouse.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Mouse.cs",
@@ -91,7 +92,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "Cheese.cs",
               "DocumentMoniker": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cheese.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Cheese.cs",
@@ -115,25 +116,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "FieldGenerator.cs",
               "DocumentMoniker": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\FieldGenerator.cs",
               "ToolTip": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\FieldGenerator.cs",
-              "ViewState": "AgIAAF8BAAAAAAAAAAAAAJUAAABeAAAAAAAAAA==",
+              "ViewState": "AgIAABEBAAAAAAAAAAAAAJUAAABeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-28T13:04:52.521Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "GameManager.cs",
               "DocumentMoniker": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\GameManager.cs",
               "ToolTip": "C:\\Users\\mitsu\\GithubDesktop\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\GameManager.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAUwBIAAAATAAAAAAAAAA==",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAADkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-28T13:25:23.737Z"
             },
