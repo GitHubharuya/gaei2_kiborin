@@ -84,7 +84,7 @@ public class Cat : MonoBehaviour
     private Vector3 lastSeenMousePosition;
     private Vector3 previousMousePosition;
     private float lostSightTimer = 0f;
-    private const float LOST_SIGHT_TIMEOUT = 5f;
+    private const float LOST_SIGHT_TIMEOUT = 3f;
     private Vector3 predictedMousePosition;
     private float mouseTrackingInterval = 0.1f;
     private float lastMouseTrackTime = 0f;
