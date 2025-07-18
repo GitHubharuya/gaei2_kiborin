@@ -207,7 +207,7 @@ public class Cat : MonoBehaviour
             case CatState.Chasing:
                 //Debug.Log("追跡状態");
                 moveSpeed = 1.0f; // 追跡時の速度を上げる
-                if (SeeSight() || lostSightTimer<1f)
+                if (SeeSight() || lostSightTimer < 1f)
                 {
                     catAnimator.SetBool("isFindMouse", true);
                     //Debug.Log("ネズミを追跡中 (A*使用)");
@@ -429,12 +429,30 @@ public class Cat : MonoBehaviour
 
         // GameManagerが利用可能な場合はA*を使用、そうでなければ直線移動
         List<Vector3> path = null;
-        if (GameManager.instance != null && GameManager.instance.wallMap != null)
+
+        /*if (GameManager.instance != null && GameManager.instance.wallMap != null)
         {
             path = FindPathAStar(startPos, endPos);
+        }*/
+
+        int cnt = 0;
+        while (path == null)
+        {
+            path = FindPathAStar(startPos, endPos);
+            cnt++;
+            if(cnt > 10)
+            {
+                Debug.LogWarning("A*パスが見つからないか利用不可、直線移動を使用します");
+                path = new List<Vector3> { endPos };
+                break;
+            }
         }
 
-        if (path != null && path.Count > 0)
+        currentPath = path;
+        currentPathIndex = 0;
+        isMovingToTarget = true;
+
+        /*if (path != null && path.Count > 0)
         {
             currentPath = path;
             currentPathIndex = 0;
@@ -453,7 +471,7 @@ public class Cat : MonoBehaviour
             currentPath = new List<Vector3> { endPos };
             currentPathIndex = 0;
             isMovingToTarget = true;
-        }
+        }*/
     }
 
     private void SetNextTarget()
@@ -596,9 +614,9 @@ public class Cat : MonoBehaviour
         {
             for (int j = 0; j < mapHeight; j++)
             {
-                for (int dx = -1; dx <= 1; dx++)
+                for (int dx = -0; dx <= 0; dx++)
                 {
-                    for (int dy = -1; dy <= 1; dy++)
+                    for (int dy = -0; dy <= 0; dy++)
                     {
 
                         int newX = i + dx;
@@ -618,7 +636,7 @@ public class Cat : MonoBehaviour
             }
         }
 
-        bool[,] detaildMap = new bool[mapWidth * 2, mapHeight * 2];
+        bool[,] detailedMap = new bool[mapWidth * 2, mapHeight * 2];
         for (int i = 0; i < mapWidth; i++)
         {
             for (int j = 0; j < mapHeight; j++)
@@ -634,7 +652,7 @@ public class Cat : MonoBehaviour
                             continue;
                         if (collisionMap[i, j])
                         {
-                            detaildMap[newX, newY] = true;
+                            detailedMap[newX, newY] = true;
                         }
                     }
                 }
@@ -675,7 +693,7 @@ public class Cat : MonoBehaviour
                         continue;
 
                     // 障害物チェック
-                    if (detaildMap[newX, newY])
+                    if (detailedMap[newX, newY])
                         continue;
 
                     // 閉じたセットにあるかチェック
@@ -687,8 +705,8 @@ public class Cat : MonoBehaviour
                     if (dx != 0 && dy != 0)
                     {
                         // 斜め移動時は隣接する2つのマスも空である必要がある
-                        if (detaildMap[currentNode.x + dx, currentNode.y] ||
-                            detaildMap[currentNode.x, currentNode.y + dy])
+                        if (detailedMap[currentNode.x + dx, currentNode.y] ||
+                            detailedMap[currentNode.x, currentNode.y + dy])
                             continue;
                     }
 
@@ -719,7 +737,7 @@ public class Cat : MonoBehaviour
             }
         }
 
-        //Debug.LogWarning("A*パス探索失敗");
+        Debug.LogWarning("A*パス探索失敗だわよ！！！！！！！！！");
         return null;
     }
 
@@ -762,9 +780,9 @@ public class Cat : MonoBehaviour
         {
             for (int j = 0; j < mapHeight; j++)
             {
-                for (int dx = -1; dx <= 1; dx++)
+                for (int dx = -0; dx <= 0; dx++)
                 {
-                    for (int dy = -1; dy <= 1; dy++)
+                    for (int dy = -0; dy <= 0; dy++)
                     {
 
                         int newX = i + dx;
@@ -948,9 +966,9 @@ public class Cat : MonoBehaviour
         {
             for (int j = 0; j < mapHeight; j++)
             {
-                for (int dx = -1; dx <= 1; dx++)
+                for (int dx = 0; dx <= 0; dx++)
                 {
-                    for (int dy = -1; dy <= 1; dy++)
+                    for (int dy = 0; dy <= 0; dy++)
                     {
 
                         int newX = i + dx;
