@@ -1,49 +1,49 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\",
+  "WorkspaceRootPath": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\suzur\\github\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\cat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|c:\\users\\haruy\\documents\\github\\gaei2_kiborin\\t_and_j\\assets\\project\\scripts\\gamemodesetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\gamemodesetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\gamemodesetting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\obstacleavoidance.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\title.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\title.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\title.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\inputfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\inputfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\inputfield.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:Assets\\Project\\Scripts\\FieldGenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:Assets\\Project\\Scripts\\UI.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\cheese.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\cheese.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\cheese.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\assets\\project\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{4C1E6176-89C1-3607-1895-2F957C4348D6}|Assembly-CSharp.csproj|solutionrelative:assets\\project\\scripts\\mouse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -60,22 +60,21 @@
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "GameModeSetting.cs",
-              "DocumentMoniker": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameModeSetting.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameModeSetting.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\GameModeSetting.cs",
-              "ToolTip": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameModeSetting.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameModeSetting.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\GameModeSetting.cs",
               "ViewState": "AgIAAA8AAACAPTvs3EsbwB4AAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-18T03:32:05.004Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-18T03:32:05.004Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
               "Title": "ObstacleAvoidance.cs",
-              "DocumentMoniker": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
-              "ToolTip": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\ObstacleAvoidance.cs",
               "ViewState": "AgIAAAgBAAAAAAAAAAAAwJgBAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -85,11 +84,11 @@
               "$type": "Document",
               "DocumentIndex": 0,
               "Title": "Cat.cs",
-              "DocumentMoniker": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cat.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cat.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Cat.cs",
-              "ToolTip": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cat.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cat.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\Cat.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAUwFYAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAAIcAAAAAAAAAAAApwJsAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-17T02:49:27.543Z",
               "EditorCaption": ""
@@ -98,9 +97,9 @@
               "$type": "Document",
               "DocumentIndex": 10,
               "Title": "Mouse.cs",
-              "DocumentMoniker": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Mouse.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Mouse.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Mouse.cs",
-              "ToolTip": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Mouse.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Mouse.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\Mouse.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -110,9 +109,9 @@
               "$type": "Document",
               "DocumentIndex": 9,
               "Title": "Cheese.cs",
-              "DocumentMoniker": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cheese.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cheese.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Cheese.cs",
-              "ToolTip": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cheese.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Cheese.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\Cheese.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -122,9 +121,9 @@
               "$type": "Document",
               "DocumentIndex": 8,
               "Title": "UI.cs",
-              "DocumentMoniker": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\UI.cs",
-              "ToolTip": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\UI.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\UI.cs",
               "ViewState": "AgIAABEAAAAAAAAAAAAkwCAAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -134,9 +133,9 @@
               "$type": "Document",
               "DocumentIndex": 7,
               "Title": "FieldGenerator.cs",
-              "DocumentMoniker": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\FieldGenerator.cs",
-              "ToolTip": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\FieldGenerator.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\FieldGenerator.cs",
               "ViewState": "AgIAAHYBAAAAAAAAAAAQwNIBAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -146,9 +145,9 @@
               "$type": "Document",
               "DocumentIndex": 3,
               "Title": "GameManager.cs",
-              "DocumentMoniker": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\GameManager.cs",
-              "ToolTip": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\GameManager.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\GameManager.cs",
               "ViewState": "AgIAABkAAAAAAAAAAAAQwC4AAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -158,9 +157,9 @@
               "$type": "Document",
               "DocumentIndex": 6,
               "Title": "InputField.cs",
-              "DocumentMoniker": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\InputField.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\InputField.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\InputField.cs",
-              "ToolTip": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\InputField.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\InputField.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\InputField.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAADwvxkAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -170,9 +169,9 @@
               "$type": "Document",
               "DocumentIndex": 5,
               "Title": "Title.cs",
-              "DocumentMoniker": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Title.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Title.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\Title.cs",
-              "ToolTip": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Title.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\Title.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\Title.cs",
               "ViewState": "AgIAACwAAAAAAAAAAAAQwEEAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -182,9 +181,9 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "PlayerController.cs",
-              "DocumentMoniker": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\PlayerController.cs",
+              "DocumentMoniker": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\PlayerController.cs",
               "RelativeDocumentMoniker": "Assets\\Project\\Scripts\\PlayerController.cs",
-              "ToolTip": "C:\\Users\\haruy\\Documents\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\PlayerController.cs",
+              "ToolTip": "C:\\Users\\suzur\\GitHub\\gaei2_kiborin\\T_and_J\\Assets\\Project\\Scripts\\PlayerController.cs",
               "RelativeToolTip": "Assets\\Project\\Scripts\\PlayerController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAKMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",

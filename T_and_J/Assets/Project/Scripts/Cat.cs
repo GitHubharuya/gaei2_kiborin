@@ -147,12 +147,13 @@ public class Cat : MonoBehaviour
         }
 
         // 最初の目標位置を設定
+        /*
         currentRectIndex = 0;
         Vector3 initialPos = rectangles[0].center;
         initialPos.y = 0f;
         transform.position = initialPos;
         //Debug.Log($"初期位置設定: {initialPos}");
-
+        */
         // 次の目標を設定
         SetNextTarget();
     }
